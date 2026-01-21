@@ -274,11 +274,11 @@ roadmap:
   github_issue: null
   item_type: task
   title: Implement demo-lambda-handler
-  status: planned
+  status: completed
   priority: high
   assigned_to: null
   created: 1970-01-01T00:00:00Z
-  updated: 1970-01-01T00:00:00Z
+  updated: 2026-01-21T21:00:00.000000000+00:00
   spec: null
   acceptance_criteria: []
   phases: []
@@ -314,11 +314,11 @@ roadmap:
   github_issue: null
   item_type: task
   title: Implement demo-latency-profile
-  status: planned
+  status: completed
   priority: medium
   assigned_to: null
   created: 1970-01-01T00:00:00Z
-  updated: 1970-01-01T00:00:00Z
+  updated: 2026-01-21T21:00:00.000000000+00:00
   spec: null
   acceptance_criteria: []
   phases: []
@@ -353,11 +353,11 @@ roadmap:
   github_issue: null
   item_type: task
   title: Implement demo-hardware-detect
-  status: planned
+  status: completed
   priority: medium
   assigned_to: null
   created: 1970-01-01T00:00:00Z
-  updated: 1970-01-01T00:00:00Z
+  updated: 2026-01-21T21:00:00.000000000+00:00
   spec: null
   acceptance_criteria: []
   phases: []
