@@ -1,0 +1,446 @@
+roadmap_version: '1.0'
+github_enabled: true
+github_repo: paiml/HF-Production-ML
+roadmap:
+- id: PROD-001
+  github_issue: null
+  item_type: task
+  title: Implement demo-tgi-architecture
+  status: completed
+  priority: high
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 2026-01-21T18:41:11.070045675+00:00
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week1
+  - demo
+  - inference
+  notes: null
+- id: PROD-002
+  github_issue: null
+  item_type: task
+  title: Implement demo-continuous-batching
+  status: planned
+  priority: high
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week1
+  - demo
+  - inference
+  notes: null
+- id: PROD-003
+  github_issue: null
+  item_type: task
+  title: Implement demo-kv-cache
+  status: planned
+  priority: high
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week1
+  - demo
+  - inference
+  notes: null
+- id: PROD-004
+  github_issue: null
+  item_type: task
+  title: Implement demo-serving-api
+  status: planned
+  priority: high
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week1
+  - demo
+  - api
+  notes: null
+- id: PROD-005
+  github_issue: null
+  item_type: task
+  title: Implement demo-streaming
+  status: planned
+  priority: medium
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week1
+  - demo
+  - streaming
+  notes: null
+- id: PROD-006
+  github_issue: null
+  item_type: task
+  title: Implement demo-throughput-bench
+  status: planned
+  priority: high
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week1
+  - demo
+  - benchmark
+  - falsification
+  notes: null
+- id: PROD-007
+  github_issue: null
+  item_type: task
+  title: Implement demo-quantization
+  status: planned
+  priority: high
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week2
+  - demo
+  - optimization
+  notes: null
+- id: PROD-008
+  github_issue: null
+  item_type: task
+  title: Implement demo-apr-format
+  status: planned
+  priority: high
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week2
+  - demo
+  - format
+  notes: null
+- id: PROD-009
+  github_issue: null
+  item_type: task
+  title: Implement demo-pruning
+  status: planned
+  priority: medium
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week2
+  - demo
+  - optimization
+  notes: null
+- id: PROD-010
+  github_issue: null
+  item_type: task
+  title: Implement demo-distillation
+  status: planned
+  priority: medium
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week2
+  - demo
+  - optimization
+  notes: null
+- id: PROD-011
+  github_issue: null
+  item_type: task
+  title: Implement demo-flash-attention
+  status: planned
+  priority: high
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week2
+  - demo
+  - optimization
+  notes: null
+- id: PROD-012
+  github_issue: null
+  item_type: task
+  title: Implement demo-speculative-decode
+  status: planned
+  priority: medium
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week2
+  - demo
+  - optimization
+  notes: null
+- id: PROD-013
+  github_issue: null
+  item_type: task
+  title: Implement demo-tensor-parallel
+  status: planned
+  priority: low
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week2
+  - demo
+  - distributed
+  notes: null
+- id: PROD-014
+  github_issue: null
+  item_type: task
+  title: Implement demo-wasm-inference
+  status: planned
+  priority: high
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week3
+  - demo
+  - edge
+  - wasm
+  notes: null
+- id: PROD-015
+  github_issue: null
+  item_type: task
+  title: Implement demo-lambda-handler
+  status: planned
+  priority: high
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week3
+  - demo
+  - edge
+  - serverless
+  notes: null
+- id: PROD-016
+  github_issue: null
+  item_type: task
+  title: Implement demo-presentar-ui
+  status: planned
+  priority: high
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week3
+  - demo
+  - ui
+  - presentar
+  notes: null
+- id: PROD-017
+  github_issue: null
+  item_type: task
+  title: Implement demo-latency-profile
+  status: planned
+  priority: medium
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week3
+  - demo
+  - profiling
+  notes: null
+- id: PROD-018
+  github_issue: null
+  item_type: task
+  title: Implement demo-model-registry
+  status: planned
+  priority: medium
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week3
+  - demo
+  - registry
+  - batuta
+  notes: null
+- id: PROD-019
+  github_issue: null
+  item_type: task
+  title: Implement demo-hardware-detect
+  status: planned
+  priority: medium
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - week3
+  - demo
+  - hardware
+  notes: null
+- id: PROD-020
+  github_issue: null
+  item_type: task
+  title: Create SVG diagrams for Week 1
+  status: planned
+  priority: medium
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - docs
+  - svg
+  - week1
+  notes: null
+- id: PROD-021
+  github_issue: null
+  item_type: task
+  title: Create SVG diagrams for Week 2
+  status: planned
+  priority: medium
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - docs
+  - svg
+  - week2
+  notes: null
+- id: PROD-022
+  github_issue: null
+  item_type: task
+  title: Create SVG diagrams for Week 3
+  status: planned
+  priority: medium
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - docs
+  - svg
+  - week3
+  notes: null
+- id: PROD-023
+  github_issue: null
+  item_type: task
+  title: Implement falsification test suite
+  status: planned
+  priority: high
+  assigned_to: null
+  created: 1970-01-01T00:00:00Z
+  updated: 1970-01-01T00:00:00Z
+  spec: null
+  acceptance_criteria: []
+  phases: []
+  subtasks: []
+  estimated_effort: null
+  labels:
+  - testing
+  - falsification
+  - quality
+  notes: null
