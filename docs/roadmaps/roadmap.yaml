@@ -25,11 +25,11 @@ roadmap:
   github_issue: null
   item_type: task
   title: Implement demo-continuous-batching
-  status: planned
+  status: completed
   priority: high
   assigned_to: null
   created: 1970-01-01T00:00:00Z
-  updated: 1970-01-01T00:00:00Z
+  updated: 2026-01-21T18:44:52.606189478+00:00
   spec: null
   acceptance_criteria: []
   phases: []
