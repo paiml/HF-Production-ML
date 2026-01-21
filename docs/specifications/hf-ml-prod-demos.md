@@ -2,7 +2,7 @@
 
 ## Course 5: Production ML Demonstration Specification
 
-**Version**: 1.0.2
+**Version**: 1.1.0
 **Status**: Draft
 **Last Updated**: 2026-01-21
 **Author**: PAIML Research Team
@@ -36,24 +36,112 @@ This specification defines the demonstration suite for **Course 5: Production ML
 
 **Conjecture**: A pure Rust implementation of production ML infrastructure using the Sovereign AI Stack (trueno, aprender, realizar, batuta) can achieve:
 
-1. **Inference throughput ≥250 tokens/second** on consumer GPU hardware (RTX 3080+)
+1. **Inference throughput ≥788 tokens/second** on consumer GPU hardware (RTX 4090) for Qwen2.5-Coder-1.5B
 2. **Sub-10ms latency** for classical ML inference at P99
 3. **Zero external runtime dependencies** (no Python, CUDA Toolkit, or cloud SDKs)
 4. **Deterministic reproducibility** across x86_64 and ARM64 architectures (bitwise exact in strict mode, or <1e-6 drift in performance mode)
+5. **Ollama parity** at 2x throughput for equivalent model configurations
 
 This conjecture is falsifiable through the 100-point validation matrix defined in Section 7.
 
-### 1.3 Scope
+### 1.3 Model-Centric Approach: Qwen2.5-Coder
 
-The demonstration suite covers three production deployment scenarios:
+Following the sister repository (HF-Advanced-Fine-Tuning), all demonstrations use **Qwen2.5-Coder** as the reference model family. This provides:
 
-| Week | Focus | Sovereign Components | Target Metric |
-|------|-------|---------------------|---------------|
-| 1 | Inference Serving | realizar, trueno | ≥250 tok/s throughput |
-| 2 | Model Optimization | trueno, aprender | ≥4x compression ratio |
-| 3 | Edge Deployment | batuta, realizar | ≤10ms P99 latency |
+- **Consistent architecture** across all demos (same transformer structure)
+- **Tiered complexity** from edge (0.5B) to production (32B)
+- **Code-optimized tokenizer** for ML engineering demonstrations
+- **Apache 2.0 licensing** for unrestricted educational use
 
-### 1.4 Non-Goals
+**Reference:** Qwen Team (2024). "Qwen2.5-Coder Technical Report." arXiv:2409.12186.
+
+### 1.4 Qwen2.5-Coder Model Tiers
+
+All demos operate on one of four model tiers, with hard-coded architecture dimensions for simulation:
+
+| Tier | Model | Parameters | Hidden | Layers | Heads | Vocab | Use Case |
+|------|-------|------------|--------|--------|-------|-------|----------|
+| **Tiny** | Qwen2.5-0.5B | 0.5B | 896 | 24 | 14 | 151,936 | Edge/Mobile, Fast CI |
+| **Small** | Qwen2.5-Coder-1.5B | 1.5B | 1,536 | 28 | 12 | 151,936 | Development, Primary QA |
+| **Medium** | Qwen2.5-Coder-7B | 7B | 3,584 | 28 | 28 | 151,936 | Production |
+| **Large** | Qwen2.5-Coder-32B | 32B | 5,120 | 64 | 40 | 151,936 | HPC, Multi-GPU |
+
+**Default Tier:** Small (1.5B) — balances speed and capability for demonstrations.
+
+#### Architecture Constants (Rust)
+
+```rust
+/// Qwen2.5-Coder model architectures for demonstrations
+pub mod qwen {
+    pub const VOCAB_SIZE: usize = 151_936;
+    pub const MAX_POSITION_EMBEDDINGS: usize = 32_768;
+    pub const ROPE_THETA: f32 = 1_000_000.0;
+
+    pub mod tiny {
+        pub const HIDDEN_DIM: usize = 896;
+        pub const NUM_LAYERS: usize = 24;
+        pub const NUM_HEADS: usize = 14;
+        pub const NUM_KV_HEADS: usize = 2;
+        pub const INTERMEDIATE_DIM: usize = 4_864;
+    }
+
+    pub mod small {
+        pub const HIDDEN_DIM: usize = 1_536;
+        pub const NUM_LAYERS: usize = 28;
+        pub const NUM_HEADS: usize = 12;
+        pub const NUM_KV_HEADS: usize = 2;
+        pub const INTERMEDIATE_DIM: usize = 8_960;
+    }
+
+    pub mod medium {
+        pub const HIDDEN_DIM: usize = 3_584;
+        pub const NUM_LAYERS: usize = 28;
+        pub const NUM_HEADS: usize = 28;
+        pub const NUM_KV_HEADS: usize = 4;
+        pub const INTERMEDIATE_DIM: usize = 18_944;
+    }
+
+    pub mod large {
+        pub const HIDDEN_DIM: usize = 5_120;
+        pub const NUM_LAYERS: usize = 64;
+        pub const NUM_HEADS: usize = 40;
+        pub const NUM_KV_HEADS: usize = 8;
+        pub const INTERMEDIATE_DIM: usize = 25_600;
+    }
+}
+```
+
+### 1.5 Performance Targets (Per Model Tier)
+
+These targets act as **falsifiable predictions**. Consistent failure invalidates the optimization hypothesis.
+
+| Tier | Backend | Minimum | Target | Ollama Parity |
+|------|---------|---------|--------|---------------|
+| **Tiny (0.5B)** | CPU | 20 tok/s | 50 tok/s | 1.0x |
+| | GPU | 200 tok/s | 500 tok/s | 2.0x |
+| **Small (1.5B)** | CPU | 10 tok/s | 25 tok/s | 1.0x |
+| | GPU Single | 100 tok/s | 300 tok/s | 2.0x |
+| | GPU Batch | 500 tok/s | 788 tok/s | 3.0x |
+| **Medium (7B)** | CPU | 2 tok/s | 8 tok/s | 1.0x |
+| | GPU | 50 tok/s | 150 tok/s | 2.0x |
+| | GPU Batch | 200 tok/s | 400 tok/s | 2.5x |
+| **Large (32B)** | CPU | 1 tok/s | 3 tok/s | 1.0x |
+| | GPU | 25 tok/s | 80 tok/s | 2.0x |
+| | GPU Batch | 100 tok/s | 250 tok/s | 2.5x |
+
+**Reference Hardware:** RTX 4090 (24GB), AMD Ryzen 9 5900X, 64GB DDR4.
+
+### 1.6 Scope
+
+The demonstration suite covers three production deployment scenarios using Qwen2.5-Coder:
+
+| Week | Focus | Sovereign Components | Model Tier | Target Metric |
+|------|-------|---------------------|------------|---------------|
+| 1 | Inference Serving | realizar, trueno | Small (1.5B) | ≥788 tok/s GPU batch |
+| 2 | Model Optimization | trueno, aprender | Medium (7B) | ≥4x compression ratio |
+| 3 | Edge Deployment | batuta, realizar | Tiny (0.5B) | ≤10ms P99 latency |
+
+### 1.7 Non-Goals
 
 - Training from scratch (covered in Course 4)
 - Cloud-specific deployment (AWS Lambda examples are optional)
@@ -419,23 +507,25 @@ Throughput: 956 tokens/second
 
 #### Demo 6: Throughput Benchmark (`demo-throughput-bench`)
 
-Comprehensive throughput measurement with statistical analysis:
+Comprehensive throughput measurement with statistical analysis using Qwen2.5-Coder:
 
 ```
 ┌────────────────────────────────────────────────────────────┐
 │           Inference Throughput Benchmark Results           │
 ├────────────────────────────────────────────────────────────┤
-│ Model: phi-2-q4_k.gguf                                     │
+│ Model: Qwen2.5-Coder-1.5B-Instruct-Q4_K_M.gguf            │
+│ Architecture: hidden=1536, layers=28, heads=12            │
 │ Backend: CUDA (RTX 4090)                                   │
 │ Iterations: 1000                                           │
 ├────────────────────────────────────────────────────────────┤
 │ Metric              │ Value        │ Unit                  │
 ├─────────────────────┼──────────────┼───────────────────────┤
-│ Mean Throughput     │ 276.4        │ tokens/second         │
-│ P50 Latency         │ 3.62         │ ms/token              │
-│ P99 Latency         │ 4.21         │ ms/token              │
-│ Memory Usage        │ 2.8          │ GB VRAM               │
+│ Mean Throughput     │ 788.4        │ tokens/second         │
+│ P50 Latency         │ 1.27         │ ms/token              │
+│ P99 Latency         │ 1.54         │ ms/token              │
+│ Memory Usage        │ 1.2          │ GB VRAM               │
 │ Batch Efficiency    │ 94.2         │ %                     │
+│ Ollama Parity       │ 3.1x         │ vs baseline           │
 └────────────────────────────────────────────────────────────┘
 ```
 
@@ -443,24 +533,25 @@ Comprehensive throughput measurement with statistical analysis:
 
 #### Demo 7: Quantization (`demo-quantization`)
 
-Compare quantization methods and their impact:
+Compare quantization methods using **Qwen2.5-Coder-7B** (Medium tier):
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│                    Quantization Comparison                        │
+│          Quantization Comparison: Qwen2.5-Coder-7B               │
+│            Architecture: hidden=3584, layers=28                   │
 ├──────────────────────────────────────────────────────────────────┤
-│ Method   │ Bits │ Size (MB) │ Perplexity │ Speed (tok/s)         │
+│ Method   │ Bits │ Size (GB) │ Perplexity │ Speed (tok/s)         │
 ├──────────┼──────┼───────────┼────────────┼───────────────────────┤
-│ FP16     │ 16   │ 5,400     │ 5.42       │ 180                   │
-│ Q8_0     │ 8    │ 2,700     │ 5.44       │ 220                   │
-│ Q6_K     │ 6    │ 2,100     │ 5.51       │ 245                   │
-│ Q5_K     │ 5    │ 1,800     │ 5.58       │ 260                   │
-│ Q4_K     │ 4    │ 1,500     │ 5.72       │ 276                   │
+│ FP16     │ 16   │ 14.8      │ 4.21       │ 80                    │
+│ Q8_0     │ 8    │ 7.4       │ 4.23       │ 110                   │
+│ Q6_K     │ 6    │ 5.7       │ 4.28       │ 130                   │
+│ Q5_K_M   │ 5    │ 4.8       │ 4.35       │ 145                   │
+│ Q4_K_M   │ 4    │ 4.1       │ 4.48       │ 160                   │
 └──────────────────────────────────────────────────────────────────┘
 
-Compression Ratio: FP16 → Q4_K = 3.6x
-Quality Loss (Δ Perplexity): +0.30 (+5.5%)
-Speedup: 1.53x
+Compression Ratio: FP16 → Q4_K_M = 3.6x
+Quality Loss (Δ Perplexity): +0.27 (+6.4%)
+Speedup: 2.0x
 ```
 
 #### Demo 8: Flash Attention (`demo-flash-attention`)
@@ -482,25 +573,30 @@ VRAM: 16GB for 8K ctx            VRAM: 4GB for 8K ctx
 
 #### Demo 9: Speculative Decoding (`demo-speculative-decode`)
 
-Demonstrate draft-verify speedup:
+Demonstrate draft-verify speedup using **Qwen2.5 model pairs**:
+- **Draft Model:** Qwen2.5-0.5B (Tiny tier) — fast, approximate
+- **Target Model:** Qwen2.5-Coder-7B (Medium tier) — accurate, slower
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                  Speculative Decoding Visualization              │
+│             Speculative Decoding: Qwen2.5 Hierarchy              │
+├─────────────────────────────────────────────────────────────────┤
+│ Draft:  Qwen2.5-0.5B (896 hidden, 24 layers)  → 500 tok/s      │
+│ Target: Qwen2.5-Coder-7B (3584 hidden, 28 layers) → 150 tok/s  │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│ Step 1: Draft model generates 4 tokens                          │
-│         Draft: [The] [quick] [brown] [fox]                       │
+│ Step 1: Draft model (0.5B) generates 4 tokens speculatively     │
+│         Draft: [def] [fibonacci] [(n)] [:]                       │
 │                                                                  │
-│ Step 2: Target model verifies in parallel                       │
-│         [The ✓] [quick ✓] [brown ✓] [fox ✓]                     │
+│ Step 2: Target model (7B) verifies batch in single forward      │
+│         [def ✓] [fibonacci ✓] [(n) ✓] [: ✓]                     │
 │                                                                  │
-│ Step 3: All accepted! Generate next token with target           │
-│         → [jumps]                                                │
+│ Step 3: All accepted! Target generates bonus token              │
+│         → [\n]                                                   │
 │                                                                  │
 ├─────────────────────────────────────────────────────────────────┤
-│ Acceptance Rate: 87.3%                                          │
-│ Speedup: 2.8x (276 → 772 effective tok/s)                       │
+│ Acceptance Rate: 89.2% (code tasks)                             │
+│ Effective Throughput: 420 tok/s (2.8x vs target alone)          │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -710,46 +806,52 @@ The following 100-point matrix defines falsifiable criteria for validating the d
 
 ### 7.1 Inference Performance (25 points)
 
+**Model:** Qwen2.5-Coder-1.5B-Q4_K_M (Small tier, unless specified)
+
 | # | Criterion | Test Method | Threshold | Points |
 |---|-----------|-------------|-----------|--------|
-| 1 | Throughput ≥250 tok/s (RTX 4090) | `demo-throughput-bench --gpu cuda` | 250.0 ± 5% | 5 |
-| 2 | Throughput ≥100 tok/s (RTX 3080) | `demo-throughput-bench --gpu cuda` | 100.0 ± 5% | 3 |
-| 3 | Throughput ≥50 tok/s (CPU AVX2) | `demo-throughput-bench --cpu` | 50.0 ± 5% | 3 |
+| 1 | Throughput ≥788 tok/s (RTX 4090, 1.5B) | `demo-throughput-bench --tier small --gpu cuda` | 788.0 ± 5% | 5 |
+| 2 | Throughput ≥300 tok/s (RTX 3080, 1.5B) | `demo-throughput-bench --tier small --gpu cuda` | 300.0 ± 5% | 3 |
+| 3 | Throughput ≥25 tok/s (CPU AVX2, 1.5B) | `demo-throughput-bench --tier small --cpu` | 25.0 ± 5% | 3 |
 | 4 | TTFT ≤100ms (first token) | `demo-streaming --measure-ttft` | 100.0ms | 3 |
 | 5 | P99 latency ≤10ms/token | `demo-throughput-bench --percentiles` | 10.0ms | 3 |
 | 6 | Memory efficiency ≥90% | `demo-kv-cache --efficiency` | 0.90 | 2 |
 | 7 | Batch utilization ≥85% | `demo-continuous-batching --utilization` | 0.85 | 2 |
-| 8 | No OOM on 8GB VRAM (7B Q4) | `demo-serving-api --max-vram 8` | Pass | 2 |
+| 8 | No OOM on 8GB VRAM (7B Q4_K_M) | `demo-serving-api --tier medium --max-vram 8` | Pass | 2 |
 | 9 | Streaming latency jitter <5ms | `demo-streaming --jitter` | 5.0ms | 1 |
 | 10 | Warmup completes in <30s | `demo-throughput-bench --warmup-only` | 30s | 1 |
 
 ### 7.2 Model Optimization (20 points)
 
+**Model:** Qwen2.5-Coder-7B (Medium tier)
+
 | # | Criterion | Test Method | Threshold | Points |
 |---|-----------|-------------|-----------|--------|
-| 11 | Q4_K compression ≥3.5x | `demo-quantization --method q4_k` | 3.5x | 3 |
-| 12 | Q4_K perplexity Δ ≤10% | `demo-quantization --eval-ppl` | 1.10 | 3 |
+| 11 | Q4_K_M compression ≥3.5x | `demo-quantization --tier medium --method q4_k_m` | 3.5x | 3 |
+| 12 | Q4_K_M perplexity Δ ≤10% | `demo-quantization --tier medium --eval-ppl` | 1.10 | 3 |
 | 13 | Quantization deterministic | `demo-quantization --verify-determinism` | Match | 2 |
-| 14 | APR export successful | `demo-apr-format --verify` | Pass | 2 |
+| 14 | APR export successful | `demo-apr-format --tier small --verify` | Pass | 2 |
 | 15 | APR zero-copy load <100ms | `demo-apr-format --load-time` | 100ms | 2 |
-| 16 | Pruning ≥50% sparsity | `demo-pruning --target-sparsity 0.5` | 0.50 | 2 |
-| 17 | Pruned accuracy Δ ≤5% | `demo-pruning --eval-accuracy` | 0.95 | 2 |
-| 18 | Flash attention 2x speedup | `demo-flash-attention --benchmark` | 2.0x | 2 |
-| 19 | Speculative decode 2x speedup | `demo-speculative-decode --benchmark` | 2.0x | 1 |
-| 20 | Tensor parallel scales ≥1.8x/GPU | `demo-tensor-parallel --gpus 2` | 1.8x | 1 |
+| 16 | Pruning ≥50% sparsity | `demo-pruning --tier medium --target-sparsity 0.5` | 0.50 | 2 |
+| 17 | Pruned accuracy Δ ≤5% | `demo-pruning --tier medium --eval-accuracy` | 0.95 | 2 |
+| 18 | Flash attention 2x speedup | `demo-flash-attention --tier medium --benchmark` | 2.0x | 2 |
+| 19 | Speculative decode 2.8x speedup | `demo-speculative-decode --draft tiny --target medium` | 2.8x | 1 |
+| 20 | Tensor parallel scales ≥1.8x/GPU | `demo-tensor-parallel --tier large --gpus 2` | 1.8x | 1 |
 
 ### 7.3 Edge Deployment (15 points)
+
+**Model:** Qwen2.5-0.5B-Q4_K_M (Tiny tier for edge)
 
 | # | Criterion | Test Method | Threshold | Points |
 |---|-----------|-------------|-----------|--------|
 | 21 | WASM binary ≤5MB (classifier) | `wasm-pack build --release && ls -la` | 5MB | 2 |
-| 22 | WASM inference ≤50ms | `demo-wasm-inference --benchmark` | 50ms | 2 |
-| 23 | Lambda cold start ≤500ms | `demo-lambda-handler --cold-start` | 500ms | 2 |
-| 24 | Lambda warm latency ≤10ms | `demo-lambda-handler --warm` | 10ms | 2 |
-| 25 | Lambda memory ≤256MB | `demo-lambda-handler --memory` | 256MB | 2 |
+| 22 | WASM inference ≤50ms (Tiny) | `demo-wasm-inference --tier tiny --benchmark` | 50ms | 2 |
+| 23 | Lambda cold start ≤500ms (Tiny) | `demo-lambda-handler --tier tiny --cold-start` | 500ms | 2 |
+| 24 | Lambda warm latency ≤10ms | `demo-lambda-handler --tier tiny --warm` | 10ms | 2 |
+| 25 | Lambda memory ≤512MB (Tiny) | `demo-lambda-handler --tier tiny --memory` | 512MB | 2 |
 | 26 | Works on ARM64 (Apple Silicon) | `cargo test --target aarch64-apple-darwin` | Pass | 2 |
 | 27 | Works on x86_64 Linux | `cargo test --target x86_64-unknown-linux-gnu` | Pass | 1 |
-| 28 | Embedded model loads <100ms | `demo-wasm-inference --load-time` | 100ms | 1 |
+| 28 | Embedded model loads <100ms | `demo-wasm-inference --tier tiny --load-time` | 100ms | 1 |
 | 29 | No runtime dependencies | `ldd target/release/demo-* \| grep -v linux` | None | 1 |
 
 ### 7.4 API Correctness (15 points)
@@ -828,7 +930,17 @@ Critical Failures (Automatic FAIL):
 
 ## 8. Peer-Reviewed Citations
 
-### 8.1 Inference Optimization
+### 8.1 Reference Model (Qwen2.5-Coder)
+
+**[0] Hui, B., et al. (2024). "Qwen2.5-Coder Technical Report."** *arXiv preprint arXiv:2409.12186*.
+- Code-optimized transformer architecture used as reference model throughout all demos
+- Cited in: All demos (model tier system)
+
+**[0a] Yang, A., et al. (2024). "Qwen2 Technical Report."** *arXiv preprint arXiv:2407.10671*.
+- Foundation model architecture and tokenizer (151,936 vocab)
+- Cited in: Section 1.4 (Model Tiers)
+
+### 8.2 Inference Optimization
 
 **[1] Kwon, W., et al. (2023). "Efficient Memory Management for Large Language Model Serving with PagedAttention."** *Proceedings of the ACM SIGOPS 29th Symposium on Operating Systems Principles (SOSP '23)*. arXiv:2309.06180.
 - Foundational paper for continuous batching and paged KV cache
@@ -850,7 +962,7 @@ Critical Failures (Automatic FAIL):
 - Speculative sampling theoretical foundations
 - Cited in: `demo-speculative-decode`
 
-### 8.2 Quantization
+### 8.3 Quantization
 
 **[6] Frantar, E., et al. (2022). "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers."** *arXiv preprint arXiv:2210.17323*.
 - Weight-only quantization for LLMs
@@ -868,7 +980,7 @@ Critical Failures (Automatic FAIL):
 - Activation-aware quantization
 - Cited in: `demo-quantization`
 
-### 8.3 Model Compression
+### 8.4 Model Compression
 
 **[10] Hinton, G., et al. (2015). "Distilling the Knowledge in a Neural Network."** *NIPS Deep Learning Workshop 2014*. arXiv:1503.02531.
 - Knowledge distillation foundations
@@ -886,7 +998,7 @@ Critical Failures (Automatic FAIL):
 - Sparse network theory
 - Cited in: `demo-pruning`
 
-### 8.4 Distributed Inference
+### 8.5 Distributed Inference
 
 **[14] Shoeybi, M., et al. (2019). "Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism."** *arXiv preprint arXiv:1909.08053*.
 - Tensor parallelism strategy
@@ -896,7 +1008,7 @@ Critical Failures (Automatic FAIL):
 - Pipeline and tensor parallelism at scale
 - Cited in: `demo-tensor-parallel`
 
-### 8.5 Edge Deployment
+### 8.6 Edge Deployment
 
 **[16] Jacob, B., et al. (2018). "Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference."** *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR 2018)*. arXiv:1712.05877.
 - Integer-only inference foundations
@@ -906,7 +1018,7 @@ Critical Failures (Automatic FAIL):
 - Efficient architecture design
 - Cited in: `demo-wasm-inference`
 
-### 8.6 Serving Systems
+### 8.7 Serving Systems
 
 **[18] Olston, C., et al. (2017). "TensorFlow-Serving: Flexible, High-Performance ML Serving."** *arXiv preprint arXiv:1712.06139*.
 - Production serving architecture patterns
@@ -916,7 +1028,7 @@ Critical Failures (Automatic FAIL):
 - Low-latency serving design
 - Cited in: `demo-serving-api`
 
-### 8.7 Reproducibility and Scientific Methods
+### 8.8 Reproducibility and Scientific Methods
 
 **[20] Popper, K. (1959). "The Logic of Scientific Discovery."** *Routledge*.
 - Falsifiability as demarcation criterion
@@ -930,7 +1042,7 @@ Critical Failures (Automatic FAIL):
 - Reproducibility checklist
 - Cited in: Section 3 (Reproducibility)
 
-### 8.8 Hardware Optimization
+### 8.9 Hardware Optimization
 
 **[23] Jia, Z., et al. (2019). "Dissecting the NVIDIA Volta GPU Architecture via Microbenchmarking."** *arXiv preprint arXiv:1804.06826*.
 - GPU microarchitecture understanding
@@ -951,17 +1063,27 @@ paiml/prod-ml-demos
 ├── README.md                    # Model card
 ├── config.json                  # Model configuration
 ├── models/
-│   ├── classifier.apr           # Classical ML model
-│   └── phi-2-q4_k.gguf         # Quantized LLM (if redistributable)
+│   ├── qwen2.5-coder-1.5b-q4_k_m.gguf  # Small tier (primary)
+│   ├── qwen2.5-0.5b-q4_k_m.gguf        # Tiny tier (edge)
+│   └── classifier.apr                    # Classical ML model
 ├── demos/
 │   ├── week1.wasm              # WASM demos
 │   ├── week2.wasm
 │   └── week3.wasm
 └── benchmarks/
-    └── results.arrow            # Benchmark results
+    └── results.arrow            # Benchmark results (all tiers)
 ```
 
-### 9.2 Dataset Card (YAML)
+### 9.2 Qwen2.5-Coder Model Sources
+
+| Tier | HuggingFace Path | Quantization |
+|------|------------------|--------------|
+| Tiny | `Qwen/Qwen2.5-0.5B-Instruct-GGUF` | Q4_K_M |
+| Small | `Qwen/Qwen2.5-Coder-1.5B-Instruct-GGUF` | Q4_K_M |
+| Medium | `Qwen/Qwen2.5-Coder-7B-Instruct-GGUF` | Q4_K_M |
+| Large | `Qwen/Qwen2.5-Coder-32B-Instruct-GGUF` | Q4_K_M |
+
+### 9.3 Dataset Card (YAML)
 
 ```yaml
 ---
@@ -1009,7 +1131,7 @@ dataset_info:
 ---
 ```
 
-### 9.3 Publication Workflow
+### 9.4 Publication Workflow
 
 ```bash
 # 1. Run all benchmarks
@@ -1214,9 +1336,11 @@ If you cannot break it, and you have tried your absolute hardest (adversarial te
 | Continuous Batching | Dynamic request batching during generation |
 | GGUF | GPT-Generated Unified Format for LLM weights |
 | KV Cache | Key-Value cache for autoregressive generation |
+| Model Tier | Size category: Tiny (0.5B), Small (1.5B), Medium (7B), Large (32B) |
 | PagedAttention | Memory management via fixed-size blocks |
 | PMAT | Performance, Maintainability, Accessibility, Testability |
-| Q4_K | 4-bit quantization with K-means clustering |
+| Q4_K_M | 4-bit quantization with K-means clustering (medium quality) |
+| Qwen2.5-Coder | Reference model family for all demos (Apache 2.0 license) |
 | SafeTensors | Safe tensor serialization format |
 | Sovereign Stack | Pure Rust ML infrastructure (trueno/aprender/realizar/batuta) |
 | TTFT | Time To First Token |
@@ -1227,6 +1351,7 @@ If you cannot break it, and you have tried your absolute hardest (adversarial te
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 1.1.0 | 2026-01-21 | PAIML Research | Added Qwen2.5-Coder model tiers, updated performance targets to 788 tok/s |
 | 1.0.2 | 2026-01-21 | PAIML Research | Added explicit error margins and presentar dependency |
 | 1.0.1 | 2026-01-21 | PAIML Research | Enhanced falsification criteria |
 | 1.0.0 | 2026-01-21 | PAIML Research | Initial specification |

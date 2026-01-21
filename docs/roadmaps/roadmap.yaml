@@ -44,11 +44,11 @@ roadmap:
   github_issue: null
   item_type: task
   title: Implement demo-kv-cache
-  status: planned
+  status: completed
   priority: high
   assigned_to: null
   created: 1970-01-01T00:00:00Z
-  updated: 1970-01-01T00:00:00Z
+  updated: 2026-01-21T18:47:10.173624768+00:00
   spec: null
   acceptance_criteria: []
   phases: []
