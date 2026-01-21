@@ -1,0 +1,61 @@
+[package]
+name = "prod-ml-demos-week2"
+version.workspace = true
+edition = "2021"
+rust-version.workspace = true
+license.workspace = true
+description = "Week 2: Model Optimization Demos"
+
+[dependencies]
+trueno.workspace = true
+aprender.workspace = true
+realizar.workspace = true
+
+serde.workspace = true
+serde_json.workspace = true
+
+clap.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+
+tokio.workspace = true
+
+ratatui.workspace = true
+crossterm.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+proptest.workspace = true
+
+[features]
+default = []
+gpu = ["trueno/gpu"]
+cuda-monitor = ["trueno/cuda-monitor"]
+
+[[bin]]
+name = "demo-quantization"
+path = "src/bin/demo-quantization.rs"
+
+[[bin]]
+name = "demo-apr-format"
+path = "src/bin/demo-apr-format.rs"
+
+[[bin]]
+name = "demo-pruning"
+path = "src/bin/demo-pruning.rs"
+
+[[bin]]
+name = "demo-distillation"
+path = "src/bin/demo-distillation.rs"
+
+[[bin]]
+name = "demo-flash-attention"
+path = "src/bin/demo-flash-attention.rs"
+
+[[bin]]
+name = "demo-speculative-decode"
+path = "src/bin/demo-speculative-decode.rs"
+
+[[bin]]
+name = "demo-tensor-parallel"
+path = "src/bin/demo-tensor-parallel.rs"

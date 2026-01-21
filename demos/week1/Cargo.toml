@@ -1,0 +1,58 @@
+[package]
+name = "prod-ml-demos-week1"
+version.workspace = true
+edition = "2021"
+rust-version.workspace = true
+license.workspace = true
+description = "Week 1: Inference Serving Demos"
+
+[dependencies]
+trueno.workspace = true
+aprender.workspace = true
+realizar.workspace = true
+
+serde.workspace = true
+serde_json.workspace = true
+
+clap.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+
+tokio.workspace = true
+axum.workspace = true
+
+ratatui.workspace = true
+crossterm.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+proptest.workspace = true
+
+[features]
+default = []
+gpu = ["trueno/gpu"]
+cuda-monitor = ["trueno/cuda-monitor"]
+
+[[bin]]
+name = "demo-tgi-architecture"
+path = "src/bin/demo-tgi-architecture.rs"
+
+[[bin]]
+name = "demo-continuous-batching"
+path = "src/bin/demo-continuous-batching.rs"
+
+[[bin]]
+name = "demo-kv-cache"
+path = "src/bin/demo-kv-cache.rs"
+
+[[bin]]
+name = "demo-serving-api"
+path = "src/bin/demo-serving-api.rs"
+
+[[bin]]
+name = "demo-streaming"
+path = "src/bin/demo-streaming.rs"
+
+[[bin]]
+name = "demo-throughput-bench"
+path = "src/bin/demo-throughput-bench.rs"

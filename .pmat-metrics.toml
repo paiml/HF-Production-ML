@@ -1,0 +1,39 @@
+# PMAT Metrics Configuration
+# Production ML with Hugging Face - Course 5
+
+[thresholds]
+lint_max_ms = 30_000
+docs_build_max_ms = 60_000
+test_max_ms = 300_000
+
+[enforcement]
+fail_on_stale_metrics = false
+fail_on_missing_metrics = false
+fail_on_threshold_violation = true
+
+[quality_gates]
+min_tdg_grade = "B"
+min_test_coverage = 95
+min_mutation_coverage = 80
+
+[project]
+type = "course"
+stack = "sovereign-ai"
+primary_tools = ["trueno", "aprender", "realizar", "batuta"]
+model_format = "apr"
+hf_integration = true
+
+[falsification]
+total_points = 100
+pass_threshold = 90
+critical_sections = ["inference_performance", "reproducibility", "code_quality"]
+
+[benchmarks]
+iterations = 1000
+warmup_iterations = 100
+export_format = "arrow"
+
+[hardware.targets]
+cpu = ["x86_64-unknown-linux-gnu", "aarch64-apple-darwin"]
+gpu = ["cuda"]
+wasm = ["wasm32-unknown-unknown"]

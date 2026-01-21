@@ -1,0 +1,61 @@
+[package]
+name = "prod-ml-demos-week3"
+version.workspace = true
+edition = "2021"
+rust-version.workspace = true
+license.workspace = true
+description = "Week 3: Edge Deployment Demos"
+
+[dependencies]
+trueno.workspace = true
+aprender.workspace = true
+realizar.workspace = true
+batuta.workspace = true
+presentar.workspace = true
+
+serde.workspace = true
+serde_json.workspace = true
+
+clap.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+
+tokio.workspace = true
+axum.workspace = true
+
+ratatui.workspace = true
+crossterm.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+proptest.workspace = true
+
+[features]
+default = []
+gpu = ["trueno/gpu"]
+gpu-wasm = ["trueno/gpu-wasm"]
+cuda-monitor = ["trueno/cuda-monitor"]
+
+[[bin]]
+name = "demo-wasm-inference"
+path = "src/bin/demo-wasm-inference.rs"
+
+[[bin]]
+name = "demo-lambda-handler"
+path = "src/bin/demo-lambda-handler.rs"
+
+[[bin]]
+name = "demo-presentar-ui"
+path = "src/bin/demo-presentar-ui.rs"
+
+[[bin]]
+name = "demo-latency-profile"
+path = "src/bin/demo-latency-profile.rs"
+
+[[bin]]
+name = "demo-model-registry"
+path = "src/bin/demo-model-registry.rs"
+
+[[bin]]
+name = "demo-hardware-detect"
+path = "src/bin/demo-hardware-detect.rs"
