@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="headerGradQ" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7C3AED"/>
+      <stop offset="100%" style="stop-color:#A855F7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="#FAFAFA"/>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="800" height="50" fill="url(#headerGradQ)"/>
+  <text x="400" y="32" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="white" text-anchor="middle">Quantization: Precision vs Memory Trade-offs</text>
+
+  <!-- Precision comparison -->
+  <g transform="translate(50, 70)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1E293B">Numeric Precision Formats</text>
+
+    <g transform="translate(0, 25)">
+      <!-- FP32 -->
+      <g>
+        <rect x="0" y="0" width="170" height="60" rx="4" fill="#FEE2E2" stroke="#EF4444"/>
+        <text x="85" y="20" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#991B1B" text-anchor="middle">FP32 (32-bit)</text>
+        <rect x="10" y="30" width="150" height="8" rx="2" fill="#EF4444"/>
+        <text x="85" y="52" font-family="monospace" font-size="9" fill="#7F1D1D" text-anchor="middle">1 sign │ 8 exp │ 23 mantissa</text>
+      </g>
+
+      <!-- FP16 -->
+      <g transform="translate(180, 0)">
+        <rect x="0" y="0" width="170" height="60" rx="4" fill="#FEF3C7" stroke="#F59E0B"/>
+        <text x="85" y="20" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#92400E" text-anchor="middle">FP16 (16-bit)</text>
+        <rect x="10" y="30" width="75" height="8" rx="2" fill="#F59E0B"/>
+        <rect x="85" y="30" width="75" height="8" rx="2" fill="#FCD34D" stroke="#F59E0B" stroke-dasharray="2"/>
+        <text x="85" y="52" font-family="monospace" font-size="9" fill="#78350F" text-anchor="middle">1 sign │ 5 exp │ 10 mantissa</text>
+      </g>
+
+      <!-- INT8 -->
+      <g transform="translate(360, 0)">
+        <rect x="0" y="0" width="170" height="60" rx="4" fill="#DCFCE7" stroke="#10B981"/>
+        <text x="85" y="20" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#166534" text-anchor="middle">INT8 (8-bit)</text>
+        <rect x="10" y="30" width="37" height="8" rx="2" fill="#10B981"/>
+        <rect x="47" y="30" width="113" height="8" rx="2" fill="#A7F3D0" stroke="#10B981" stroke-dasharray="2"/>
+        <text x="85" y="52" font-family="monospace" font-size="9" fill="#14532D" text-anchor="middle">1 sign │ 7 value bits</text>
+      </g>
+
+      <!-- INT4 -->
+      <g transform="translate(540, 0)">
+        <rect x="0" y="0" width="170" height="60" rx="4" fill="#DBEAFE" stroke="#3B82F6"/>
+        <text x="85" y="20" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#1E40AF" text-anchor="middle">INT4 (4-bit)</text>
+        <rect x="10" y="30" width="18" height="8" rx="2" fill="#3B82F6"/>
+        <rect x="28" y="30" width="132" height="8" rx="2" fill="#BFDBFE" stroke="#3B82F6" stroke-dasharray="2"/>
+        <text x="85" y="52" font-family="monospace" font-size="9" fill="#1E3A8A" text-anchor="middle">16 discrete levels</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- GGUF Quantization Methods -->
+  <g transform="translate(50, 165)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1E293B">GGUF Quantization Methods (llama.cpp)</text>
+
+    <g transform="translate(0, 20)">
+      <rect x="0" y="0" width="700" height="120" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
+
+      <!-- Table header -->
+      <rect x="0" y="0" width="700" height="25" rx="4" fill="#E2E8F0"/>
+      <text x="70" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569" text-anchor="middle">Method</text>
+      <text x="180" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569" text-anchor="middle">Bits/Weight</text>
+      <text x="290" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569" text-anchor="middle">7B Size</text>
+      <text x="400" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569" text-anchor="middle">Quality</text>
+      <text x="550" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569" text-anchor="middle">Use Case</text>
+
+      <!-- Q8_0 -->
+      <text x="70" y="45" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">Q8_0</text>
+      <text x="180" y="45" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">8.0</text>
+      <text x="290" y="45" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">7.0 GB</text>
+      <rect x="350" y="35" width="100" height="12" rx="2" fill="#DCFCE7"/>
+      <rect x="350" y="35" width="99" height="12" rx="2" fill="#10B981"/>
+      <text x="550" y="45" font-family="system-ui, sans-serif" font-size="9" fill="#475569" text-anchor="middle">High quality inference</text>
+
+      <!-- Q6_K -->
+      <text x="70" y="65" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">Q6_K</text>
+      <text x="180" y="65" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">6.5</text>
+      <text x="290" y="65" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">5.5 GB</text>
+      <rect x="350" y="55" width="100" height="12" rx="2" fill="#DCFCE7"/>
+      <rect x="350" y="55" width="97" height="12" rx="2" fill="#10B981"/>
+      <text x="550" y="65" font-family="system-ui, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Balanced quality/size</text>
+
+      <!-- Q5_K_M -->
+      <text x="70" y="85" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">Q5_K_M</text>
+      <text x="180" y="85" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">5.5</text>
+      <text x="290" y="85" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">4.8 GB</text>
+      <rect x="350" y="75" width="100" height="12" rx="2" fill="#FEF3C7"/>
+      <rect x="350" y="75" width="95" height="12" rx="2" fill="#F59E0B"/>
+      <text x="550" y="85" font-family="system-ui, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Memory constrained</text>
+
+      <!-- Q4_K_M -->
+      <text x="70" y="105" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">Q4_K_M</text>
+      <text x="180" y="105" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">4.5</text>
+      <text x="290" y="105" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">4.1 GB</text>
+      <rect x="350" y="95" width="100" height="12" rx="2" fill="#DBEAFE"/>
+      <rect x="350" y="95" width="92" height="12" rx="2" fill="#3B82F6"/>
+      <text x="550" y="105" font-family="system-ui, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Edge/mobile deployment</text>
+    </g>
+  </g>
+
+  <!-- Quality vs Size chart -->
+  <g transform="translate(50, 320)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1E293B">Qwen2.5-Coder-7B: Compression vs Quality Retention</text>
+
+    <g transform="translate(0, 20)">
+      <!-- Chart -->
+      <rect x="0" y="0" width="700" height="80" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
+
+      <!-- Bars showing compression -->
+      <g transform="translate(20, 10)">
+        <rect x="0" y="0" width="120" height="25" rx="3" fill="#EF4444"/>
+        <text x="60" y="17" font-family="monospace" font-size="9" fill="white" text-anchor="middle">FP16: 14GB (100%)</text>
+
+        <rect x="140" y="0" width="60" height="25" rx="3" fill="#F59E0B"/>
+        <text x="170" y="17" font-family="monospace" font-size="9" fill="white" text-anchor="middle">Q8: 7GB</text>
+
+        <rect x="220" y="0" width="45" height="25" rx="3" fill="#10B981"/>
+        <text x="242" y="17" font-family="monospace" font-size="9" fill="white" text-anchor="middle">Q6</text>
+
+        <rect x="285" y="0" width="38" height="25" rx="3" fill="#3B82F6"/>
+        <text x="304" y="17" font-family="monospace" font-size="9" fill="white" text-anchor="middle">Q5</text>
+
+        <rect x="343" y="0" width="32" height="25" rx="3" fill="#8B5CF6"/>
+        <text x="359" y="17" font-family="monospace" font-size="9" fill="white" text-anchor="middle">Q4</text>
+
+        <!-- Quality retention labels -->
+        <text x="60" y="50" font-family="monospace" font-size="9" fill="#64748B" text-anchor="middle">100%</text>
+        <text x="170" y="50" font-family="monospace" font-size="9" fill="#64748B" text-anchor="middle">99.5%</text>
+        <text x="242" y="50" font-family="monospace" font-size="9" fill="#64748B" text-anchor="middle">98.5%</text>
+        <text x="304" y="50" font-family="monospace" font-size="9" fill="#64748B" text-anchor="middle">97%</text>
+        <text x="359" y="50" font-family="monospace" font-size="9" fill="#64748B" text-anchor="middle">94%</text>
+
+        <text x="60" y="65" font-family="system-ui, sans-serif" font-size="8" fill="#94A3B8" text-anchor="middle">Quality Retention</text>
+
+        <!-- Arrow showing compression -->
+        <path d="M 400 12 L 550 12" stroke="#64748B" stroke-width="1.5" marker-end="url(#arrowhead2)"/>
+        <defs><marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#64748B"/></marker></defs>
+        <text x="475" y="8" font-family="system-ui, sans-serif" font-size="9" fill="#64748B" text-anchor="middle">4x compression</text>
+
+        <!-- Recommendation -->
+        <rect x="560" y="0" width="100" height="60" rx="4" fill="#F0FDF4" stroke="#10B981"/>
+        <text x="610" y="18" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#166534" text-anchor="middle">Recommended</text>
+        <text x="610" y="35" font-family="monospace" font-size="11" font-weight="600" fill="#10B981" text-anchor="middle">Q4_K_M</text>
+        <text x="610" y="50" font-family="monospace" font-size="8" fill="#475569" text-anchor="middle">Best quality/size</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="400" y="440" font-family="system-ui, sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Course 5: Production ML with Hugging Face | Week 2: Optimization Techniques</text>
+</svg>

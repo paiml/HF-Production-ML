@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="headerGradFA" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#F59E0B"/>
+      <stop offset="100%" style="stop-color:#EF4444"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="#FAFAFA"/>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="800" height="50" fill="url(#headerGradFA)"/>
+  <text x="400" y="32" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="white" text-anchor="middle">Flash Attention: IO-Aware Exact Attention</text>
+
+  <!-- Memory hierarchy -->
+  <g transform="translate(50, 70)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1E293B">GPU Memory Hierarchy</text>
+
+    <g transform="translate(0, 25)">
+      <!-- HBM -->
+      <rect x="0" y="0" width="200" height="70" rx="6" fill="#FEE2E2" stroke="#EF4444"/>
+      <text x="100" y="25" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#991B1B" text-anchor="middle">HBM (Global Memory)</text>
+      <text x="100" y="45" font-family="monospace" font-size="10" fill="#7F1D1D" text-anchor="middle">80GB capacity</text>
+      <text x="100" y="60" font-family="monospace" font-size="10" fill="#7F1D1D" text-anchor="middle">~2 TB/s bandwidth</text>
+
+      <!-- Arrow -->
+      <path d="M 210 35 L 280 35" stroke="#94A3B8" stroke-width="2" marker-end="url(#arrowhead3)"/>
+      <defs><marker id="arrowhead3" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#94A3B8"/></marker></defs>
+      <text x="245" y="28" font-family="monospace" font-size="8" fill="#64748B" text-anchor="middle">slow</text>
+
+      <!-- SRAM -->
+      <rect x="290" y="0" width="200" height="70" rx="6" fill="#DCFCE7" stroke="#10B981"/>
+      <text x="390" y="25" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#166534" text-anchor="middle">SRAM (Shared Memory)</text>
+      <text x="390" y="45" font-family="monospace" font-size="10" fill="#14532D" text-anchor="middle">~20MB per SM</text>
+      <text x="390" y="60" font-family="monospace" font-size="10" fill="#14532D" text-anchor="middle">~20 TB/s bandwidth</text>
+
+      <!-- 10x faster label -->
+      <rect x="500" y="20" width="80" height="30" rx="4" fill="#10B981"/>
+      <text x="540" y="40" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="white" text-anchor="middle">10x faster</text>
+    </g>
+  </g>
+
+  <!-- Standard vs Flash -->
+  <g transform="translate(50, 175)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1E293B">Standard Attention vs Flash Attention</text>
+
+    <g transform="translate(0, 25)">
+      <!-- Standard -->
+      <g>
+        <rect x="0" y="0" width="320" height="100" rx="6" fill="#FEE2E2" stroke="#EF4444"/>
+        <text x="160" y="20" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#991B1B" text-anchor="middle">Standard Attention</text>
+
+        <text x="15" y="42" font-family="monospace" font-size="9" fill="#7F1D1D">1. S = QKᵀ          → O(N²) HBM writes</text>
+        <text x="15" y="57" font-family="monospace" font-size="9" fill="#7F1D1D">2. P = softmax(S)   → O(N²) HBM reads</text>
+        <text x="15" y="72" font-family="monospace" font-size="9" fill="#7F1D1D">3. O = PV           → O(N²) HBM accesses</text>
+
+        <rect x="15" y="80" width="290" height="15" rx="2" fill="#FCA5A5"/>
+        <text x="160" y="92" font-family="monospace" font-size="9" fill="#7F1D1D" text-anchor="middle">Memory: O(N²) │ IO: O(N²d)</text>
+      </g>
+
+      <!-- Flash -->
+      <g transform="translate(350, 0)">
+        <rect x="0" y="0" width="320" height="100" rx="6" fill="#DCFCE7" stroke="#10B981"/>
+        <text x="160" y="20" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#166534" text-anchor="middle">Flash Attention (Tiled)</text>
+
+        <text x="15" y="42" font-family="monospace" font-size="9" fill="#14532D">for each Q_block:</text>
+        <text x="15" y="57" font-family="monospace" font-size="9" fill="#14532D">  for each K,V_block: (in SRAM)</text>
+        <text x="15" y="72" font-family="monospace" font-size="9" fill="#14532D">    online_softmax → accumulate O</text>
+
+        <rect x="15" y="80" width="290" height="15" rx="2" fill="#86EFAC"/>
+        <text x="160" y="92" font-family="monospace" font-size="9" fill="#14532D" text-anchor="middle">Memory: O(N) │ IO: O(N²d²/M)</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Memory scaling chart -->
+  <g transform="translate(50, 310)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1E293B">Memory Scaling: Sequence Length Impact</text>
+
+    <g transform="translate(0, 20)">
+      <rect x="0" y="0" width="700" height="90" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
+
+      <!-- Chart -->
+      <g transform="translate(60, 10)">
+        <!-- Y axis -->
+        <text x="-10" y="10" font-family="monospace" font-size="8" fill="#64748B" text-anchor="end">32GB</text>
+        <text x="-10" y="35" font-family="monospace" font-size="8" fill="#64748B" text-anchor="end">16GB</text>
+        <text x="-10" y="60" font-family="monospace" font-size="8" fill="#64748B" text-anchor="end">0GB</text>
+
+        <!-- Standard bars (red) -->
+        <rect x="0" y="50" width="50" height="10" rx="2" fill="#EF4444"/>
+        <rect x="70" y="40" width="50" height="20" rx="2" fill="#EF4444"/>
+        <rect x="140" y="20" width="50" height="40" rx="2" fill="#EF4444"/>
+        <rect x="210" y="0" width="50" height="60" rx="2" fill="#EF4444"/>
+
+        <!-- Flash bars (green) -->
+        <rect x="20" y="55" width="30" height="5" rx="2" fill="#10B981"/>
+        <rect x="90" y="53" width="30" height="7" rx="2" fill="#10B981"/>
+        <rect x="160" y="50" width="30" height="10" rx="2" fill="#10B981"/>
+        <rect x="230" y="48" width="30" height="12" rx="2" fill="#10B981"/>
+
+        <!-- X axis labels -->
+        <text x="25" y="75" font-family="monospace" font-size="8" fill="#64748B" text-anchor="middle">512</text>
+        <text x="95" y="75" font-family="monospace" font-size="8" fill="#64748B" text-anchor="middle">2K</text>
+        <text x="165" y="75" font-family="monospace" font-size="8" fill="#64748B" text-anchor="middle">8K</text>
+        <text x="235" y="75" font-family="monospace" font-size="8" fill="#64748B" text-anchor="middle">32K</text>
+
+        <!-- Legend -->
+        <rect x="320" y="15" width="12" height="12" rx="2" fill="#EF4444"/>
+        <text x="338" y="25" font-family="system-ui, sans-serif" font-size="9" fill="#475569">Standard (O(N²))</text>
+
+        <rect x="320" y="35" width="12" height="12" rx="2" fill="#10B981"/>
+        <text x="338" y="45" font-family="system-ui, sans-serif" font-size="9" fill="#475569">Flash (O(N))</text>
+
+        <!-- Savings box -->
+        <rect x="450" y="10" width="180" height="55" rx="4" fill="#F0FDF4" stroke="#10B981"/>
+        <text x="540" y="30" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#166534" text-anchor="middle">Flash Attention Benefits</text>
+        <text x="540" y="48" font-family="monospace" font-size="9" fill="#475569" text-anchor="middle">2-4x speedup</text>
+        <text x="540" y="60" font-family="monospace" font-size="9" fill="#475569" text-anchor="middle">5-20x memory reduction</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="400" y="440" font-family="system-ui, sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Course 5: Production ML with Hugging Face | Week 2: Optimization Techniques</text>
+</svg>

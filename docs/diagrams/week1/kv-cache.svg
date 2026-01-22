@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="headerGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#DC2626"/>
+      <stop offset="100%" style="stop-color:#F59E0B"/>
+    </linearGradient>
+    <filter id="shadow3" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="#FAFAFA"/>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="800" height="50" fill="url(#headerGrad3)"/>
+  <text x="400" y="32" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="white" text-anchor="middle">KV Cache: Memory Management for Autoregressive Inference</text>
+
+  <!-- Attention mechanism -->
+  <g transform="translate(50, 70)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1E293B">Self-Attention with KV Cache</text>
+
+    <g transform="translate(0, 25)">
+      <!-- Without cache -->
+      <g>
+        <text x="0" y="0" font-family="system-ui, sans-serif" font-size="11" fill="#64748B">Without Cache (Recompute)</text>
+
+        <g transform="translate(0, 15)">
+          <rect x="0" y="0" width="180" height="70" rx="4" fill="#FEE2E2" stroke="#EF4444"/>
+
+          <text x="10" y="20" font-family="monospace" font-size="9" fill="#7F1D1D">Step 1: Q₁K₁ᵀ → Attn₁</text>
+          <text x="10" y="35" font-family="monospace" font-size="9" fill="#7F1D1D">Step 2: Q₂[K₁K₂]ᵀ → Attn₂</text>
+          <text x="10" y="50" font-family="monospace" font-size="9" fill="#7F1D1D">Step 3: Q₃[K₁K₂K₃]ᵀ → Attn₃</text>
+          <text x="10" y="65" font-family="monospace" font-size="9" fill="#DC2626">⚠ O(n²) recomputation!</text>
+        </g>
+      </g>
+
+      <!-- With cache -->
+      <g transform="translate(220, 0)">
+        <text x="0" y="0" font-family="system-ui, sans-serif" font-size="11" fill="#64748B">With KV Cache (Incremental)</text>
+
+        <g transform="translate(0, 15)">
+          <rect x="0" y="0" width="200" height="70" rx="4" fill="#DCFCE7" stroke="#10B981"/>
+
+          <text x="10" y="20" font-family="monospace" font-size="9" fill="#14532D">Step 1: Cache K₁,V₁</text>
+          <text x="10" y="35" font-family="monospace" font-size="9" fill="#14532D">Step 2: Q₂ × [cached K] → Attn₂</text>
+          <text x="10" y="50" font-family="monospace" font-size="9" fill="#14532D">Step 3: Q₃ × [cached K] → Attn₃</text>
+          <text x="10" y="65" font-family="monospace" font-size="9" fill="#059669">✓ O(n) per step!</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- Memory layout -->
+  <g transform="translate(500, 70)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1E293B">Cache Memory Layout</text>
+
+    <g transform="translate(0, 25)">
+      <rect x="0" y="0" width="250" height="100" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
+
+      <!-- K cache -->
+      <rect x="10" y="10" width="110" height="35" rx="3" fill="#3B82F6"/>
+      <text x="65" y="25" font-family="system-ui, sans-serif" font-size="10" fill="white" text-anchor="middle" font-weight="600">K Cache</text>
+      <text x="65" y="38" font-family="monospace" font-size="8" fill="#BFDBFE" text-anchor="middle">[batch, heads, seq, dim]</text>
+
+      <!-- V cache -->
+      <rect x="130" y="10" width="110" height="35" rx="3" fill="#8B5CF6"/>
+      <text x="185" y="25" font-family="system-ui, sans-serif" font-size="10" fill="white" text-anchor="middle" font-weight="600">V Cache</text>
+      <text x="185" y="38" font-family="monospace" font-size="8" fill="#DDD6FE" text-anchor="middle">[batch, heads, seq, dim]</text>
+
+      <!-- Formula -->
+      <text x="10" y="65" font-family="monospace" font-size="9" fill="#475569">Memory = 2 × layers × heads ×</text>
+      <text x="10" y="78" font-family="monospace" font-size="9" fill="#475569">         seq_len × head_dim × dtype</text>
+      <text x="10" y="95" font-family="monospace" font-size="9" fill="#64748B">Qwen 7B: ~14GB for 8K context</text>
+    </g>
+  </g>
+
+  <!-- Memory scaling chart -->
+  <g transform="translate(50, 200)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1E293B">KV Cache Memory by Model Size (8K context, FP16)</text>
+
+    <g transform="translate(0, 25)">
+      <!-- Chart background -->
+      <rect x="0" y="0" width="700" height="100" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
+
+      <!-- Y axis -->
+      <text x="5" y="15" font-family="monospace" font-size="8" fill="#64748B">64GB</text>
+      <text x="5" y="50" font-family="monospace" font-size="8" fill="#64748B">32GB</text>
+      <text x="5" y="85" font-family="monospace" font-size="8" fill="#64748B">0GB</text>
+
+      <!-- Bars -->
+      <g transform="translate(60, 0)">
+        <!-- Tiny -->
+        <rect x="0" y="80" width="80" height="10" rx="2" fill="#3B82F6"/>
+        <text x="40" y="95" font-family="system-ui, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Tiny 0.5B</text>
+        <text x="40" y="77" font-family="monospace" font-size="8" fill="#3B82F6" text-anchor="middle">0.5GB</text>
+
+        <!-- Small -->
+        <rect x="100" y="75" width="80" height="15" rx="2" fill="#10B981"/>
+        <text x="140" y="95" font-family="system-ui, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Small 1.5B</text>
+        <text x="140" y="72" font-family="monospace" font-size="8" fill="#10B981" text-anchor="middle">1.5GB</text>
+
+        <!-- Medium -->
+        <rect x="200" y="60" width="80" height="30" rx="2" fill="#F59E0B"/>
+        <text x="240" y="95" font-family="system-ui, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Medium 7B</text>
+        <text x="240" y="57" font-family="monospace" font-size="8" fill="#F59E0B" text-anchor="middle">7GB</text>
+
+        <!-- Large -->
+        <rect x="300" y="25" width="80" height="65" rx="2" fill="#EF4444"/>
+        <text x="340" y="95" font-family="system-ui, sans-serif" font-size="9" fill="#475569" text-anchor="middle">Large 32B</text>
+        <text x="340" y="22" font-family="monospace" font-size="8" fill="#EF4444" text-anchor="middle">32GB</text>
+
+        <!-- 70B reference -->
+        <rect x="400" y="5" width="80" height="85" rx="2" fill="#7C3AED"/>
+        <text x="440" y="95" font-family="system-ui, sans-serif" font-size="9" fill="#475569" text-anchor="middle">70B (ref)</text>
+        <text x="440" y="15" font-family="monospace" font-size="8" fill="#7C3AED" text-anchor="middle">64GB</text>
+
+        <!-- Legend -->
+        <g transform="translate(500, 30)">
+          <rect x="0" y="0" width="150" height="50" rx="3" fill="white" stroke="#E2E8F0"/>
+          <text x="10" y="18" font-family="monospace" font-size="9" fill="#475569">head_dim = 128</text>
+          <text x="10" y="32" font-family="monospace" font-size="9" fill="#475569">kv_heads = 2-8</text>
+          <text x="10" y="46" font-family="monospace" font-size="9" fill="#475569">dtype = FP16</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- Optimization techniques -->
+  <g transform="translate(50, 345)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1E293B">Cache Optimization Techniques</text>
+
+    <g transform="translate(0, 20)">
+      <!-- GQA -->
+      <g>
+        <rect x="0" y="0" width="165" height="55" rx="4" fill="#DBEAFE" stroke="#3B82F6"/>
+        <text x="10" y="18" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#1E40AF">Grouped Query Attention</text>
+        <text x="10" y="35" font-family="monospace" font-size="9" fill="#475569">Share KV across heads</text>
+        <text x="10" y="48" font-family="monospace" font-size="9" fill="#3B82F6">4-8x memory reduction</text>
+      </g>
+
+      <!-- Quantization -->
+      <g transform="translate(180, 0)">
+        <rect x="0" y="0" width="165" height="55" rx="4" fill="#DCFCE7" stroke="#10B981"/>
+        <text x="10" y="18" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#166534">KV Cache Quantization</text>
+        <text x="10" y="35" font-family="monospace" font-size="9" fill="#475569">FP16 → INT8/INT4</text>
+        <text x="10" y="48" font-family="monospace" font-size="9" fill="#10B981">2-4x memory reduction</text>
+      </g>
+
+      <!-- Sliding Window -->
+      <g transform="translate(360, 0)">
+        <rect x="0" y="0" width="165" height="55" rx="4" fill="#FEF3C7" stroke="#F59E0B"/>
+        <text x="10" y="18" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#92400E">Sliding Window</text>
+        <text x="10" y="35" font-family="monospace" font-size="9" fill="#475569">Fixed context window</text>
+        <text x="10" y="48" font-family="monospace" font-size="9" fill="#F59E0B">O(1) memory growth</text>
+      </g>
+
+      <!-- Paged -->
+      <g transform="translate(540, 0)">
+        <rect x="0" y="0" width="155" height="55" rx="4" fill="#FCE7F3" stroke="#EC4899"/>
+        <text x="10" y="18" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#9D174D">PagedAttention</text>
+        <text x="10" y="35" font-family="monospace" font-size="9" fill="#475569">Block-level allocation</text>
+        <text x="10" y="48" font-family="monospace" font-size="9" fill="#EC4899">No fragmentation</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="400" y="440" font-family="system-ui, sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Course 5: Production ML with Hugging Face | Week 1: Inference Fundamentals</text>
+</svg>

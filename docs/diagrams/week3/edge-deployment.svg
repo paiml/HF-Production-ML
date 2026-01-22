@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="headerGradED" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10B981"/>
+      <stop offset="100%" style="stop-color:#06B6D4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="#FAFAFA"/>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="800" height="50" fill="url(#headerGradED)"/>
+  <text x="400" y="32" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="white" text-anchor="middle">Edge Deployment: WASM + Serverless Inference</text>
+
+  <!-- Deployment targets -->
+  <g transform="translate(50, 70)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1E293B">Deployment Targets</text>
+
+    <g transform="translate(0, 25)">
+      <!-- Browser -->
+      <rect x="0" y="0" width="160" height="90" rx="6" fill="#DBEAFE" stroke="#3B82F6"/>
+      <text x="80" y="22" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#1E40AF" text-anchor="middle">Browser (WASM)</text>
+      <text x="80" y="42" font-family="monospace" font-size="9" fill="#475569" text-anchor="middle">Chrome, Firefox, Safari</text>
+      <text x="80" y="58" font-family="monospace" font-size="9" fill="#475569" text-anchor="middle">Memory: 4GB limit</text>
+      <text x="80" y="74" font-family="monospace" font-size="9" fill="#3B82F6" text-anchor="middle">~35% native speed</text>
+      <text x="80" y="87" font-family="monospace" font-size="8" fill="#64748B" text-anchor="middle">SIMD supported</text>
+
+      <!-- Lambda -->
+      <rect x="180" y="0" width="160" height="90" rx="6" fill="#FEF3C7" stroke="#F59E0B"/>
+      <text x="260" y="22" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#92400E" text-anchor="middle">AWS Lambda</text>
+      <text x="260" y="42" font-family="monospace" font-size="9" fill="#475569" text-anchor="middle">Serverless functions</text>
+      <text x="260" y="58" font-family="monospace" font-size="9" fill="#475569" text-anchor="middle">Memory: 10GB max</text>
+      <text x="260" y="74" font-family="monospace" font-size="9" fill="#F59E0B" text-anchor="middle">Cold start: ~750ms</text>
+      <text x="260" y="87" font-family="monospace" font-size="8" fill="#64748B" text-anchor="middle">ARM64 Graviton</text>
+
+      <!-- Cloudflare Workers -->
+      <rect x="360" y="0" width="160" height="90" rx="6" fill="#FCE7F3" stroke="#EC4899"/>
+      <text x="440" y="22" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#9D174D" text-anchor="middle">CF Workers</text>
+      <text x="440" y="42" font-family="monospace" font-size="9" fill="#475569" text-anchor="middle">Edge runtime</text>
+      <text x="440" y="58" font-family="monospace" font-size="9" fill="#475569" text-anchor="middle">Memory: 128MB limit</text>
+      <text x="440" y="74" font-family="monospace" font-size="9" fill="#EC4899" text-anchor="middle">Cold start: ~50ms</text>
+      <text x="440" y="87" font-family="monospace" font-size="8" fill="#64748B" text-anchor="middle">V8 isolates</text>
+
+      <!-- On-device -->
+      <rect x="540" y="0" width="160" height="90" rx="6" fill="#DCFCE7" stroke="#10B981"/>
+      <text x="620" y="22" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#166534" text-anchor="middle">On-Device</text>
+      <text x="620" y="42" font-family="monospace" font-size="9" fill="#475569" text-anchor="middle">Mobile/Desktop native</text>
+      <text x="620" y="58" font-family="monospace" font-size="9" fill="#475569" text-anchor="middle">Full hardware access</text>
+      <text x="620" y="74" font-family="monospace" font-size="9" fill="#10B981" text-anchor="middle">~100% native speed</text>
+      <text x="620" y="87" font-family="monospace" font-size="8" fill="#64748B" text-anchor="middle">GPU/NPU available</text>
+    </g>
+  </g>
+
+  <!-- Model sizing for edge -->
+  <g transform="translate(50, 195)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1E293B">Qwen2.5-Coder: Edge-Viable Model Sizing</text>
+
+    <g transform="translate(0, 20)">
+      <rect x="0" y="0" width="700" height="100" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
+
+      <!-- Table -->
+      <rect x="0" y="0" width="700" height="25" rx="4" fill="#E2E8F0"/>
+      <text x="70" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569" text-anchor="middle">Model</text>
+      <text x="180" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569" text-anchor="middle">Q4 Size</text>
+      <text x="280" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569" text-anchor="middle">Browser</text>
+      <text x="380" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569" text-anchor="middle">Lambda</text>
+      <text x="480" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569" text-anchor="middle">CF Workers</text>
+      <text x="600" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#475569" text-anchor="middle">Speed (Browser)</text>
+
+      <!-- Tiny -->
+      <text x="70" y="45" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">Tiny (0.5B)</text>
+      <text x="180" y="45" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">~250MB</text>
+      <text x="280" y="45" font-family="monospace" font-size="10" fill="#10B981" text-anchor="middle">✓</text>
+      <text x="380" y="45" font-family="monospace" font-size="10" fill="#10B981" text-anchor="middle">✓</text>
+      <text x="480" y="45" font-family="monospace" font-size="10" fill="#EF4444" text-anchor="middle">✗</text>
+      <text x="600" y="45" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">~280 tok/s</text>
+
+      <!-- Small -->
+      <text x="70" y="65" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">Small (1.5B)</text>
+      <text x="180" y="65" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">~750MB</text>
+      <text x="280" y="65" font-family="monospace" font-size="10" fill="#10B981" text-anchor="middle">✓</text>
+      <text x="380" y="65" font-family="monospace" font-size="10" fill="#10B981" text-anchor="middle">✓</text>
+      <text x="480" y="65" font-family="monospace" font-size="10" fill="#EF4444" text-anchor="middle">✗</text>
+      <text x="600" y="65" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">~100 tok/s</text>
+
+      <!-- Medium -->
+      <text x="70" y="85" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">Medium (7B)</text>
+      <text x="180" y="85" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">~3.5GB</text>
+      <text x="280" y="85" font-family="monospace" font-size="10" fill="#F59E0B" text-anchor="middle">~</text>
+      <text x="380" y="85" font-family="monospace" font-size="10" fill="#10B981" text-anchor="middle">✓</text>
+      <text x="480" y="85" font-family="monospace" font-size="10" fill="#EF4444" text-anchor="middle">✗</text>
+      <text x="600" y="85" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">~15 tok/s</text>
+    </g>
+  </g>
+
+  <!-- Cost comparison -->
+  <g transform="translate(50, 330)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1E293B">Cost Comparison (1M requests/month)</text>
+
+    <g transform="translate(0, 20)">
+      <!-- Browser (free) -->
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#DCFCE7" stroke="#10B981"/>
+      <text x="80" y="20" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#166534" text-anchor="middle">Browser WASM</text>
+      <text x="80" y="40" font-family="monospace" font-size="14" font-weight="600" fill="#10B981" text-anchor="middle">$0</text>
+      <text x="80" y="55" font-family="monospace" font-size="9" fill="#64748B" text-anchor="middle">Client-side compute</text>
+
+      <!-- Lambda -->
+      <rect x="180" y="0" width="160" height="60" rx="4" fill="#FEF3C7" stroke="#F59E0B"/>
+      <text x="260" y="20" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#92400E" text-anchor="middle">AWS Lambda</text>
+      <text x="260" y="40" font-family="monospace" font-size="14" font-weight="600" fill="#F59E0B" text-anchor="middle">~$2,900</text>
+      <text x="260" y="55" font-family="monospace" font-size="9" fill="#64748B" text-anchor="middle">$2.95/1K requests</text>
+
+      <!-- EC2 (reference) -->
+      <rect x="360" y="0" width="160" height="60" rx="4" fill="#FEE2E2" stroke="#EF4444"/>
+      <text x="440" y="20" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#991B1B" text-anchor="middle">EC2 g4dn.xlarge</text>
+      <text x="440" y="40" font-family="monospace" font-size="14" font-weight="600" fill="#EF4444" text-anchor="middle">~$380</text>
+      <text x="440" y="55" font-family="monospace" font-size="9" fill="#64748B" text-anchor="middle">Always-on GPU</text>
+
+      <!-- Recommendation -->
+      <rect x="540" y="0" width="160" height="60" rx="4" fill="#F0FDF4" stroke="#10B981"/>
+      <text x="620" y="18" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#166534" text-anchor="middle">Recommendation</text>
+      <text x="620" y="35" font-family="monospace" font-size="9" fill="#475569" text-anchor="middle">&lt;130K req: Lambda</text>
+      <text x="620" y="50" font-family="monospace" font-size="9" fill="#475569" text-anchor="middle">&gt;130K req: EC2</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="400" y="440" font-family="system-ui, sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Course 5: Production ML with Hugging Face | Week 3: Edge Deployment</text>
+</svg>
