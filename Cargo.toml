@@ -4,6 +4,7 @@ members = [
     "demos/week1",
     "demos/week2",
     "demos/week3",
+    "demos/week3/apr-explorer",
 ]
 
 [workspace.package]

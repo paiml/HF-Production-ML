@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APR Explorer - Browser-Native ML Model Inspector</title>
+    <style>
+        :root {
+            --bg-primary: #020617;
+            --bg-secondary: #0f172a;
+            --bg-tertiary: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-green: #22c55e;
+            --accent-blue: #3b82f6;
+            --accent-purple: #7c3aed;
+            --border: #334155;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 2rem; }
+        h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        h1 span { color: var(--accent-green); }
+        .subtitle { color: var(--text-secondary); font-size: 1.1rem; }
+        .badges { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
+        .badge {
+            background: var(--bg-tertiary);
+            padding: 0.375rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid var(--border);
+        }
+        .badge.green { border-color: var(--accent-green); color: var(--accent-green); }
+        .badge.blue { border-color: var(--accent-blue); color: var(--accent-blue); }
+        .badge.purple { border-color: var(--accent-purple); color: var(--accent-purple); }
+        .drop-zone {
+            background: var(--bg-secondary);
+            border: 2px dashed var(--border);
+            border-radius: 1rem;
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 2rem;
+        }
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: var(--accent-green);
+            background: rgba(34, 197, 94, 0.05);
+        }
+        .drop-zone h3 { margin-bottom: 0.5rem; }
+        .drop-zone p { color: var(--text-secondary); font-size: 0.9rem; }
+        .drop-zone input { display: none; }
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-secondary); }
+        .status-dot.ready { background: var(--accent-green); }
+        .status-dot.loading { background: #f59e0b; animation: pulse 1s infinite; }
+        .status-dot.error { background: #ef4444; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+        .metric {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+        }
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .metric-label { color: var(--text-secondary); font-size: 0.8rem; margin-top: 0.25rem; }
+        .hidden { display: none; }
+        .panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
+        .panel {
+            background: var(--bg-secondary);
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .panel-header {
+            background: var(--bg-tertiary);
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .panel-header h2 { font-size: 1rem; font-weight: 600; }
+        .panel-content {
+            padding: 1.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .panel-content pre { white-space: pre-wrap; word-break: break-word; }
+        .tensor-item {
+            background: var(--bg-tertiary);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .tensor-name { color: var(--accent-blue); font-weight: 600; }
+        .tensor-details { color: var(--text-secondary); font-size: 0.8rem; }
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        footer a { color: var(--accent-green); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>APR <span>Explorer</span></h1>
+            <p class="subtitle">Browser-native ML model inspection powered by WebAssembly</p>
+            <div class="badges">
+                <span class="badge green">APR1 Format</span>
+                <span class="badge blue">100% Rust</span>
+                <span class="badge purple">JSON Metadata</span>
+            </div>
+        </header>
+
+        <div class="status" id="status">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">Initializing WASM...</span>
+        </div>
+
+        <div class="drop-zone" id="dropZone">
+            <h3>Drop APR Model Here</h3>
+            <p>or click to select a .apr file (APR1 format)</p>
+            <input type="file" id="fileInput" accept=".apr">
+        </div>
+
+        <div class="metrics hidden" id="metrics">
+            <div class="metric">
+                <div class="metric-value" id="loadTime">-</div>
+                <div class="metric-label">Parse Time</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value" id="fileSize">-</div>
+                <div class="metric-label">File Size (KB)</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value" id="tensorCount">-</div>
+                <div class="metric-label">Tensors</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value" id="compression">-</div>
+                <div class="metric-label">Compression</div>
+            </div>
+        </div>
+
+        <div class="panels hidden" id="panels">
+            <div class="panel">
+                <div class="panel-header"><h2>Header</h2></div>
+                <div class="panel-content" id="headerInfo"></div>
+            </div>
+            <div class="panel">
+                <div class="panel-header"><h2>Metadata</h2></div>
+                <div class="panel-content"><pre id="metadataInfo"></pre></div>
+            </div>
+            <div class="panel" style="grid-column: 1 / -1;">
+                <div class="panel-header"><h2>Tensors</h2></div>
+                <div class="panel-content" id="tensorList"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Part of the <a href="https://github.com/paiml/hf-production-ml">Production ML with Hugging Face</a> course</p>
+            <p>Built with Rust + WebAssembly | All business logic in Rust | No server required</p>
+        </footer>
+    </div>
+
+    <!-- Minimal bootstrap JS - all business logic is in Rust -->
+    <script type="module">
+        import init, { BrowserExplorer } from './pkg/apr_explorer.js';
+
+        let explorer = null;
+
+        // WASM init
+        async function initWasm() {
+            try {
+                await init();
+                explorer = new BrowserExplorer();
+                setStatus('ready', 'Ready - drop an APR file (APR1 format)');
+            } catch (e) {
+                setStatus('error', `WASM init failed: ${e.message}`);
+            }
+        }
+
+        function setStatus(state, text) {
+            document.getElementById('statusDot').className = `status-dot ${state}`;
+            document.getElementById('statusText').textContent = text;
+        }
+
+        // File handling - delegates to Rust immediately
+        function handleFile(file) {
+            if (!explorer) return;
+            setStatus('loading', 'Parsing APR file...');
+
+            file.arrayBuffer().then(buffer => {
+                try {
+                    // All parsing happens in Rust
+                    const result = explorer.load(new Uint8Array(buffer));
+                    const model = JSON.parse(result);
+                    renderModel(model);
+                } catch (e) {
+                    setStatus('error', `Parse error: ${e}`);
+                }
+            });
+        }
+
+        // Render model data from Rust
+        function renderModel(model) {
+            // Show microseconds for sub-millisecond times
+            const timeMs = model.parse_time_ms;
+            document.getElementById('loadTime').textContent = timeMs < 0.01
+                ? (timeMs * 1000).toFixed(1) + 'us'
+                : timeMs.toFixed(2) + 'ms';
+            document.getElementById('fileSize').textContent = (model.file_size / 1024).toFixed(1);
+            document.getElementById('tensorCount').textContent = model.tensors.length;
+            document.getElementById('compression').textContent = model.header.compressed
+                ? model.header.compression
+                : 'None';
+
+            document.getElementById('headerInfo').innerHTML =
+                `Format: ${model.header.magic}<br>` +
+                `Compressed: ${model.header.compressed}<br>` +
+                `Metadata Size: ${model.header.metadata_size} bytes<br>` +
+                `Index Size: ${model.header.index_size} bytes<br>` +
+                `Tensor Data Offset: ${model.tensor_data_offset}`;
+
+            document.getElementById('metadataInfo').textContent =
+                JSON.stringify(model.metadata, null, 2);
+
+            document.getElementById('tensorList').innerHTML = model.tensors
+                .map(t => `<div class="tensor-item">
+                    <span class="tensor-name">${t.name}</span>
+                    <div class="tensor-details">${t.dtype} | [${t.shape.join(', ')}] | offset: ${t.offset} | size: ${t.size}</div>
+                </div>`).join('');
+
+            document.getElementById('metrics').classList.remove('hidden');
+            document.getElementById('panels').classList.remove('hidden');
+            setStatus('ready', `Loaded: ${model.tensors.length} tensors in ${model.parse_time_ms.toFixed(2)}ms`);
+        }
+
+        // Wire up file drop
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        dropZone.onclick = () => fileInput.click();
+        dropZone.ondragover = e => { e.preventDefault(); dropZone.classList.add('dragover'); };
+        dropZone.ondragleave = () => dropZone.classList.remove('dragover');
+        dropZone.ondrop = e => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+        };
+        fileInput.onchange = e => { if (e.target.files[0]) handleFile(e.target.files[0]); };
+
+        initWasm();
+    </script>
+</body>
+</html>
