@@ -41,6 +41,45 @@ By completing this course, learners will be able to:
 
 Master production inference serving with continuous batching, KV cache management, and streaming APIs.
 
+### 1.0 Model Format Fundamentals (Rosetta)
+
+Understanding model portability before deployment.
+
+**Video Series**: 10-13 minutes total
+
+| # | Topic | Diagram | Duration |
+|---|-------|---------|----------|
+| 1 | Model Anatomy | `model-anatomy.svg` | 2-3 min |
+| 2 | Why Self-Contained | `self-contained-models-why.svg` | 4-5 min |
+| 3 | Conversion Flow | `safetensors-to-apr-flow.svg` | 3-4 min |
+
+**Key Concepts**:
+- 4 components: weights, tokenizer, config, metadata
+- SafeTensors (fragmented) → GGUF (bundled) → APR (bundled + verified)
+- Production constraints: CDN, WASM sandbox, offline, version mismatch
+- Rosetta conversion pipeline: parse → validate → embed → compress → sign
+
+**Scripts**: `docs/scripts/model-anatomy.md`, `self-contained-models-why.md`, `safetensors-to-apr-flow.md`
+
+### 1.0.1 ML Observability (Tracing)
+
+Understanding tracing for production inference debugging.
+
+**Video Series**: 4-6 minutes total
+
+| # | Topic | Diagram | Duration |
+|---|-------|---------|----------|
+| 1 | Why Trace | `tracing-why.svg` | 2-3 min |
+| 2 | Three Layers | `tracing-layers.svg` | 2-3 min |
+
+**Key Concepts**:
+- Four problems: NaN propagation, latency spikes, quality drift, memory bloat
+- Four trace types: Layer, Brick, Diff, Syscall
+- Three levels: Request (prod safe) → Layer (offline) → System (deep dive)
+- Jidoka: stop the line when anomaly detected
+
+**Scripts**: `docs/scripts/tracing-why.md`, `tracing-layers.md`
+
 ### 1.1 TGI Architecture Concepts
 
 Understanding production inference server architecture.

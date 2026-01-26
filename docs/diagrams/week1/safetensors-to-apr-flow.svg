@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#f97316"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="50%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#f97316"/>
+    </linearGradient>
+    <marker id="arrowHead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowHeadOrange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f97316"/>
+    </marker>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#020617"/>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="1920" height="70" fill="url(#headerGrad)"/>
+  <text x="960" y="46" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="700" fill="white" text-anchor="middle">Rosetta Conversion: SafeTensors to APR</text>
+
+  <!-- ==================== LEFT: HuggingFace Repo ==================== -->
+  <g transform="translate(40, 95)">
+    <rect width="380" height="480" rx="16" fill="#0f172a" stroke="#3b82f6" stroke-width="2"/>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="380" height="45" rx="16" fill="#1e3a8a"/>
+    <rect x="0" y="30" width="380" height="15" fill="#1e3a8a"/>
+    <circle cx="28" cy="22" r="10" fill="#3b82f6"/>
+    <text x="28" y="27" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">HF</text>
+    <text x="190" y="28" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="700" fill="white" text-anchor="middle">HuggingFace Repository</text>
+
+    <!-- File: model.safetensors -->
+    <g transform="translate(20, 60)">
+      <rect width="340" height="85" rx="10" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="2"/>
+      <g transform="translate(12, 12)">
+        <rect width="35" height="42" rx="4" fill="#22c55e"/>
+        <rect x="5" y="8" width="25" height="3" rx="1" fill="#0f172a"/>
+        <rect x="5" y="14" width="20" height="3" rx="1" fill="#0f172a"/>
+        <rect x="5" y="20" width="25" height="3" rx="1" fill="#0f172a"/>
+        <rect x="5" y="26" width="18" height="3" rx="1" fill="#0f172a"/>
+      </g>
+      <text x="60" y="28" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#86efac">model.safetensors</text>
+      <text x="60" y="48" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">Weights (4.2 GB)</text>
+      <text x="60" y="66" font-family="JetBrains Mono, monospace" font-size="9" fill="#64748b">F16 tensors, JSON header</text>
+      <circle cx="310" cy="42" r="14" fill="#22c55e"/>
+      <text x="310" y="47" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">1</text>
+    </g>
+
+    <!-- File: tokenizer.json -->
+    <g transform="translate(20, 155)">
+      <rect width="340" height="70" rx="10" fill="#f59e0b" opacity="0.15" stroke="#f59e0b" stroke-width="2"/>
+      <g transform="translate(12, 10)">
+        <rect width="35" height="38" rx="4" fill="#f59e0b"/>
+        <text x="17" y="26" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle">{}</text>
+      </g>
+      <text x="60" y="26" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#fcd34d">tokenizer.json</text>
+      <text x="60" y="44" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">Vocabulary + Merges (2 MB)</text>
+      <circle cx="310" cy="35" r="14" fill="#f59e0b"/>
+      <text x="310" y="40" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">2</text>
+    </g>
+
+    <!-- File: config.json -->
+    <g transform="translate(20, 235)">
+      <rect width="340" height="70" rx="10" fill="#14b8a6" opacity="0.15" stroke="#14b8a6" stroke-width="2"/>
+      <g transform="translate(12, 10)">
+        <rect width="35" height="38" rx="4" fill="#14b8a6"/>
+        <text x="17" y="26" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#0f172a" text-anchor="middle">cfg</text>
+      </g>
+      <text x="60" y="26" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#5eead4">config.json</text>
+      <text x="60" y="44" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">Architecture (4 KB)</text>
+      <circle cx="310" cy="35" r="14" fill="#14b8a6"/>
+      <text x="310" y="40" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">3</text>
+    </g>
+
+    <!-- File: README.md -->
+    <g transform="translate(20, 315)">
+      <rect width="340" height="70" rx="10" fill="#8b5cf6" opacity="0.15" stroke="#8b5cf6" stroke-width="2"/>
+      <g transform="translate(12, 10)">
+        <rect width="35" height="38" rx="4" fill="#8b5cf6"/>
+        <text x="17" y="26" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#0f172a" text-anchor="middle">md</text>
+      </g>
+      <text x="60" y="26" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#a78bfa">README + model_card</text>
+      <text x="60" y="44" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">Provenance (50 KB)</text>
+      <circle cx="310" cy="35" r="14" fill="#8b5cf6"/>
+      <text x="310" y="40" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">4</text>
+    </g>
+
+    <!-- File count -->
+    <text x="190" y="420" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#ef4444" text-anchor="middle">4+ separate files</text>
+    <text x="190" y="440" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Version mismatch risk</text>
+  </g>
+
+  <!-- ==================== FLOW ARROWS LEFT ==================== -->
+  <g transform="translate(420, 95)">
+    <path d="M0,100 C50,100 50,200 100,200" stroke="#22c55e" stroke-width="3" fill="none"/>
+    <path d="M0,190 C40,190 60,200 100,200" stroke="#f59e0b" stroke-width="3" fill="none"/>
+    <path d="M0,270 C40,270 60,200 100,200" stroke="#14b8a6" stroke-width="3" fill="none"/>
+    <path d="M0,350 C50,350 50,200 100,200" stroke="#8b5cf6" stroke-width="3" fill="none"/>
+    <circle cx="100" cy="200" r="8" fill="#7c3aed"/>
+  </g>
+
+  <!-- ==================== CENTER: Rosetta Converter ==================== -->
+  <g transform="translate(540, 95)">
+    <rect width="340" height="480" rx="16" fill="#1e1b4b" stroke="#7c3aed" stroke-width="3" filter="url(#glow)"/>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="340" height="50" rx="16" fill="#7c3aed"/>
+    <rect x="0" y="35" width="340" height="15" fill="#7c3aed"/>
+    <text x="170" y="34" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="white" text-anchor="middle">Rosetta Stone</text>
+
+    <!-- Process steps -->
+    <g transform="translate(25, 70)">
+      <!-- Step 1 -->
+      <g transform="translate(0, 0)">
+        <circle cx="22" cy="22" r="18" fill="#3b82f6"/>
+        <text x="22" y="28" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">1</text>
+        <text x="55" y="20" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#93c5fd">Parse Formats</text>
+        <text x="55" y="36" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#64748b">Read SafeTensors + JSON</text>
+      </g>
+      <path d="M22,44 L22,56" stroke="#4f46e5" stroke-width="2" stroke-dasharray="4"/>
+
+      <!-- Step 2 -->
+      <g transform="translate(0, 65)">
+        <circle cx="22" cy="22" r="18" fill="#6366f1"/>
+        <text x="22" y="28" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">2</text>
+        <text x="55" y="20" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#a5b4fc">Validate Tensors</text>
+        <text x="55" y="36" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#64748b">Shape + dtype checks</text>
+      </g>
+      <path d="M22,109 L22,121" stroke="#4f46e5" stroke-width="2" stroke-dasharray="4"/>
+
+      <!-- Step 3 -->
+      <g transform="translate(0, 130)">
+        <circle cx="22" cy="22" r="18" fill="#8b5cf6"/>
+        <text x="22" y="28" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">3</text>
+        <text x="55" y="20" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#c4b5fd">Embed Tokenizer</text>
+        <text x="55" y="36" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#64748b">Bundle into metadata</text>
+      </g>
+      <path d="M22,174 L22,186" stroke="#4f46e5" stroke-width="2" stroke-dasharray="4"/>
+
+      <!-- Step 4 -->
+      <g transform="translate(0, 195)">
+        <circle cx="22" cy="22" r="18" fill="#a855f7"/>
+        <text x="22" y="28" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">4</text>
+        <text x="55" y="20" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#d8b4fe">Compress (LZ4)</text>
+        <text x="55" y="36" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#64748b">~20% size reduction</text>
+      </g>
+      <path d="M22,239 L22,251" stroke="#4f46e5" stroke-width="2" stroke-dasharray="4"/>
+
+      <!-- Step 5 -->
+      <g transform="translate(0, 260)">
+        <circle cx="22" cy="22" r="18" fill="#c026d3"/>
+        <text x="22" y="28" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">5</text>
+        <text x="55" y="20" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#f0abfc">Sign + Checksum</text>
+        <text x="55" y="36" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#64748b">CRC32 + Ed25519</text>
+      </g>
+    </g>
+
+    <!-- CLI command -->
+    <g transform="translate(15, 420)">
+      <rect width="310" height="40" rx="6" fill="#0f172a"/>
+      <text x="155" y="18" font-family="JetBrains Mono, monospace" font-size="9" fill="#64748b" text-anchor="middle">apr rosetta convert</text>
+      <text x="155" y="32" font-family="JetBrains Mono, monospace" font-size="9" fill="#a78bfa" text-anchor="middle">model.safetensors → out.apr</text>
+    </g>
+  </g>
+
+  <!-- ==================== FLOW ARROW RIGHT ==================== -->
+  <g transform="translate(880, 280)">
+    <path d="M0,0 L80,0" stroke="url(#arrowGrad)" stroke-width="4" marker-end="url(#arrowHeadOrange)"/>
+  </g>
+
+  <!-- ==================== RIGHT: APR Output ==================== -->
+  <g transform="translate(980, 95)">
+    <rect width="380" height="480" rx="16" fill="#0f172a" stroke="#f97316" stroke-width="3"/>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="380" height="45" rx="16" fill="#c2410c"/>
+    <rect x="0" y="30" width="380" height="15" fill="#c2410c"/>
+    <text x="190" y="28" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="700" fill="white" text-anchor="middle">APR Format (Single File)</text>
+
+    <!-- APR file structure -->
+    <g transform="translate(15, 55)">
+      <rect width="350" height="400" rx="10" fill="#0a0a0a" stroke="#f97316" stroke-width="2"/>
+
+      <text x="175" y="25" font-family="JetBrains Mono, monospace" font-size="15" font-weight="700" fill="#f97316" text-anchor="middle">model.apr</text>
+
+      <!-- Magic header -->
+      <g transform="translate(12, 38)">
+        <rect width="326" height="30" rx="5" fill="#c2410c"/>
+        <text x="163" y="20" font-family="JetBrains Mono, monospace" font-size="11" fill="white" text-anchor="middle">Magic: APR2 | CRC32 | Flags</text>
+      </g>
+
+      <!-- Weights -->
+      <g transform="translate(12, 78)">
+        <rect width="326" height="60" rx="6" fill="#22c55e" opacity="0.2" stroke="#22c55e"/>
+        <circle cx="22" cy="30" r="12" fill="#22c55e"/>
+        <text x="22" y="35" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">1</text>
+        <text x="45" y="25" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#86efac">Tensor Data</text>
+        <text x="45" y="42" font-family="JetBrains Mono, monospace" font-size="9" fill="#64748b">64-byte aligned, LZ4</text>
+      </g>
+
+      <!-- Tokenizer -->
+      <g transform="translate(12, 148)">
+        <rect width="326" height="60" rx="6" fill="#f59e0b" opacity="0.2" stroke="#f59e0b"/>
+        <circle cx="22" cy="30" r="12" fill="#f59e0b"/>
+        <text x="22" y="35" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">2</text>
+        <text x="45" y="25" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#fcd34d">Embedded Tokenizer</text>
+        <text x="45" y="42" font-family="JetBrains Mono, monospace" font-size="9" fill="#64748b">vocab, merges, special</text>
+      </g>
+
+      <!-- Config -->
+      <g transform="translate(12, 218)">
+        <rect width="326" height="60" rx="6" fill="#14b8a6" opacity="0.2" stroke="#14b8a6"/>
+        <circle cx="22" cy="30" r="12" fill="#14b8a6"/>
+        <text x="22" y="35" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">3</text>
+        <text x="45" y="25" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#5eead4">Architecture Config</text>
+        <text x="45" y="42" font-family="JetBrains Mono, monospace" font-size="9" fill="#64748b">JSON metadata</text>
+      </g>
+
+      <!-- Provenance -->
+      <g transform="translate(12, 288)">
+        <rect width="326" height="45" rx="6" fill="#8b5cf6" opacity="0.2" stroke="#8b5cf6"/>
+        <circle cx="22" cy="22" r="12" fill="#8b5cf6"/>
+        <text x="22" y="27" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">4</text>
+        <text x="45" y="27" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#a78bfa">Provenance Metadata</text>
+      </g>
+
+      <!-- Footer -->
+      <g transform="translate(12, 343)">
+        <rect width="326" height="30" rx="5" fill="#c2410c"/>
+        <text x="163" y="20" font-family="JetBrains Mono, monospace" font-size="11" fill="white" text-anchor="middle">Footer: CRC32 | Ed25519 | 2RPA</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ==================== FAR RIGHT: Size Comparison ==================== -->
+  <g transform="translate(1400, 95)">
+    <rect width="480" height="480" rx="16" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+
+    <text x="240" y="32" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">Size Comparison</text>
+
+    <!-- Before -->
+    <g transform="translate(25, 55)">
+      <text x="0" y="14" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">Before (SafeTensors F16)</text>
+      <rect x="0" y="22" width="430" height="28" rx="5" fill="#3b82f6"/>
+      <text x="215" y="41" font-family="JetBrains Mono, monospace" font-size="12" fill="white" text-anchor="middle">4.2 GB</text>
+    </g>
+
+    <!-- After LZ4 -->
+    <g transform="translate(25, 115)">
+      <text x="0" y="14" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">After (APR + LZ4)</text>
+      <rect x="0" y="22" width="430" height="28" rx="5" fill="#0f172a" stroke="#f97316"/>
+      <rect x="0" y="22" width="344" height="28" rx="5" fill="#f97316"/>
+      <text x="172" y="41" font-family="JetBrains Mono, monospace" font-size="12" fill="white" text-anchor="middle">3.4 GB (~20% smaller)</text>
+    </g>
+
+    <!-- Quantized -->
+    <g transform="translate(25, 175)">
+      <text x="0" y="14" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">Quantized (APR Q4_0)</text>
+      <rect x="0" y="22" width="430" height="28" rx="5" fill="#0f172a" stroke="#22c55e"/>
+      <rect x="0" y="22" width="107" height="28" rx="5" fill="#22c55e"/>
+      <text x="215" y="41" font-family="JetBrains Mono, monospace" font-size="12" fill="#22c55e" text-anchor="middle">1.1 GB (4x smaller)</text>
+    </g>
+
+    <!-- Benefits list -->
+    <g transform="translate(25, 240)">
+      <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="white">APR Advantages:</text>
+
+      <g transform="translate(0, 22)">
+        <circle cx="8" cy="8" r="5" fill="#22c55e"/>
+        <text x="22" y="12" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">Tokenizer embedded (no external files)</text>
+      </g>
+      <g transform="translate(0, 46)">
+        <circle cx="8" cy="8" r="5" fill="#22c55e"/>
+        <text x="22" y="12" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">CRC32 integrity verification</text>
+      </g>
+      <g transform="translate(0, 70)">
+        <circle cx="8" cy="8" r="5" fill="#22c55e"/>
+        <text x="22" y="12" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">Ed25519 cryptographic signing</text>
+      </g>
+      <g transform="translate(0, 94)">
+        <circle cx="8" cy="8" r="5" fill="#22c55e"/>
+        <text x="22" y="12" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">64-byte SIMD alignment</text>
+      </g>
+      <g transform="translate(0, 118)">
+        <circle cx="8" cy="8" r="5" fill="#22c55e"/>
+        <text x="22" y="12" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">Zero-copy memory mapping</text>
+      </g>
+      <g transform="translate(0, 142)">
+        <circle cx="8" cy="8" r="5" fill="#22c55e"/>
+        <text x="22" y="12" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">WASM compatible</text>
+      </g>
+      <g transform="translate(0, 166)">
+        <circle cx="8" cy="8" r="5" fill="#22c55e"/>
+        <text x="22" y="12" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">Offline portable</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ==================== BOTTOM: Benefits Bar ==================== -->
+  <g transform="translate(40, 600)">
+    <rect width="1840" height="100" rx="14" fill="#0f172a" stroke="#22c55e" stroke-width="2"/>
+
+    <text x="920" y="30" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#86efac" text-anchor="middle">Conversion Benefits</text>
+
+    <!-- Icons row -->
+    <g transform="translate(120, 45)">
+      <!-- Single file -->
+      <g transform="translate(0, 0)">
+        <circle cx="25" cy="20" r="18" fill="#22c55e" opacity="0.2" stroke="#22c55e" stroke-width="2"/>
+        <text x="25" y="26" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#22c55e" text-anchor="middle">1</text>
+        <text x="25" y="52" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Single File</text>
+      </g>
+
+      <!-- Portable -->
+      <g transform="translate(270, 0)">
+        <circle cx="25" cy="20" r="18" fill="#3b82f6" opacity="0.2" stroke="#3b82f6" stroke-width="2"/>
+        <text x="25" y="26" font-family="Inter, system-ui, sans-serif" font-size="14" fill="#3b82f6" text-anchor="middle">P</text>
+        <text x="25" y="52" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Portable</text>
+      </g>
+
+      <!-- Compressed -->
+      <g transform="translate(540, 0)">
+        <circle cx="25" cy="20" r="18" fill="#8b5cf6" opacity="0.2" stroke="#8b5cf6" stroke-width="2"/>
+        <text x="25" y="26" font-family="Inter, system-ui, sans-serif" font-size="14" fill="#8b5cf6" text-anchor="middle">C</text>
+        <text x="25" y="52" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Compressed</text>
+      </g>
+
+      <!-- Verified -->
+      <g transform="translate(810, 0)">
+        <circle cx="25" cy="20" r="18" fill="#f59e0b" opacity="0.2" stroke="#f59e0b" stroke-width="2"/>
+        <text x="25" y="26" font-family="Inter, system-ui, sans-serif" font-size="16" fill="#f59e0b" text-anchor="middle">&#10003;</text>
+        <text x="25" y="52" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Verified</text>
+      </g>
+
+      <!-- Signed -->
+      <g transform="translate(1080, 0)">
+        <circle cx="25" cy="20" r="18" fill="#ef4444" opacity="0.2" stroke="#ef4444" stroke-width="2"/>
+        <text x="25" y="26" font-family="Inter, system-ui, sans-serif" font-size="14" fill="#ef4444" text-anchor="middle">S</text>
+        <text x="25" y="52" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Signed</text>
+      </g>
+
+      <!-- WASM -->
+      <g transform="translate(1350, 0)">
+        <circle cx="25" cy="20" r="18" fill="#14b8a6" opacity="0.2" stroke="#14b8a6" stroke-width="2"/>
+        <text x="25" y="26" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#14b8a6" text-anchor="middle">W</text>
+        <text x="25" y="52" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">WASM Ready</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ==================== BOTTOM: CLI Command ==================== -->
+  <g transform="translate(40, 720)">
+    <rect width="1840" height="50" rx="10" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2"/>
+    <text x="920" y="32" font-family="JetBrains Mono, monospace" font-size="14" fill="#c4b5fd" text-anchor="middle">apr rosetta convert hf://meta-llama/Llama-3.1-8B model.apr --quantize Q4_0 --sign</text>
+  </g>
+
+  <!-- ==================== FLOW LABELS ==================== -->
+  <g transform="translate(460, 560)">
+    <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#64748b">4 files in</text>
+  </g>
+  <g transform="translate(900, 560)">
+    <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#64748b">1 file out</text>
+  </g>
+</svg>

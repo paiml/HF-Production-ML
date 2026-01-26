@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f97316"/>
+      <stop offset="100%" style="stop-color:#ea580c"/>
+    </linearGradient>
+    <linearGradient id="problemGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#020617"/>
+    </linearGradient>
+    <linearGradient id="solutionGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#14532d"/>
+      <stop offset="100%" style="stop-color:#052e16"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#020617"/>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="1920" height="80" fill="url(#headerGrad)"/>
+  <text x="960" y="52" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="700" fill="white" text-anchor="middle">Why Self-Contained Models Matter for Production</text>
+
+  <!-- Subtitle -->
+  <text x="960" y="115" font-family="Inter, system-ui, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">Real-world deployment constraints that force the "everything in one file" approach</text>
+
+  <!-- Left Side: Problem Scenarios -->
+  <g transform="translate(60, 145)">
+    <rect width="880" height="880" rx="16" fill="url(#problemGrad)" stroke="#f87171" stroke-width="3"/>
+    <text x="440" y="40" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#ffffff" text-anchor="middle">The Problem: Fragmented Model Files</text>
+
+    <!-- Scenario 1: CDN Edge -->
+    <g transform="translate(30, 70)">
+      <rect width="820" height="150" rx="12" fill="#0f172a"/>
+      <text x="20" y="30" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#ffffff">1. Global CDN Edge Deployment</text>
+
+      <!-- Diagram -->
+      <g transform="translate(20, 50)">
+        <!-- User -->
+        <circle cx="50" cy="40" r="25" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+        <text x="50" y="45" font-family="Inter, system-ui, sans-serif" font-size="10" fill="white" text-anchor="middle">User</text>
+        <text x="50" y="85" font-family="JetBrains Mono, monospace" font-size="9" fill="#64748b" text-anchor="middle">Tokyo</text>
+
+        <!-- Arrow to CDN -->
+        <path d="M80,40 L150,40" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+        <!-- CDN Edge -->
+        <rect x="160" y="15" width="100" height="50" rx="6" fill="#7c3aed" opacity="0.3" stroke="#7c3aed" stroke-width="1"/>
+        <text x="210" y="45" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#a78bfa" text-anchor="middle">CloudFront</text>
+        <text x="210" y="85" font-family="JetBrains Mono, monospace" font-size="9" fill="#64748b" text-anchor="middle">Edge Node</text>
+
+        <!-- Multiple file requests -->
+        <g transform="translate(280, 0)">
+          <path d="M0,20 L60,5" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4"/>
+          <path d="M0,40 L60,40" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4"/>
+          <path d="M0,60 L60,75" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4"/>
+
+          <!-- Files -->
+          <rect x="70" y="-5" width="120" height="25" rx="4" fill="#22c55e" opacity="0.2" stroke="#22c55e"/>
+          <text x="130" y="12" font-family="JetBrains Mono, monospace" font-size="9" fill="#86efac" text-anchor="middle">model.safetensors</text>
+
+          <rect x="70" y="28" width="120" height="25" rx="4" fill="#f59e0b" opacity="0.2" stroke="#f59e0b"/>
+          <text x="130" y="45" font-family="JetBrains Mono, monospace" font-size="9" fill="#fcd34d" text-anchor="middle">tokenizer.json</text>
+
+          <rect x="70" y="61" width="120" height="25" rx="4" fill="#14b8a6" opacity="0.2" stroke="#14b8a6"/>
+          <text x="130" y="78" font-family="JetBrains Mono, monospace" font-size="9" fill="#5eead4" text-anchor="middle">config.json</text>
+        </g>
+
+        <!-- Problem text -->
+        <text x="550" y="30" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">3 HTTP requests</text>
+        <text x="550" y="48" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">3x latency penalty</text>
+        <text x="550" y="66" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">Partial failure risk</text>
+      </g>
+    </g>
+
+    <!-- Scenario 2: WASM Sandbox -->
+    <g transform="translate(30, 235)">
+      <rect width="820" height="150" rx="12" fill="#0f172a"/>
+      <text x="20" y="30" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#ffffff">2. WebAssembly Sandbox Isolation</text>
+
+      <g transform="translate(20, 50)">
+        <!-- Browser -->
+        <rect x="20" y="10" width="140" height="70" rx="8" fill="#1e3a8a" opacity="0.3" stroke="#3b82f6" stroke-width="2"/>
+        <text x="90" y="35" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#93c5fd" text-anchor="middle">Browser</text>
+
+        <!-- WASM inside -->
+        <rect x="35" y="45" width="110" height="30" rx="4" fill="#7c3aed" opacity="0.5" stroke="#7c3aed"/>
+        <text x="90" y="65" font-family="JetBrains Mono, monospace" font-size="10" fill="#c4b5fd" text-anchor="middle">WASM Module</text>
+
+        <!-- Blocked arrow -->
+        <g transform="translate(180, 30)">
+          <path d="M0,25 L80,25" stroke="#ef4444" stroke-width="2" stroke-dasharray="6"/>
+          <line x1="70" y1="15" x2="85" y2="35" stroke="#ef4444" stroke-width="3"/>
+          <line x1="70" y1="35" x2="85" y2="15" stroke="#ef4444" stroke-width="3"/>
+          <text x="40" y="55" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#f1f5f9" text-anchor="middle">BLOCKED</text>
+        </g>
+
+        <!-- External resource -->
+        <rect x="290" y="15" width="150" height="55" rx="6" fill="#7f1d1d" stroke="#ef4444" stroke-width="1"/>
+        <text x="365" y="38" font-family="JetBrains Mono, monospace" font-size="10" fill="#f1f5f9" text-anchor="middle">fetch("tokenizer.json")</text>
+        <text x="365" y="55" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#f1f5f9" text-anchor="middle">Network access denied</text>
+
+        <!-- Explanation -->
+        <text x="480" y="25" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">WASM sandbox cannot</text>
+        <text x="480" y="43" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">make network requests</text>
+        <text x="480" y="61" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">Tokenizer must be bundled</text>
+      </g>
+    </g>
+
+    <!-- Scenario 3: Offline/Service Worker -->
+    <g transform="translate(30, 400)">
+      <rect width="820" height="150" rx="12" fill="#0f172a"/>
+      <text x="20" y="30" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#ffffff">3. Offline / Service Worker Caching</text>
+
+      <g transform="translate(20, 50)">
+        <!-- Airplane mode icon -->
+        <rect x="20" y="10" width="80" height="60" rx="8" fill="#1e3a8a" opacity="0.3" stroke="#3b82f6"/>
+        <text x="60" y="35" font-family="Inter, system-ui, sans-serif" font-size="20" fill="#93c5fd" text-anchor="middle">&#9992;</text>
+        <text x="60" y="55" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">Offline</text>
+
+        <!-- Service Worker cache -->
+        <rect x="130" y="5" width="200" height="70" rx="8" fill="#7c3aed" opacity="0.2" stroke="#7c3aed"/>
+        <text x="230" y="25" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#a78bfa" text-anchor="middle">Service Worker Cache</text>
+
+        <!-- Cached files -->
+        <rect x="145" y="35" width="75" height="18" rx="3" fill="#22c55e" opacity="0.3"/>
+        <text x="182" y="48" font-family="JetBrains Mono, monospace" font-size="8" fill="#86efac" text-anchor="middle">model.apr</text>
+
+        <rect x="230" y="35" width="45" height="18" rx="3" fill="#64748b" opacity="0.3"/>
+        <text x="252" y="48" font-family="JetBrains Mono, monospace" font-size="8" fill="#94a3b8" text-anchor="middle">?.json</text>
+
+        <text x="252" y="68" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#f1f5f9" text-anchor="middle">Miss!</text>
+
+        <!-- Problem explanation -->
+        <text x="370" y="25" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">Fragmented cache entries</text>
+        <text x="370" y="43" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">Some files may not be cached</text>
+        <text x="370" y="61" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">Partial model = broken inference</text>
+      </g>
+    </g>
+
+    <!-- Scenario 4: Version Mismatch -->
+    <g transform="translate(30, 565)">
+      <rect width="820" height="150" rx="12" fill="#0f172a"/>
+      <text x="20" y="30" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#ffffff">4. Version Mismatch Hell</text>
+
+      <g transform="translate(20, 50)">
+        <!-- Model v2 -->
+        <rect x="20" y="5" width="120" height="50" rx="6" fill="#22c55e" opacity="0.2" stroke="#22c55e"/>
+        <text x="80" y="25" font-family="JetBrains Mono, monospace" font-size="10" fill="#86efac" text-anchor="middle">model.safetensors</text>
+        <text x="80" y="42" font-family="JetBrains Mono, monospace" font-size="9" fill="#64748b" text-anchor="middle">v2.0 (new vocab)</text>
+
+        <!-- Plus -->
+        <text x="165" y="35" font-family="Inter, system-ui, sans-serif" font-size="24" fill="#64748b">+</text>
+
+        <!-- Tokenizer v1 -->
+        <rect x="190" y="5" width="120" height="50" rx="6" fill="#f59e0b" opacity="0.2" stroke="#f59e0b"/>
+        <text x="250" y="25" font-family="JetBrains Mono, monospace" font-size="10" fill="#fcd34d" text-anchor="middle">tokenizer.json</text>
+        <text x="250" y="42" font-family="JetBrains Mono, monospace" font-size="9" fill="#64748b" text-anchor="middle">v1.0 (old vocab)</text>
+
+        <!-- Equals -->
+        <text x="335" y="35" font-family="Inter, system-ui, sans-serif" font-size="24" fill="#64748b">=</text>
+
+        <!-- Broken output -->
+        <rect x="370" y="5" width="180" height="50" rx="6" fill="#7f1d1d" stroke="#ef4444" stroke-width="2"/>
+        <text x="460" y="25" font-family="JetBrains Mono, monospace" font-size="10" fill="#f1f5f9" text-anchor="middle">UNK UNK UNK UNK</text>
+        <text x="460" y="42" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#f1f5f9" text-anchor="middle">Garbage output</text>
+
+        <!-- Explanation -->
+        <text x="590" y="20" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">CDN serves stale tokenizer</text>
+        <text x="590" y="38" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">New vocab IDs + old mappings</text>
+        <text x="590" y="56" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">Silent corruption, hard to debug</text>
+      </g>
+    </g>
+
+    <!-- Scenario 5: Mobile/Android -->
+    <g transform="translate(30, 730)">
+      <rect width="820" height="120" rx="12" fill="#0f172a"/>
+      <text x="20" y="30" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#ffffff">5. Mobile / Android WebView Constraints</text>
+
+      <g transform="translate(20, 50)">
+        <!-- Phone icon -->
+        <rect x="20" y="0" width="50" height="55" rx="6" fill="#1e3a8a" opacity="0.3" stroke="#3b82f6"/>
+        <text x="45" y="35" font-family="Inter, system-ui, sans-serif" font-size="20" fill="#93c5fd" text-anchor="middle">&#128241;</text>
+
+        <!-- Constraints -->
+        <g transform="translate(100, 0)">
+          <text x="0" y="15" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">&#8226; 512MB IndexedDB limit</text>
+          <text x="0" y="33" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">&#8226; Cellular network unreliable</text>
+          <text x="0" y="51" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">&#8226; Battery drain from multiple requests</text>
+        </g>
+
+        <g transform="translate(380, 0)">
+          <text x="0" y="15" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">&#8226; Background fetch limitations</text>
+          <text x="0" y="33" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">&#8226; WebView sandboxing</text>
+          <text x="0" y="51" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f1f5f9">&#8226; App size budgets</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- Right Side: Solution -->
+  <g transform="translate(980, 145)">
+    <rect width="880" height="880" rx="16" fill="url(#solutionGrad)" stroke="#22c55e" stroke-width="2"/>
+    <text x="440" y="40" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#86efac" text-anchor="middle">The Solution: Self-Contained APR Format</text>
+
+    <!-- Solution diagram -->
+    <g transform="translate(30, 70)">
+      <rect width="820" height="200" rx="12" fill="#0f172a"/>
+      <text x="20" y="30" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#22c55e">Single Atomic Unit</text>
+
+      <!-- APR file structure -->
+      <g transform="translate(40, 55)">
+        <rect width="740" height="120" rx="10" fill="#0a0a0a" stroke="#f97316" stroke-width="3"/>
+        <text x="370" y="25" font-family="JetBrains Mono, monospace" font-size="18" font-weight="700" fill="#f97316" text-anchor="middle">model.apr</text>
+
+        <!-- Components inside -->
+        <g transform="translate(20, 40)">
+          <rect width="160" height="60" rx="6" fill="#22c55e" opacity="0.2" stroke="#22c55e"/>
+          <text x="80" y="25" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#86efac" text-anchor="middle">Weights</text>
+          <text x="80" y="45" font-family="JetBrains Mono, monospace" font-size="9" fill="#64748b" text-anchor="middle">LZ4 compressed</text>
+        </g>
+
+        <g transform="translate(195, 40)">
+          <rect width="160" height="60" rx="6" fill="#f59e0b" opacity="0.2" stroke="#f59e0b"/>
+          <text x="80" y="25" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#fcd34d" text-anchor="middle">Tokenizer</text>
+          <text x="80" y="45" font-family="JetBrains Mono, monospace" font-size="9" fill="#64748b" text-anchor="middle">Embedded</text>
+        </g>
+
+        <g transform="translate(370, 40)">
+          <rect width="160" height="60" rx="6" fill="#14b8a6" opacity="0.2" stroke="#14b8a6"/>
+          <text x="80" y="25" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#5eead4" text-anchor="middle">Config</text>
+          <text x="80" y="45" font-family="JetBrains Mono, monospace" font-size="9" fill="#64748b" text-anchor="middle">JSON metadata</text>
+        </g>
+
+        <g transform="translate(545, 40)">
+          <rect width="160" height="60" rx="6" fill="#ef4444" opacity="0.2" stroke="#ef4444"/>
+          <text x="80" y="25" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#f1f5f9" text-anchor="middle">Integrity</text>
+          <text x="80" y="45" font-family="JetBrains Mono, monospace" font-size="9" fill="#64748b" text-anchor="middle">CRC32 + Ed25519</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Benefits Grid -->
+    <g transform="translate(30, 290)">
+      <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="#86efac">Production Benefits:</text>
+
+      <!-- Benefit 1: Single Request -->
+      <g transform="translate(0, 25)">
+        <rect width="395" height="100" rx="10" fill="#0f172a"/>
+        <circle cx="30" cy="50" r="18" fill="#22c55e"/>
+        <text x="30" y="55" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">1</text>
+        <text x="60" y="35" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#86efac">Single HTTP Request</text>
+        <text x="60" y="55" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">One fetch = complete model</text>
+        <text x="60" y="75" font-family="JetBrains Mono, monospace" font-size="11" fill="#64748b">3x latency reduction</text>
+      </g>
+
+      <!-- Benefit 2: WASM Compatible -->
+      <g transform="translate(420, 25)">
+        <rect width="395" height="100" rx="10" fill="#0f172a"/>
+        <circle cx="30" cy="50" r="18" fill="#22c55e"/>
+        <text x="30" y="55" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">2</text>
+        <text x="60" y="35" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#86efac">WASM Sandbox Safe</text>
+        <text x="60" y="55" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">No network calls needed</text>
+        <text x="60" y="75" font-family="JetBrains Mono, monospace" font-size="11" fill="#64748b">Pure local computation</text>
+      </g>
+
+      <!-- Benefit 3: Atomic Cache -->
+      <g transform="translate(0, 140)">
+        <rect width="395" height="100" rx="10" fill="#0f172a"/>
+        <circle cx="30" cy="50" r="18" fill="#22c55e"/>
+        <text x="30" y="55" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">3</text>
+        <text x="60" y="35" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#86efac">Atomic Cache Entry</text>
+        <text x="60" y="55" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">All or nothing caching</text>
+        <text x="60" y="75" font-family="JetBrains Mono, monospace" font-size="11" fill="#64748b">No partial failures</text>
+      </g>
+
+      <!-- Benefit 4: Version Locked -->
+      <g transform="translate(420, 140)">
+        <rect width="395" height="100" rx="10" fill="#0f172a"/>
+        <circle cx="30" cy="50" r="18" fill="#22c55e"/>
+        <text x="30" y="55" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">4</text>
+        <text x="60" y="35" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#86efac">Version Locked</text>
+        <text x="60" y="55" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">Weights + tokenizer always match</text>
+        <text x="60" y="75" font-family="JetBrains Mono, monospace" font-size="11" fill="#64748b">No mismatch possible</text>
+      </g>
+
+      <!-- Benefit 5: Offline Ready -->
+      <g transform="translate(0, 255)">
+        <rect width="395" height="100" rx="10" fill="#0f172a"/>
+        <circle cx="30" cy="50" r="18" fill="#22c55e"/>
+        <text x="30" y="55" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">5</text>
+        <text x="60" y="35" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#86efac">Offline Ready</text>
+        <text x="60" y="55" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">Works with airplane mode</text>
+        <text x="60" y="75" font-family="JetBrains Mono, monospace" font-size="11" fill="#64748b">Service Worker friendly</text>
+      </g>
+
+      <!-- Benefit 6: Verified -->
+      <g transform="translate(420, 255)">
+        <rect width="395" height="100" rx="10" fill="#0f172a"/>
+        <circle cx="30" cy="50" r="18" fill="#22c55e"/>
+        <text x="30" y="55" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">6</text>
+        <text x="60" y="35" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#86efac">Cryptographic Integrity</text>
+        <text x="60" y="55" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">CRC32 + Ed25519 signature</text>
+        <text x="60" y="75" font-family="JetBrains Mono, monospace" font-size="11" fill="#64748b">Tamper detection built-in</text>
+      </g>
+    </g>
+
+    <!-- Real World Example -->
+    <g transform="translate(30, 670)">
+      <rect width="820" height="180" rx="12" fill="#0f172a" stroke="#7c3aed" stroke-width="2"/>
+      <text x="20" y="30" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#a78bfa">Real World: interactive.paiml.com</text>
+
+      <!-- Architecture diagram -->
+      <g transform="translate(30, 55)">
+        <!-- S3 -->
+        <rect x="0" y="0" width="100" height="50" rx="6" fill="#f97316" opacity="0.2" stroke="#f97316"/>
+        <text x="50" y="30" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#fdba74" text-anchor="middle">S3 Bucket</text>
+
+        <!-- Arrow -->
+        <path d="M110,25 L170,25" stroke="#64748b" stroke-width="2"/>
+
+        <!-- CloudFront -->
+        <rect x="180" y="0" width="100" height="50" rx="6" fill="#7c3aed" opacity="0.2" stroke="#7c3aed"/>
+        <text x="230" y="30" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#a78bfa" text-anchor="middle">CloudFront</text>
+
+        <!-- Arrows to users -->
+        <path d="M290,15 L350,5" stroke="#64748b" stroke-width="1.5"/>
+        <path d="M290,25 L350,25" stroke="#64748b" stroke-width="1.5"/>
+        <path d="M290,35 L350,45" stroke="#64748b" stroke-width="1.5"/>
+
+        <!-- Users -->
+        <text x="370" y="10" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#94a3b8">Tokyo</text>
+        <text x="370" y="30" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#94a3b8">London</text>
+        <text x="370" y="50" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#94a3b8">NYC</text>
+
+        <!-- APR file -->
+        <rect x="440" y="0" width="120" height="50" rx="6" fill="#22c55e" opacity="0.2" stroke="#22c55e"/>
+        <text x="500" y="25" font-family="JetBrains Mono, monospace" font-size="10" fill="#86efac" text-anchor="middle">model.apr</text>
+        <text x="500" y="42" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">Single file</text>
+
+        <!-- Arrows to WASM -->
+        <path d="M570,25 L630,25" stroke="#22c55e" stroke-width="2"/>
+
+        <!-- WASM -->
+        <rect x="640" y="0" width="120" height="50" rx="6" fill="#1e3a8a" opacity="0.3" stroke="#3b82f6"/>
+        <text x="700" y="20" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#93c5fd" text-anchor="middle">Browser WASM</text>
+        <text x="700" y="38" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">Inference ready</text>
+      </g>
+
+      <!-- Stats -->
+      <g transform="translate(30, 125)">
+        <text x="0" y="0" font-family="JetBrains Mono, monospace" font-size="12" fill="#86efac">Zero backend servers</text>
+        <text x="200" y="0" font-family="JetBrains Mono, monospace" font-size="12" fill="#86efac">&lt;500ms WASM init</text>
+        <text x="400" y="0" font-family="JetBrains Mono, monospace" font-size="12" fill="#86efac">100% offline capable</text>
+        <text x="600" y="0" font-family="JetBrains Mono, monospace" font-size="12" fill="#86efac">Global CDN edge</text>
+      </g>
+    </g>
+  </g>
+</svg>

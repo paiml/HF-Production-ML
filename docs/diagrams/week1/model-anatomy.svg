@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#4f46e5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#020617"/>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="1920" height="70" fill="url(#headerGrad)"/>
+  <text x="960" y="46" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="700" fill="white" text-anchor="middle">Model Anatomy: The Portability Problem</text>
+
+  <!-- Subtitle -->
+  <text x="960" y="105" font-family="Inter, system-ui, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">A complete model needs 4 components — formats handle them differently</text>
+
+  <!-- ==================== COMPONENT LEGEND (Top) ==================== -->
+  <g transform="translate(260, 140)">
+    <!-- Weights -->
+    <g transform="translate(0, 0)">
+      <rect width="180" height="50" rx="8" fill="#22c55e" opacity="0.2" stroke="#22c55e" stroke-width="2"/>
+      <circle cx="30" cy="25" r="14" fill="#22c55e"/>
+      <text x="30" y="30" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">1</text>
+      <text x="100" y="30" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#86efac" text-anchor="middle">Weights</text>
+    </g>
+
+    <!-- Tokenizer -->
+    <g transform="translate(350, 0)">
+      <rect width="180" height="50" rx="8" fill="#f59e0b" opacity="0.2" stroke="#f59e0b" stroke-width="2"/>
+      <circle cx="30" cy="25" r="14" fill="#f59e0b"/>
+      <text x="30" y="30" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">2</text>
+      <text x="100" y="30" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#fcd34d" text-anchor="middle">Tokenizer</text>
+    </g>
+
+    <!-- Config -->
+    <g transform="translate(700, 0)">
+      <rect width="180" height="50" rx="8" fill="#14b8a6" opacity="0.2" stroke="#14b8a6" stroke-width="2"/>
+      <circle cx="30" cy="25" r="14" fill="#14b8a6"/>
+      <text x="30" y="30" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">3</text>
+      <text x="100" y="30" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#5eead4" text-anchor="middle">Config</text>
+    </g>
+
+    <!-- Metadata -->
+    <g transform="translate(1050, 0)">
+      <rect width="180" height="50" rx="8" fill="#8b5cf6" opacity="0.2" stroke="#8b5cf6" stroke-width="2"/>
+      <circle cx="30" cy="25" r="14" fill="#8b5cf6"/>
+      <text x="30" y="30" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">4</text>
+      <text x="100" y="30" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#a78bfa" text-anchor="middle">Metadata</text>
+    </g>
+
+    <!-- Verification (APR only) -->
+    <g transform="translate(1400, 0)">
+      <rect width="180" height="50" rx="8" fill="#ef4444" opacity="0.2" stroke="#ef4444" stroke-width="2"/>
+      <circle cx="30" cy="25" r="14" fill="#ef4444"/>
+      <text x="30" y="30" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">+</text>
+      <text x="100" y="30" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#fca5a5" text-anchor="middle">Verification</text>
+    </g>
+  </g>
+
+  <!-- ==================== THREE COLUMNS ==================== -->
+
+  <!-- Column 1: SafeTensors -->
+  <g transform="translate(60, 230)">
+    <!-- Header -->
+    <rect width="560" height="55" rx="12" fill="#1e3a8a"/>
+    <text x="280" y="35" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="white" text-anchor="middle">SafeTensors</text>
+
+    <!-- Files container -->
+    <g transform="translate(0, 75)">
+      <rect width="560" height="520" rx="12" fill="#0f172a" stroke="#3b82f6" stroke-width="2"/>
+
+      <!-- 4 Separate file boxes -->
+      <g transform="translate(30, 30)">
+        <!-- File 1: Weights -->
+        <rect width="500" height="90" rx="10" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="2"/>
+        <circle cx="45" cy="45" r="20" fill="#22c55e"/>
+        <text x="45" y="52" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">1</text>
+        <text x="280" y="40" font-family="JetBrains Mono, monospace" font-size="14" fill="#86efac" text-anchor="middle">model.safetensors</text>
+        <text x="280" y="62" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#64748b" text-anchor="middle">4.2 GB</text>
+      </g>
+
+      <g transform="translate(30, 135)">
+        <!-- File 2: Tokenizer -->
+        <rect width="500" height="90" rx="10" fill="#f59e0b" opacity="0.15" stroke="#f59e0b" stroke-width="2"/>
+        <circle cx="45" cy="45" r="20" fill="#f59e0b"/>
+        <text x="45" y="52" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">2</text>
+        <text x="280" y="40" font-family="JetBrains Mono, monospace" font-size="14" fill="#fcd34d" text-anchor="middle">tokenizer.json</text>
+        <text x="280" y="62" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#64748b" text-anchor="middle">2 MB</text>
+      </g>
+
+      <g transform="translate(30, 240)">
+        <!-- File 3: Config -->
+        <rect width="500" height="90" rx="10" fill="#14b8a6" opacity="0.15" stroke="#14b8a6" stroke-width="2"/>
+        <circle cx="45" cy="45" r="20" fill="#14b8a6"/>
+        <text x="45" y="52" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">3</text>
+        <text x="280" y="40" font-family="JetBrains Mono, monospace" font-size="14" fill="#5eead4" text-anchor="middle">config.json</text>
+        <text x="280" y="62" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#64748b" text-anchor="middle">4 KB</text>
+      </g>
+
+      <g transform="translate(30, 345)">
+        <!-- File 4: Metadata -->
+        <rect width="500" height="90" rx="10" fill="#8b5cf6" opacity="0.15" stroke="#8b5cf6" stroke-width="2"/>
+        <circle cx="45" cy="45" r="20" fill="#8b5cf6"/>
+        <text x="45" y="52" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">4</text>
+        <text x="280" y="40" font-family="JetBrains Mono, monospace" font-size="14" fill="#a78bfa" text-anchor="middle">README.md</text>
+        <text x="280" y="62" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#64748b" text-anchor="middle">50 KB</text>
+      </g>
+
+      <!-- Status -->
+      <g transform="translate(30, 460)">
+        <rect width="500" height="40" rx="8" fill="#7f1d1d"/>
+        <text x="250" y="27" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#fca5a5" text-anchor="middle">4 separate files — version mismatch risk</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Column 2: GGUF -->
+  <g transform="translate(680, 230)">
+    <!-- Header -->
+    <rect width="560" height="55" rx="12" fill="#166534"/>
+    <text x="280" y="35" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="white" text-anchor="middle">GGUF</text>
+
+    <!-- Single file container -->
+    <g transform="translate(0, 75)">
+      <rect width="560" height="520" rx="12" fill="#0f172a" stroke="#22c55e" stroke-width="2"/>
+
+      <!-- Single file with all components -->
+      <g transform="translate(30, 30)">
+        <rect width="500" height="400" rx="10" fill="#0a0a0a" stroke="#22c55e" stroke-width="2"/>
+
+        <text x="250" y="35" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700" fill="#22c55e" text-anchor="middle">model.gguf</text>
+
+        <!-- Component 1 -->
+        <g transform="translate(20, 55)">
+          <rect width="460" height="70" rx="6" fill="#22c55e" opacity="0.2"/>
+          <circle cx="30" cy="35" r="16" fill="#22c55e"/>
+          <text x="30" y="41" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">1</text>
+          <text x="250" y="40" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#86efac" text-anchor="middle">Tensor Data (quantized)</text>
+        </g>
+
+        <!-- Component 2 -->
+        <g transform="translate(20, 135)">
+          <rect width="460" height="70" rx="6" fill="#f59e0b" opacity="0.2"/>
+          <circle cx="30" cy="35" r="16" fill="#f59e0b"/>
+          <text x="30" y="41" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">2</text>
+          <text x="250" y="40" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#fcd34d" text-anchor="middle">Tokenizer (KV metadata)</text>
+        </g>
+
+        <!-- Component 3 -->
+        <g transform="translate(20, 215)">
+          <rect width="460" height="70" rx="6" fill="#14b8a6" opacity="0.2"/>
+          <circle cx="30" cy="35" r="16" fill="#14b8a6"/>
+          <text x="30" y="41" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">3</text>
+          <text x="250" y="40" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#5eead4" text-anchor="middle">Architecture (KV metadata)</text>
+        </g>
+
+        <!-- Component 4 -->
+        <g transform="translate(20, 295)">
+          <rect width="460" height="70" rx="6" fill="#8b5cf6" opacity="0.2"/>
+          <circle cx="30" cy="35" r="16" fill="#8b5cf6"/>
+          <text x="30" y="41" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">4</text>
+          <text x="250" y="40" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#a78bfa" text-anchor="middle">General Metadata</text>
+        </g>
+      </g>
+
+      <!-- Status -->
+      <g transform="translate(30, 460)">
+        <rect width="500" height="40" rx="8" fill="#14532d"/>
+        <text x="250" y="27" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#86efac" text-anchor="middle">1 file — but no verification</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Column 3: APR -->
+  <g transform="translate(1300, 230)">
+    <!-- Header -->
+    <rect width="560" height="55" rx="12" fill="#c2410c"/>
+    <text x="280" y="35" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="white" text-anchor="middle">APR</text>
+
+    <!-- Single file container -->
+    <g transform="translate(0, 75)">
+      <rect width="560" height="520" rx="12" fill="#0f172a" stroke="#f97316" stroke-width="3"/>
+
+      <!-- Single file with all components + verification -->
+      <g transform="translate(30, 30)">
+        <rect width="500" height="400" rx="10" fill="#0a0a0a" stroke="#f97316" stroke-width="2"/>
+
+        <text x="250" y="35" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700" fill="#f97316" text-anchor="middle">model.apr</text>
+
+        <!-- Component 1 -->
+        <g transform="translate(20, 50)">
+          <rect width="460" height="55" rx="6" fill="#22c55e" opacity="0.2"/>
+          <circle cx="30" cy="27" r="14" fill="#22c55e"/>
+          <text x="30" y="33" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">1</text>
+          <text x="250" y="32" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#86efac" text-anchor="middle">Tensor Data (SIMD aligned)</text>
+        </g>
+
+        <!-- Component 2 -->
+        <g transform="translate(20, 115)">
+          <rect width="460" height="55" rx="6" fill="#f59e0b" opacity="0.2"/>
+          <circle cx="30" cy="27" r="14" fill="#f59e0b"/>
+          <text x="30" y="33" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">2</text>
+          <text x="250" y="32" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#fcd34d" text-anchor="middle">Embedded Tokenizer</text>
+        </g>
+
+        <!-- Component 3 -->
+        <g transform="translate(20, 180)">
+          <rect width="460" height="55" rx="6" fill="#14b8a6" opacity="0.2"/>
+          <circle cx="30" cy="27" r="14" fill="#14b8a6"/>
+          <text x="30" y="33" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">3</text>
+          <text x="250" y="32" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#5eead4" text-anchor="middle">Architecture Config</text>
+        </g>
+
+        <!-- Component 4 -->
+        <g transform="translate(20, 245)">
+          <rect width="460" height="55" rx="6" fill="#8b5cf6" opacity="0.2"/>
+          <circle cx="30" cy="27" r="14" fill="#8b5cf6"/>
+          <text x="30" y="33" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">4</text>
+          <text x="250" y="32" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#a78bfa" text-anchor="middle">Provenance Metadata</text>
+        </g>
+
+        <!-- Component + (Verification) -->
+        <g transform="translate(20, 310)">
+          <rect width="460" height="55" rx="6" fill="#ef4444" opacity="0.2" stroke="#ef4444" stroke-width="2"/>
+          <circle cx="30" cy="27" r="14" fill="#ef4444"/>
+          <text x="30" y="33" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">+</text>
+          <text x="250" y="32" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#fca5a5" text-anchor="middle">CRC32 + Ed25519 Signature</text>
+        </g>
+      </g>
+
+      <!-- Status -->
+      <g transform="translate(30, 460)">
+        <rect width="500" height="40" rx="8" fill="#7c2d12"/>
+        <text x="250" y="27" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#fdba74" text-anchor="middle">1 file — self-contained + verified</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ==================== BOTTOM COMPARISON ==================== -->
+  <g transform="translate(60, 870)">
+    <rect width="1800" height="170" rx="14" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+
+    <!-- Three columns for quick comparison -->
+    <g transform="translate(0, 0)">
+      <!-- SafeTensors -->
+      <g transform="translate(50, 25)">
+        <text x="250" y="25" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#3b82f6" text-anchor="middle">SafeTensors</text>
+        <g transform="translate(0, 45)">
+          <circle cx="15" cy="8" r="6" fill="#ef4444"/>
+          <text x="30" y="12" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#94a3b8">Multiple files</text>
+        </g>
+        <g transform="translate(0, 70)">
+          <circle cx="15" cy="8" r="6" fill="#ef4444"/>
+          <text x="30" y="12" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#94a3b8">Version mismatch risk</text>
+        </g>
+        <g transform="translate(0, 95)">
+          <circle cx="15" cy="8" r="6" fill="#ef4444"/>
+          <text x="30" y="12" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#94a3b8">No integrity check</text>
+        </g>
+      </g>
+
+      <!-- GGUF -->
+      <g transform="translate(650, 25)">
+        <text x="250" y="25" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#22c55e" text-anchor="middle">GGUF</text>
+        <g transform="translate(0, 45)">
+          <circle cx="15" cy="8" r="6" fill="#22c55e"/>
+          <text x="30" y="12" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#94a3b8">Single file</text>
+        </g>
+        <g transform="translate(0, 70)">
+          <circle cx="15" cy="8" r="6" fill="#22c55e"/>
+          <text x="30" y="12" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#94a3b8">Everything bundled</text>
+        </g>
+        <g transform="translate(0, 95)">
+          <circle cx="15" cy="8" r="6" fill="#ef4444"/>
+          <text x="30" y="12" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#94a3b8">No signing/checksum</text>
+        </g>
+      </g>
+
+      <!-- APR -->
+      <g transform="translate(1250, 25)">
+        <text x="250" y="25" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#f97316" text-anchor="middle">APR</text>
+        <g transform="translate(0, 45)">
+          <circle cx="15" cy="8" r="6" fill="#22c55e"/>
+          <text x="30" y="12" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#94a3b8">Single file</text>
+        </g>
+        <g transform="translate(0, 70)">
+          <circle cx="15" cy="8" r="6" fill="#22c55e"/>
+          <text x="30" y="12" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#94a3b8">Everything bundled</text>
+        </g>
+        <g transform="translate(0, 95)">
+          <circle cx="15" cy="8" r="6" fill="#22c55e"/>
+          <text x="30" y="12" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#94a3b8">CRC32 + Ed25519</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
