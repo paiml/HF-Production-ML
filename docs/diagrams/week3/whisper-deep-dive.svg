@@ -1,0 +1,385 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="audioGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+    <linearGradient id="encoderGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="decoderGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#be185d"/>
+    </linearGradient>
+    <linearGradient id="wasmGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrCyan" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#06b6d4"/>
+    </marker>
+    <marker id="arrPurple" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8b5cf6"/>
+    </marker>
+    <marker id="arrPink" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#ec4899"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#020617"/>
+
+  <!-- Title -->
+  <text x="960" y="50" text-anchor="middle" fill="#f8fafc" font-family="Inter, system-ui, sans-serif" font-size="38" font-weight="700">whisper.apr: Browser Speech Recognition</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 1: Audio Pipeline (Top Left) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(60, 90)">
+    <rect x="0" y="0" width="600" height="240" rx="12" fill="#0f172a" stroke="#0891b2" stroke-width="2"/>
+    <text x="300" y="32" text-anchor="middle" fill="#22d3ee" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Audio Processing Pipeline</text>
+
+    <!-- Waveform input -->
+    <g transform="translate(25, 55)">
+      <rect x="0" y="0" width="90" height="70" rx="6" fill="url(#audioGrad)" opacity="0.3" stroke="#06b6d4" stroke-width="1"/>
+      <text x="45" y="30" text-anchor="middle" fill="#67e8f9" font-family="Inter, system-ui, sans-serif" font-size="11">PCM</text>
+      <text x="45" y="48" text-anchor="middle" fill="#a5f3fc" font-family="JetBrains Mono, monospace" font-size="10">48kHz</text>
+      <!-- Mini waveform -->
+      <path d="M15 60 Q25 50 35 60 T55 60 T75 60" stroke="#22d3ee" stroke-width="1.5" fill="none"/>
+    </g>
+
+    <path d="M125 90 L155 90" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrCyan)"/>
+
+    <!-- Resample -->
+    <g transform="translate(165, 55)">
+      <rect x="0" y="0" width="90" height="70" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="45" y="30" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">Resample</text>
+      <text x="45" y="48" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="10">→ 16kHz</text>
+    </g>
+
+    <path d="M265 90 L295 90" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
+
+    <!-- Mel Spectrogram -->
+    <g transform="translate(305, 55)">
+      <rect x="0" y="0" width="110" height="70" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="55" y="25" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">Mel Spec</text>
+      <text x="55" y="43" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="9">80 bins</text>
+      <text x="55" y="58" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="9">400-pt FFT</text>
+    </g>
+
+    <path d="M425 90 L455 90" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
+
+    <!-- Output frames -->
+    <g transform="translate(465, 55)">
+      <rect x="0" y="0" width="110" height="70" rx="6" fill="url(#audioGrad)" opacity="0.3" stroke="#06b6d4" stroke-width="1"/>
+      <text x="55" y="30" text-anchor="middle" fill="#67e8f9" font-family="Inter, system-ui, sans-serif" font-size="11">Frames</text>
+      <text x="55" y="48" text-anchor="middle" fill="#a5f3fc" font-family="JetBrains Mono, monospace" font-size="10">1500 × 80</text>
+    </g>
+
+    <!-- Specs row -->
+    <g transform="translate(25, 145)" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">
+      <rect x="0" y="0" width="170" height="28" rx="4" fill="#1e293b"/>
+      <text x="85" y="18" text-anchor="middle" fill="#94a3b8">30s chunks (max)</text>
+
+      <rect x="185" y="0" width="170" height="28" rx="4" fill="#1e293b"/>
+      <text x="270" y="18" text-anchor="middle" fill="#94a3b8">10ms hop length</text>
+
+      <rect x="370" y="0" width="170" height="28" rx="4" fill="#1e293b"/>
+      <text x="455" y="18" text-anchor="middle" fill="#94a3b8">VAD integration</text>
+    </g>
+
+    <!-- Languages badge -->
+    <g transform="translate(25, 190)">
+      <rect x="0" y="0" width="550" height="35" rx="5" fill="#22c55e" opacity="0.1" stroke="#22c55e" stroke-width="1"/>
+      <text x="275" y="23" text-anchor="middle" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">99 Languages · Auto-Detection · Translation Mode</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 2: Transformer Architecture (Top Center) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(700, 90)">
+    <rect x="0" y="0" width="520" height="240" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <text x="260" y="32" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Encoder-Decoder Transformer</text>
+
+    <!-- Encoder stack -->
+    <g transform="translate(30, 55)">
+      <rect x="0" y="0" width="200" height="160" rx="8" fill="url(#encoderGrad)" opacity="0.2" stroke="#8b5cf6" stroke-width="2"/>
+      <text x="100" y="25" text-anchor="middle" fill="#a78bfa" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">Encoder</text>
+
+      <!-- Conv layers -->
+      <rect x="15" y="40" width="170" height="25" rx="3" fill="#1e293b"/>
+      <text x="100" y="57" text-anchor="middle" fill="#c4b5fd" font-family="JetBrains Mono, monospace" font-size="10">Conv1D × 2</text>
+
+      <!-- Attention blocks -->
+      <rect x="15" y="75" width="170" height="35" rx="3" fill="#1e293b"/>
+      <text x="100" y="90" text-anchor="middle" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Self-Attention</text>
+      <text x="100" y="103" text-anchor="middle" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="9">4-32 layers</text>
+
+      <!-- FFN -->
+      <rect x="15" y="120" width="170" height="25" rx="3" fill="#1e293b"/>
+      <text x="100" y="137" text-anchor="middle" fill="#c4b5fd" font-family="JetBrains Mono, monospace" font-size="10">FFN (4× expand)</text>
+    </g>
+
+    <!-- Arrow encoder to decoder -->
+    <path d="M240 135 L270 135" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+    <text x="255" y="125" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="9">cross</text>
+
+    <!-- Decoder stack -->
+    <g transform="translate(280, 55)">
+      <rect x="0" y="0" width="200" height="160" rx="8" fill="url(#decoderGrad)" opacity="0.2" stroke="#ec4899" stroke-width="2"/>
+      <text x="100" y="25" text-anchor="middle" fill="#f472b6" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">Decoder</text>
+
+      <!-- Token embed -->
+      <rect x="15" y="40" width="170" height="25" rx="3" fill="#1e293b"/>
+      <text x="100" y="57" text-anchor="middle" fill="#f9a8d4" font-family="JetBrains Mono, monospace" font-size="10">Token Embed 51K</text>
+
+      <!-- Cross attention -->
+      <rect x="15" y="75" width="170" height="35" rx="3" fill="#1e293b"/>
+      <text x="100" y="90" text-anchor="middle" fill="#f9a8d4" font-family="Inter, system-ui, sans-serif" font-size="10">Cross-Attention</text>
+      <text x="100" y="103" text-anchor="middle" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="9">+ KV Cache</text>
+
+      <!-- Output -->
+      <rect x="15" y="120" width="170" height="25" rx="3" fill="#1e293b"/>
+      <text x="100" y="137" text-anchor="middle" fill="#f9a8d4" font-family="JetBrains Mono, monospace" font-size="10">Greedy / Beam</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 3: Model Sizes (Top Right) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(1260, 90)">
+    <rect x="0" y="0" width="600" height="240" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <text x="300" y="32" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Model Variants &amp; Quantization</text>
+
+    <!-- Size comparison bars -->
+    <g transform="translate(30, 55)">
+      <!-- Tiny -->
+      <text x="0" y="15" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="12">tiny</text>
+      <rect x="60" y="0" width="40" height="22" rx="3" fill="#22c55e"/>
+      <text x="115" y="15" fill="#86efac" font-family="JetBrains Mono, monospace" font-size="11">20 MB</text>
+      <text x="175" y="15" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">39M · RTF 0.3x</text>
+
+      <!-- Base -->
+      <text x="0" y="50" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="12">base</text>
+      <rect x="60" y="35" width="74" height="22" rx="3" fill="#22c55e"/>
+      <text x="150" y="50" fill="#86efac" font-family="JetBrains Mono, monospace" font-size="11">37 MB</text>
+      <text x="210" y="50" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">74M · RTF 0.5x</text>
+
+      <!-- Small -->
+      <text x="0" y="85" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="12">small</text>
+      <rect x="60" y="70" width="244" height="22" rx="3" fill="#eab308"/>
+      <text x="320" y="85" fill="#fde047" font-family="JetBrains Mono, monospace" font-size="11">122 MB</text>
+      <text x="395" y="85" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">244M · RTF 0.8x</text>
+
+      <!-- Medium -->
+      <text x="0" y="120" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="12">medium</text>
+      <rect x="60" y="105" width="385" height="22" rx="3" fill="#f59e0b"/>
+      <text x="460" y="120" fill="#fcd34d" font-family="JetBrains Mono, monospace" font-size="11">385 MB</text>
+    </g>
+
+    <!-- Quantization legend -->
+    <g transform="translate(30, 185)">
+      <rect x="0" y="0" width="540" height="40" rx="5" fill="#1e293b"/>
+      <text x="20" y="25" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="12">INT4 Quantization:</text>
+      <text x="160" y="25" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="12">7.25× compression</text>
+      <text x="330" y="25" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">|</text>
+      <text x="350" y="25" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="12">FP32 → INT4 weights, FP32 activations</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 4: WASM Architecture (Bottom Left) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(60, 360)">
+    <rect x="0" y="0" width="600" height="320" rx="12" fill="#0f172a" stroke="#d97706" stroke-width="2"/>
+    <text x="300" y="32" text-anchor="middle" fill="#fbbf24" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">WASM Browser Architecture</text>
+
+    <!-- Main thread -->
+    <g transform="translate(30, 55)">
+      <rect x="0" y="0" width="250" height="130" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="125" y="25" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Main Thread</text>
+
+      <rect x="15" y="40" width="100" height="35" rx="4" fill="#06b6d4" opacity="0.2" stroke="#06b6d4" stroke-width="1"/>
+      <text x="65" y="62" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="10">getUserMedia</text>
+
+      <rect x="130" y="40" width="105" height="35" rx="4" fill="#ec4899" opacity="0.2" stroke="#ec4899" stroke-width="1"/>
+      <text x="182" y="62" text-anchor="middle" fill="#f9a8d4" font-family="JetBrains Mono, monospace" font-size="10">ScriptProc</text>
+
+      <rect x="15" y="85" width="220" height="30" rx="4" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="1"/>
+      <text x="125" y="105" text-anchor="middle" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="10">Presentar UI (zero JS)</text>
+    </g>
+
+    <!-- SharedArrayBuffer -->
+    <g transform="translate(135, 200)">
+      <rect x="0" y="0" width="140" height="50" rx="6" fill="url(#wasmGrad)" opacity="0.3" stroke="#f59e0b" stroke-width="2"/>
+      <text x="70" y="22" text-anchor="middle" fill="#fcd34d" font-family="JetBrains Mono, monospace" font-size="11">SharedArray</text>
+      <text x="70" y="40" text-anchor="middle" fill="#fef3c7" font-family="JetBrains Mono, monospace" font-size="10">Ring Buffer</text>
+    </g>
+
+    <!-- Arrows to/from buffer -->
+    <path d="M155 185 L175 200" stroke="#f59e0b" stroke-width="2"/>
+    <path d="M255 200 L275 185" stroke="#f59e0b" stroke-width="2"/>
+
+    <!-- Web Worker -->
+    <g transform="translate(310, 55)">
+      <rect x="0" y="0" width="260" height="130" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="130" y="25" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Web Worker</text>
+
+      <rect x="15" y="40" width="110" height="35" rx="4" fill="#8b5cf6" opacity="0.2" stroke="#8b5cf6" stroke-width="1"/>
+      <text x="70" y="62" text-anchor="middle" fill="#c4b5fd" font-family="JetBrains Mono, monospace" font-size="10">WASM Module</text>
+
+      <rect x="135" y="40" width="110" height="35" rx="4" fill="#ec4899" opacity="0.2" stroke="#ec4899" stroke-width="1"/>
+      <text x="190" y="62" text-anchor="middle" fill="#f9a8d4" font-family="JetBrains Mono, monospace" font-size="10">Whisper Inf</text>
+
+      <rect x="15" y="85" width="230" height="30" rx="4" fill="#06b6d4" opacity="0.15" stroke="#06b6d4" stroke-width="1"/>
+      <text x="130" y="105" text-anchor="middle" fill="#67e8f9" font-family="Inter, system-ui, sans-serif" font-size="10">trueno SIMD (128-bit vectors)</text>
+    </g>
+
+    <!-- COOP/COEP badge -->
+    <g transform="translate(30, 270)">
+      <rect x="0" y="0" width="540" height="35" rx="5" fill="#ef4444" opacity="0.1" stroke="#ef4444" stroke-width="1"/>
+      <text x="270" y="22" text-anchor="middle" fill="#fca5a5" font-family="Inter, system-ui, sans-serif" font-size="12">COOP/COEP Headers Required · wasm32-unknown-unknown · No Emscripten</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 5: Streaming Flow (Bottom Center) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(700, 360)">
+    <rect x="0" y="0" width="520" height="320" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <text x="260" y="32" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Real-Time Streaming Flow</text>
+
+    <!-- Flow diagram -->
+    <g transform="translate(30, 55)">
+      <!-- Mic -->
+      <rect x="0" y="0" width="80" height="50" rx="6" fill="#06b6d4" opacity="0.3" stroke="#06b6d4" stroke-width="1"/>
+      <text x="40" y="22" text-anchor="middle" fill="#67e8f9" font-family="Inter, system-ui, sans-serif" font-size="20">🎤</text>
+      <text x="40" y="42" text-anchor="middle" fill="#a5f3fc" font-family="Inter, system-ui, sans-serif" font-size="9">48kHz</text>
+
+      <path d="M90 25 L115 25" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrCyan)"/>
+
+      <!-- Chunk buffer -->
+      <rect x="125" y="0" width="100" height="50" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="175" y="22" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="10">Chunk</text>
+      <text x="175" y="38" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="9">1.5s buffer</text>
+
+      <path d="M235 25 L260 25" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
+
+      <!-- Encoder -->
+      <rect x="270" y="0" width="80" height="50" rx="6" fill="url(#encoderGrad)" opacity="0.4" stroke="#8b5cf6" stroke-width="1"/>
+      <text x="310" y="30" text-anchor="middle" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-size="11">Encode</text>
+
+      <path d="M360 25 L385 25" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrPurple)"/>
+
+      <!-- Decoder -->
+      <rect x="395" y="0" width="80" height="50" rx="6" fill="url(#decoderGrad)" opacity="0.4" stroke="#ec4899" stroke-width="1"/>
+      <text x="435" y="30" text-anchor="middle" fill="#f9a8d4" font-family="Inter, system-ui, sans-serif" font-size="11">Decode</text>
+    </g>
+
+    <!-- Partial results -->
+    <g transform="translate(30, 125)">
+      <rect x="0" y="0" width="460" height="80" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="20" y="25" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Partial:</text>
+      <text x="80" y="25" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="12" font-style="italic">"Hello, this is a test of the..."</text>
+
+      <text x="20" y="55" fill="#22c55e" font-family="Inter, system-ui, sans-serif" font-size="11">Final:</text>
+      <text x="80" y="55" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">"Hello, this is a test of the speech recognition."</text>
+    </g>
+
+    <!-- State machine -->
+    <g transform="translate(30, 225)">
+      <text x="0" y="15" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">States:</text>
+
+      <rect x="60" y="0" width="90" height="25" rx="4" fill="#475569" opacity="0.3"/>
+      <text x="105" y="17" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="10">Waiting</text>
+
+      <path d="M160 12 L180 12" stroke="#64748b" stroke-width="1"/>
+
+      <rect x="190" y="0" width="90" height="25" rx="4" fill="#22c55e" opacity="0.3"/>
+      <text x="235" y="17" text-anchor="middle" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="10">InSpeech</text>
+
+      <path d="M290 12 L310 12" stroke="#64748b" stroke-width="1"/>
+
+      <rect x="320" y="0" width="90" height="25" rx="4" fill="#f59e0b" opacity="0.3"/>
+      <text x="365" y="17" text-anchor="middle" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="10">Finalizing</text>
+    </g>
+
+    <!-- Latency targets -->
+    <g transform="translate(30, 270)">
+      <rect x="0" y="0" width="460" height="35" rx="5" fill="#22c55e" opacity="0.1" stroke="#22c55e" stroke-width="1"/>
+      <text x="230" y="22" text-anchor="middle" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="12">RTF ≤0.62x in Chrome · Real-time capable on tiny/base</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 6: APR Format (Bottom Right) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(1260, 360)">
+    <rect x="0" y="0" width="600" height="320" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <text x="300" y="32" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">.apr Model Format</text>
+
+    <!-- File structure -->
+    <g transform="translate(30, 55)">
+      <rect x="0" y="0" width="250" height="180" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+
+      <rect x="0" y="0" width="250" height="30" rx="8" fill="#8b5cf6" opacity="0.3"/>
+      <text x="125" y="20" text-anchor="middle" fill="#c4b5fd" font-family="JetBrains Mono, monospace" font-size="11">Header (64 bytes)</text>
+
+      <text x="15" y="52" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="10">Magic: "APR\0"</text>
+      <text x="15" y="70" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="10">Compression: ZSTD</text>
+      <text x="15" y="88" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="10">CRC32 checksum</text>
+
+      <rect x="10" y="100" width="230" height="25" rx="3" fill="#06b6d4" opacity="0.2"/>
+      <text x="125" y="117" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="10">Metadata (JSON, zstd)</text>
+
+      <rect x="10" y="130" width="230" height="25" rx="3" fill="#22c55e" opacity="0.2"/>
+      <text x="125" y="147" text-anchor="middle" fill="#86efac" font-family="JetBrains Mono, monospace" font-size="10">Tensor Index</text>
+
+      <rect x="10" y="160" width="230" height="15" rx="3" fill="#f59e0b" opacity="0.2"/>
+      <text x="125" y="172" text-anchor="middle" fill="#fcd34d" font-family="JetBrains Mono, monospace" font-size="9">Tensor Data (LZ4 blocks)</text>
+    </g>
+
+    <!-- Features -->
+    <g transform="translate(310, 55)">
+      <text x="0" y="15" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Features</text>
+
+      <g transform="translate(0, 30)" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="12">
+        <circle cx="8" cy="8" r="3" fill="#22c55e"/>
+        <text x="20" y="12">Zero-copy mmap load</text>
+
+        <circle cx="8" cy="35" r="3" fill="#22c55e"/>
+        <text x="20" y="39">64-byte SIMD alignment</text>
+
+        <circle cx="8" cy="62" r="3" fill="#22c55e"/>
+        <text x="20" y="66">30-50% compression</text>
+
+        <circle cx="8" cy="89" r="3" fill="#22c55e"/>
+        <text x="20" y="93">Progressive loading</text>
+
+        <circle cx="8" cy="116" r="3" fill="#22c55e"/>
+        <text x="20" y="120">Ed25519 signing</text>
+      </g>
+    </g>
+
+    <!-- Load times -->
+    <g transform="translate(30, 255)">
+      <rect x="0" y="0" width="540" height="50" rx="6" fill="#1e293b"/>
+      <text x="20" y="20" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Load Times:</text>
+      <text x="110" y="20" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="11">tiny &lt;15ms</text>
+      <text x="220" y="20" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="11">base &lt;35ms</text>
+      <text x="330" y="20" fill="#eab308" font-family="JetBrains Mono, monospace" font-size="11">small &lt;75ms</text>
+      <text x="450" y="20" fill="#f59e0b" font-family="JetBrains Mono, monospace" font-size="11">medium &lt;180ms</text>
+
+      <text x="20" y="40" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">WASM binary:</text>
+      <text x="110" y="40" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11">~2.5 MB (wasm-opt)</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="960" y="720" text-anchor="middle" fill="#475569" font-family="Inter, system-ui, sans-serif" font-size="14">Pure Rust · Zero Python · 145K LOC · 2,273 tests · 96% coverage</text>
+</svg>

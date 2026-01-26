@@ -1,0 +1,331 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="pzshGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="mlGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="budgetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrGreen" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#22c55e"/>
+    </marker>
+    <marker id="arrPurple" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8b5cf6"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#020617"/>
+
+  <!-- Title -->
+  <text x="960" y="50" text-anchor="middle" fill="#f8fafc" font-family="Inter, system-ui, sans-serif" font-size="38" font-weight="700">pzsh: Performance-First Shell Framework</text>
+  <text x="960" y="85" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="18">oh-my-zsh functionality, 50-200× faster</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 1: Performance Comparison (Top Left) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(60, 120)">
+    <rect x="0" y="0" width="580" height="220" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <text x="290" y="32" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Startup Time Comparison</text>
+
+    <!-- oh-my-zsh bar (long, red) -->
+    <g transform="translate(30, 60)">
+      <text x="0" y="18" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="13">oh-my-zsh</text>
+      <rect x="100" y="0" width="420" height="30" rx="4" fill="#ef4444" opacity="0.7"/>
+      <text x="530" y="20" fill="#fca5a5" font-family="JetBrains Mono, monospace" font-size="14">500-2000ms</text>
+    </g>
+
+    <!-- bare zsh bar (medium, yellow) -->
+    <g transform="translate(30, 105)">
+      <text x="0" y="18" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="13">bare zsh</text>
+      <rect x="100" y="0" width="21" height="30" rx="4" fill="#eab308" opacity="0.7"/>
+      <text x="130" y="20" fill="#fde047" font-family="JetBrains Mono, monospace" font-size="14">5-10ms</text>
+    </g>
+
+    <!-- pzsh bar (tiny, green) -->
+    <g transform="translate(30, 150)">
+      <text x="0" y="18" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">pzsh</text>
+      <rect x="100" y="0" width="3" height="30" rx="2" fill="url(#pzshGrad)"/>
+      <text x="115" y="20" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700">0.003ms</text>
+      <text x="200" y="20" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">(p99 measured)</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 2: 10ms Budget Pipeline (Top Center) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(680, 120)">
+    <rect x="0" y="0" width="560" height="220" rx="12" fill="#0f172a" stroke="#22c55e" stroke-width="2"/>
+    <text x="280" y="32" text-anchor="middle" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">10ms Budget Pipeline (Toyota Way)</text>
+
+    <!-- Pipeline stages -->
+    <g transform="translate(30, 60)">
+      <!-- Parse -->
+      <rect x="0" y="0" width="90" height="55" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="45" y="25" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="12">Parse</text>
+      <text x="45" y="45" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="11">2ms</text>
+
+      <path d="M100 27 L120 27" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
+
+      <!-- Env -->
+      <rect x="130" y="0" width="90" height="55" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="175" y="25" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="12">Env</text>
+      <text x="175" y="45" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="11">2ms</text>
+
+      <path d="M230 27 L250 27" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
+
+      <!-- Alias -->
+      <rect x="260" y="0" width="90" height="55" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="305" y="25" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="12">Alias</text>
+      <text x="305" y="45" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="11">2ms</text>
+
+      <path d="M360 27 L380 27" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
+
+      <!-- Prompt -->
+      <rect x="390" y="0" width="90" height="55" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="435" y="25" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="12">Prompt</text>
+      <text x="435" y="45" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="11">2ms</text>
+    </g>
+
+    <!-- Budget bar -->
+    <g transform="translate(30, 135)">
+      <rect x="0" y="0" width="500" height="20" rx="3" fill="#1e293b"/>
+      <rect x="0" y="0" width="400" height="20" rx="3" fill="url(#budgetGrad)" opacity="0.6"/>
+      <text x="410" y="14" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="10">8ms used</text>
+      <text x="470" y="14" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="10">2ms reserve</text>
+    </g>
+
+    <!-- Andon principle -->
+    <g transform="translate(30, 170)">
+      <rect x="0" y="0" width="500" height="35" rx="5" fill="#ef4444" opacity="0.1" stroke="#ef4444" stroke-width="1"/>
+      <text x="250" y="22" text-anchor="middle" fill="#fca5a5" font-family="Inter, system-ui, sans-serif" font-size="12">ANDON: Tests fail if any stage exceeds budget</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 3: Data Structures (Top Right) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(1280, 120)">
+    <rect x="0" y="0" width="580" height="220" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <text x="290" y="32" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">O(1) Data Structures</text>
+
+    <!-- AHashMap -->
+    <g transform="translate(30, 55)">
+      <rect x="0" y="0" width="250" height="70" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="125" y="25" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="14" font-weight="600">AHashMap</text>
+      <text x="125" y="48" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">Aliases, Env vars, Completions</text>
+      <text x="125" y="63" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="10">O(1) lookup</text>
+    </g>
+
+    <!-- LRU Cache -->
+    <g transform="translate(300, 55)">
+      <rect x="0" y="0" width="250" height="70" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="125" y="25" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="14" font-weight="600">LRU Cache</text>
+      <text x="125" y="48" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">Parsed commands (1024 entries)</text>
+      <text x="125" y="63" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="10">O(1) cache hit</text>
+    </g>
+
+    <!-- Pre-compiled config -->
+    <g transform="translate(30, 140)">
+      <rect x="0" y="0" width="520" height="55" rx="6" fill="#22c55e" opacity="0.1" stroke="#22c55e" stroke-width="1"/>
+      <text x="260" y="22" text-anchor="middle" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Pre-Compiled Config</text>
+      <text x="260" y="42" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">Zero runtime TOML parsing · Build-time frozen environment</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 4: ML Completion (Bottom Left) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(60, 370)">
+    <rect x="0" y="0" width="580" height="300" rx="12" fill="#0f172a" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="290" y="32" text-anchor="middle" fill="#a78bfa" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">aprender-shell ML Completion</text>
+
+    <!-- N-gram model -->
+    <g transform="translate(30, 55)">
+      <rect x="0" y="0" width="250" height="100" rx="8" fill="url(#mlGrad)" opacity="0.2" stroke="#8b5cf6" stroke-width="1"/>
+      <text x="125" y="25" text-anchor="middle" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">N-gram Markov Model</text>
+
+      <text x="20" y="50" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">• 2-5 gram context</text>
+      <text x="20" y="68" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">• Frequency-sorted trie</text>
+      <text x="20" y="86" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">• Paged memory segments</text>
+    </g>
+
+    <!-- Training flow -->
+    <g transform="translate(300, 55)">
+      <rect x="0" y="0" width="250" height="100" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="125" y="25" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Training Flow</text>
+
+      <text x="20" y="50" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="10">~/.zsh_history</text>
+      <path d="M140 47 L170 47" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrPurple)"/>
+      <text x="180" y="50" fill="#c4b5fd" font-family="JetBrains Mono, monospace" font-size="10">train</text>
+
+      <text x="20" y="75" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="10">shell.apr</text>
+      <text x="100" y="75" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">(model file)</text>
+    </g>
+
+    <!-- Suggestion example -->
+    <g transform="translate(30, 175)">
+      <rect x="0" y="0" width="520" height="100" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+
+      <!-- Terminal mockup -->
+      <rect x="15" y="15" width="490" height="70" rx="4" fill="#0f172a"/>
+      <text x="30" y="38" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="12">$ git ch</text>
+      <text x="100" y="38" fill="#475569" font-family="JetBrains Mono, monospace" font-size="12">eckout main</text>
+
+      <!-- Suggestions dropdown -->
+      <rect x="75" y="45" width="180" height="35" rx="3" fill="#1e293b" stroke="#8b5cf6" stroke-width="1"/>
+      <text x="85" y="62" fill="#c4b5fd" font-family="JetBrains Mono, monospace" font-size="10">checkout</text>
+      <text x="160" y="62" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="9">0.92</text>
+      <text x="85" y="76" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="10">cherry-pick</text>
+      <text x="175" y="76" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="9">0.74</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 5: Security (Bottom Center) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(680, 370)">
+    <rect x="0" y="0" width="560" height="300" rx="12" fill="#0f172a" stroke="#ef4444" stroke-width="2"/>
+    <text x="280" y="32" text-anchor="middle" fill="#fca5a5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Security: Forbidden Patterns</text>
+
+    <!-- Forbidden list -->
+    <g transform="translate(30, 55)">
+      <text x="0" y="0" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="12">Rejected at compile time:</text>
+
+      <g transform="translate(0, 20)" font-family="JetBrains Mono, monospace" font-size="12">
+        <rect x="0" y="0" width="500" height="30" rx="4" fill="#ef4444" opacity="0.15"/>
+        <text x="15" y="20" fill="#fca5a5">$(...)  backticks</text>
+        <text x="250" y="20" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">subprocess calls blocked</text>
+
+        <rect x="0" y="40" width="500" height="30" rx="4" fill="#ef4444" opacity="0.15"/>
+        <text x="15" y="60" fill="#fca5a5">eval</text>
+        <text x="250" y="60" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">injection vector blocked</text>
+
+        <rect x="0" y="80" width="500" height="30" rx="4" fill="#ef4444" opacity="0.15"/>
+        <text x="15" y="100" fill="#fca5a5">brew --prefix</text>
+        <text x="250" y="100" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">slow pattern (use hardcoded path)</text>
+      </g>
+    </g>
+
+    <!-- Credential filtering -->
+    <g transform="translate(30, 200)">
+      <rect x="0" y="0" width="500" height="80" rx="8" fill="#22c55e" opacity="0.1" stroke="#22c55e" stroke-width="1"/>
+      <text x="20" y="25" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">aprender-shell Credential Filtering</text>
+
+      <text x="20" y="50" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">• API keys, tokens, passwords excluded from training</text>
+      <text x="20" y="68" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">• Database credentials, AWS secrets filtered automatically</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 6: Widgets & Plugins (Bottom Right) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(1280, 370)">
+    <rect x="0" y="0" width="580" height="300" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <text x="290" y="32" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Widgets &amp; Plugins</text>
+
+    <!-- Widgets -->
+    <g transform="translate(30, 55)">
+      <text x="0" y="0" fill="#67e8f9" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Zsh Widgets</text>
+
+      <g transform="translate(0, 15)" font-family="Inter, system-ui, sans-serif" font-size="11">
+        <rect x="0" y="0" width="240" height="28" rx="4" fill="#1e293b"/>
+        <text x="120" y="18" text-anchor="middle" fill="#94a3b8">AutoSuggest (gray ghost text)</text>
+
+        <rect x="0" y="35" width="240" height="28" rx="4" fill="#1e293b"/>
+        <text x="120" y="53" text-anchor="middle" fill="#94a3b8">SyntaxHighlight (colorized)</text>
+
+        <rect x="0" y="70" width="240" height="28" rx="4" fill="#1e293b"/>
+        <text x="120" y="88" text-anchor="middle" fill="#94a3b8">HistorySearch (Ctrl+R)</text>
+
+        <rect x="0" y="105" width="240" height="28" rx="4" fill="#1e293b"/>
+        <text x="120" y="123" text-anchor="middle" fill="#94a3b8">DirectoryJump (z command)</text>
+      </g>
+    </g>
+
+    <!-- Plugins -->
+    <g transform="translate(300, 55)">
+      <text x="0" y="0" fill="#f472b6" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Built-in Plugins (9)</text>
+
+      <g transform="translate(0, 15)">
+        <rect x="0" y="0" width="75" height="25" rx="4" fill="#22c55e" opacity="0.2"/>
+        <text x="37" y="17" text-anchor="middle" fill="#86efac" font-family="JetBrains Mono, monospace" font-size="10">git</text>
+
+        <rect x="85" y="0" width="75" height="25" rx="4" fill="#06b6d4" opacity="0.2"/>
+        <text x="122" y="17" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="10">docker</text>
+
+        <rect x="170" y="0" width="75" height="25" rx="4" fill="#8b5cf6" opacity="0.2"/>
+        <text x="207" y="17" text-anchor="middle" fill="#c4b5fd" font-family="JetBrains Mono, monospace" font-size="10">kubectl</text>
+
+        <rect x="0" y="35" width="75" height="25" rx="4" fill="#f59e0b" opacity="0.2"/>
+        <text x="37" y="52" text-anchor="middle" fill="#fcd34d" font-family="JetBrains Mono, monospace" font-size="10">npm</text>
+
+        <rect x="85" y="35" width="75" height="25" rx="4" fill="#3b82f6" opacity="0.2"/>
+        <text x="122" y="52" text-anchor="middle" fill="#93c5fd" font-family="JetBrains Mono, monospace" font-size="10">python</text>
+
+        <rect x="170" y="35" width="75" height="25" rx="4" fill="#ec4899" opacity="0.2"/>
+        <text x="207" y="52" text-anchor="middle" fill="#f9a8d4" font-family="JetBrains Mono, monospace" font-size="10">rust</text>
+
+        <rect x="0" y="70" width="75" height="25" rx="4" fill="#14b8a6" opacity="0.2"/>
+        <text x="37" y="87" text-anchor="middle" fill="#5eead4" font-family="JetBrains Mono, monospace" font-size="10">golang</text>
+
+        <rect x="85" y="70" width="75" height="25" rx="4" fill="#a855f7" opacity="0.2"/>
+        <text x="122" y="87" text-anchor="middle" fill="#d8b4fe" font-family="JetBrains Mono, monospace" font-size="10">terraform</text>
+
+        <rect x="170" y="70" width="75" height="25" rx="4" fill="#f97316" opacity="0.2"/>
+        <text x="207" y="87" text-anchor="middle" fill="#fdba74" font-family="JetBrains Mono, monospace" font-size="10">aws</text>
+      </g>
+
+      <text x="0" y="125" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">5ms budget per plugin</text>
+    </g>
+
+    <!-- Installation -->
+    <g transform="translate(30, 210)">
+      <rect x="0" y="0" width="520" height="70" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="20" y="22" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">Installation</text>
+      <text x="20" y="45" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="11">cargo install pzsh</text>
+      <text x="20" y="62" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="11">eval "$(pzsh init zsh)"</text>
+      <text x="250" y="62" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">← add to ~/.zshrc</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- Bottom: Config Example -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(60, 700)">
+    <rect x="0" y="0" width="1800" height="100" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <text x="900" y="28" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600">~/.pzshrc (TOML Config)</text>
+
+    <g transform="translate(30, 45)" font-family="JetBrains Mono, monospace" font-size="11">
+      <text x="0" y="0" fill="#f472b6">[pzsh]</text>
+      <text x="80" y="0" fill="#94a3b8">shell = "zsh"</text>
+
+      <text x="250" y="0" fill="#f472b6">[performance]</text>
+      <text x="380" y="0" fill="#94a3b8">startup_budget_ms = 10</text>
+
+      <text x="600" y="0" fill="#f472b6">[plugins]</text>
+      <text x="700" y="0" fill="#94a3b8">enabled = ["git", "docker"]</text>
+
+      <text x="950" y="0" fill="#f472b6">[aliases]</text>
+      <text x="1040" y="0" fill="#94a3b8">gs = "git status"</text>
+      <text x="1200" y="0" fill="#94a3b8">ll = "ls -la"</text>
+
+      <text x="1400" y="0" fill="#f472b6">[prompt]</text>
+      <text x="1490" y="0" fill="#94a3b8">theme = "robbyrussell"</text>
+    </g>
+
+    <text x="900" y="85" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">Validated at compile time · Forbidden patterns rejected · O(1) lookup at runtime</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="960" y="840" text-anchor="middle" fill="#475569" font-family="Inter, system-ui, sans-serif" font-size="14">Pure Rust · Toyota Production System · 97% test coverage · 335 tests</text>
+</svg>
