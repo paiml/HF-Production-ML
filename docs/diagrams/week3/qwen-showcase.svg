@@ -1,0 +1,249 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="aprGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="ggufGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="stGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="chatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="runGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+    <linearGradient id="serveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#db2777"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#020617"/>
+
+  <!-- Title -->
+  <text x="960" y="50" text-anchor="middle" fill="#f8fafc" font-family="Inter, system-ui, sans-serif" font-size="38" font-weight="700">Qwen2.5-Coder Showcase</text>
+  <text x="960" y="85" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="18">apr CLI · Three Modes · Three Formats</text>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- CENTER: apr CLI Hub -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(960, 450)">
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="120" fill="none" stroke="#22c55e" stroke-width="3" opacity="0.3"/>
+    <circle cx="0" cy="0" r="100" fill="url(#aprGrad)" opacity="0.2"/>
+    <circle cx="0" cy="0" r="100" fill="none" stroke="#22c55e" stroke-width="4"/>
+
+    <!-- apr CLI text -->
+    <text x="0" y="-15" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="36" font-weight="700">apr</text>
+    <text x="0" y="20" text-anchor="middle" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="16">CLI</text>
+    <text x="0" y="45" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">Unified Interface</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SPOKES: Three Modes (Top) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- Spoke lines to modes -->
+  <line x1="960" y1="350" x2="600" y2="180" stroke="#8b5cf6" stroke-width="3" opacity="0.5"/>
+  <line x1="960" y1="350" x2="960" y2="180" stroke="#06b6d4" stroke-width="3" opacity="0.5"/>
+  <line x1="960" y1="350" x2="1320" y2="180" stroke="#ec4899" stroke-width="3" opacity="0.5"/>
+
+  <!-- apr chat (Top Left) -->
+  <g transform="translate(600, 180)">
+    <rect x="-140" y="-70" width="280" height="140" rx="16" fill="#0f172a"/>
+    <rect x="-140" y="-70" width="280" height="140" rx="16" fill="url(#chatGrad)" opacity="0.2" stroke="#8b5cf6" stroke-width="3"/>
+    <text x="0" y="-30" text-anchor="middle" fill="#c4b5fd" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">apr chat</text>
+    <text x="0" y="0" text-anchor="middle" fill="#a78bfa" font-family="Inter, system-ui, sans-serif" font-size="14">Interactive REPL</text>
+    <text x="0" y="25" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">--system --temperature</text>
+    <text x="0" y="45" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">--max-tokens --gpu</text>
+  </g>
+
+  <!-- apr run (Top Center) -->
+  <g transform="translate(960, 180)">
+    <rect x="-140" y="-70" width="280" height="140" rx="16" fill="#0f172a"/>
+    <rect x="-140" y="-70" width="280" height="140" rx="16" fill="url(#runGrad)" opacity="0.2" stroke="#06b6d4" stroke-width="3"/>
+    <text x="0" y="-30" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">apr run</text>
+    <text x="0" y="0" text-anchor="middle" fill="#22d3ee" font-family="Inter, system-ui, sans-serif" font-size="14">Single-shot Inference</text>
+    <text x="0" y="25" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">--prompt --max-tokens</text>
+    <text x="0" y="45" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">--benchmark --trace</text>
+  </g>
+
+  <!-- apr serve (Top Right) -->
+  <g transform="translate(1320, 180)">
+    <rect x="-140" y="-70" width="280" height="140" rx="16" fill="#0f172a"/>
+    <rect x="-140" y="-70" width="280" height="140" rx="16" fill="url(#serveGrad)" opacity="0.2" stroke="#ec4899" stroke-width="3"/>
+    <text x="0" y="-30" text-anchor="middle" fill="#f9a8d4" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">apr serve</text>
+    <text x="0" y="0" text-anchor="middle" fill="#f472b6" font-family="Inter, system-ui, sans-serif" font-size="14">REST API Server</text>
+    <text x="0" y="25" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">--port --gpu --batch</text>
+    <text x="0" y="45" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">OpenAI Compatible</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SPOKES: Three Formats (Bottom) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- Spoke lines to formats -->
+  <line x1="960" y1="550" x2="600" y2="720" stroke="#f59e0b" stroke-width="3" opacity="0.5"/>
+  <line x1="960" y1="550" x2="960" y2="760" stroke="#22c55e" stroke-width="3" opacity="0.5"/>
+  <line x1="960" y1="550" x2="1320" y2="720" stroke="#3b82f6" stroke-width="3" opacity="0.5"/>
+
+  <!-- GGUF Format (Bottom Left) -->
+  <g transform="translate(600, 720)">
+    <rect x="-140" y="-60" width="280" height="120" rx="16" fill="#0f172a"/>
+    <rect x="-140" y="-60" width="280" height="120" rx="16" fill="url(#ggufGrad)" opacity="0.2" stroke="#f59e0b" stroke-width="3"/>
+    <text x="0" y="-25" text-anchor="middle" fill="#fcd34d" font-family="JetBrains Mono, monospace" font-size="28" font-weight="700">.gguf</text>
+    <text x="0" y="5" text-anchor="middle" fill="#fbbf24" font-family="Inter, system-ui, sans-serif" font-size="14">llama.cpp Format</text>
+    <text x="0" y="30" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">Q4_K_M · Q5_K_M · Q8_0</text>
+    <text x="0" y="48" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">32-byte aligned · KV metadata</text>
+  </g>
+
+  <!-- APR Format (Bottom Center) -->
+  <g transform="translate(960, 760)">
+    <rect x="-140" y="-60" width="280" height="120" rx="16" fill="#0f172a"/>
+    <rect x="-140" y="-60" width="280" height="120" rx="16" fill="url(#aprGrad)" opacity="0.2" stroke="#22c55e" stroke-width="3"/>
+    <text x="0" y="-25" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="28" font-weight="700">.apr</text>
+    <text x="0" y="5" text-anchor="middle" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="14">Native Format</text>
+    <text x="0" y="30" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">Q4_0 · Q8_0 · LZ4 · Ed25519</text>
+    <text x="0" y="48" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">64-byte aligned · JSON metadata</text>
+  </g>
+
+  <!-- SafeTensors Format (Bottom Right) -->
+  <g transform="translate(1320, 720)">
+    <rect x="-140" y="-60" width="280" height="120" rx="16" fill="#0f172a"/>
+    <rect x="-140" y="-60" width="280" height="120" rx="16" fill="url(#stGrad)" opacity="0.2" stroke="#3b82f6" stroke-width="3"/>
+    <text x="0" y="-25" text-anchor="middle" fill="#93c5fd" font-family="JetBrains Mono, monospace" font-size="28" font-weight="700">.safetensors</text>
+    <text x="0" y="5" text-anchor="middle" fill="#60a5fa" font-family="Inter, system-ui, sans-serif" font-size="14">HuggingFace Format</text>
+    <text x="0" y="30" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">F16 · F32 · BF16</text>
+    <text x="0" y="48" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">JSON header · No pickle</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- LEFT PANEL: Use Cases -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(60, 350)">
+    <rect x="0" y="0" width="280" height="300" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <text x="140" y="30" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600">Use Cases</text>
+
+    <!-- chat use case -->
+    <g transform="translate(20, 55)">
+      <rect x="0" y="0" width="240" height="70" rx="6" fill="#8b5cf6" opacity="0.1"/>
+      <text x="10" y="20" fill="#c4b5fd" font-family="JetBrains Mono, monospace" font-size="11">apr chat</text>
+      <text x="10" y="40" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="10">• Development + testing</text>
+      <text x="10" y="55" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="10">• Prompt engineering</text>
+    </g>
+
+    <!-- run use case -->
+    <g transform="translate(20, 135)">
+      <rect x="0" y="0" width="240" height="70" rx="6" fill="#06b6d4" opacity="0.1"/>
+      <text x="10" y="20" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="11">apr run</text>
+      <text x="10" y="40" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="10">• Shell scripts + pipelines</text>
+      <text x="10" y="55" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="10">• CI/CD automation</text>
+    </g>
+
+    <!-- serve use case -->
+    <g transform="translate(20, 215)">
+      <rect x="0" y="0" width="240" height="70" rx="6" fill="#ec4899" opacity="0.1"/>
+      <text x="10" y="20" fill="#f9a8d4" font-family="JetBrains Mono, monospace" font-size="11">apr serve</text>
+      <text x="10" y="40" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="10">• Production deployment</text>
+      <text x="10" y="55" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="10">• API integration</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- RIGHT PANEL: Model Tiers -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(1580, 350)">
+    <rect x="0" y="0" width="280" height="300" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <text x="140" y="30" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600">Qwen2.5-Coder Tiers</text>
+
+    <!-- Tier table -->
+    <g transform="translate(20, 55)" font-family="JetBrains Mono, monospace" font-size="11">
+      <text x="0" y="0" fill="#64748b">Tier</text>
+      <text x="70" y="0" fill="#64748b">Params</text>
+      <text x="140" y="0" fill="#64748b">Q4_K Size</text>
+
+      <rect x="-5" y="10" width="250" height="24" rx="2" fill="#1e293b"/>
+      <text x="0" y="27" fill="#94a3b8">tiny</text>
+      <text x="70" y="27" fill="#94a3b8">0.5B</text>
+      <text x="140" y="27" fill="#86efac">~275 MB</text>
+
+      <rect x="-5" y="40" width="250" height="24" rx="2" fill="#22c55e" opacity="0.1"/>
+      <text x="0" y="57" fill="#4ade80" font-weight="700">small</text>
+      <text x="70" y="57" fill="#4ade80">1.5B</text>
+      <text x="140" y="57" fill="#86efac">~825 MB</text>
+
+      <rect x="-5" y="70" width="250" height="24" rx="2" fill="#1e293b"/>
+      <text x="0" y="87" fill="#94a3b8">medium</text>
+      <text x="70" y="87" fill="#94a3b8">7B</text>
+      <text x="140" y="87" fill="#86efac">~4.5 GB</text>
+
+      <rect x="-5" y="100" width="250" height="24" rx="2" fill="#1e293b"/>
+      <text x="0" y="117" fill="#94a3b8">large</text>
+      <text x="70" y="117" fill="#94a3b8">32B</text>
+      <text x="140" y="117" fill="#86efac">~19 GB</text>
+    </g>
+
+    <!-- Source info -->
+    <g transform="translate(20, 200)">
+      <rect x="0" y="0" width="240" height="80" rx="6" fill="#1e293b"/>
+      <text x="10" y="20" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">Model Source:</text>
+      <text x="10" y="38" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="9">hf://Qwen/Qwen2.5-Coder</text>
+      <text x="10" y="52" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="9">-1.5B-Instruct-GGUF</text>
+      <text x="10" y="70" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">Auto-download · Cached locally</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- BOTTOM: Command Examples -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(60, 900)">
+    <rect x="0" y="0" width="1800" height="120" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <text x="900" y="28" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600">Quick Start Commands</text>
+
+    <!-- Commands row -->
+    <g transform="translate(50, 50)" font-family="JetBrains Mono, monospace" font-size="12">
+      <!-- Pull -->
+      <rect x="0" y="0" width="400" height="50" rx="6" fill="#1e293b"/>
+      <text x="15" y="20" fill="#4ade80">apr pull</text>
+      <text x="100" y="20" fill="#94a3b8">hf://Qwen/Qwen2.5-Coder-1.5B-Instruct-GGUF</text>
+      <text x="15" y="38" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">Download model to cache</text>
+
+      <!-- Run -->
+      <rect x="420" y="0" width="450" height="50" rx="6" fill="#1e293b"/>
+      <text x="435" y="20" fill="#67e8f9">apr run</text>
+      <text x="510" y="20" fill="#94a3b8">model.gguf --prompt "Hello" --max-tokens 64</text>
+      <text x="435" y="38" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">Single-shot inference</text>
+
+      <!-- Chat -->
+      <rect x="890" y="0" width="400" height="50" rx="6" fill="#1e293b"/>
+      <text x="905" y="20" fill="#c4b5fd">apr chat</text>
+      <text x="985" y="20" fill="#94a3b8">model.gguf --system "Be concise"</text>
+      <text x="905" y="38" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">Interactive REPL session</text>
+
+      <!-- Serve -->
+      <rect x="1310" y="0" width="400" height="50" rx="6" fill="#1e293b"/>
+      <text x="1325" y="20" fill="#f9a8d4">apr serve</text>
+      <text x="1420" y="20" fill="#94a3b8">model.gguf --port 8080 --gpu</text>
+      <text x="1325" y="38" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">REST API server (OpenAI compatible)</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="960" y="1060" text-anchor="middle" fill="#475569" font-family="Inter, system-ui, sans-serif" font-size="14">One CLI · Three Modes · Three Formats · Qwen2.5-Coder-1.5B</text>
+</svg>

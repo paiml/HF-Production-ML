@@ -1,0 +1,279 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="passGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="failGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#22c55e"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#ef4444"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#020617"/>
+
+  <!-- Title -->
+  <text x="960" y="50" text-anchor="middle" fill="#f8fafc" font-family="Inter, system-ui, sans-serif" font-size="36" font-weight="700">2.7 Model Validation Pipeline</text>
+  <text x="960" y="85" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="16">25-Point QA Checklist: Quality Gates Before Production</text>
+
+  <!-- Pipeline Flow -->
+  <!-- Stage 1: Model Input -->
+  <g transform="translate(160, 350)">
+    <rect x="-100" y="-120" width="200" height="240" rx="16" fill="#0f172a" stroke="#64748b" stroke-width="3"/>
+    <text x="0" y="-85" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700">Model</text>
+    <rect x="-80" y="-60" width="160" height="40" rx="6" fill="#1e293b"/>
+    <text x="0" y="-35" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="10">model.apr</text>
+    <rect x="-80" y="-10" width="160" height="40" rx="6" fill="#1e293b"/>
+    <text x="0" y="15" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="10">config.json</text>
+    <rect x="-80" y="40" width="160" height="40" rx="6" fill="#1e293b"/>
+    <text x="0" y="65" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="10">tokenizer.json</text>
+  </g>
+
+  <line x1="265" y1="350" x2="355" y2="350" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: Format Validation -->
+  <g transform="translate(460, 350)">
+    <rect x="-100" y="-120" width="200" height="240" rx="16" fill="#0f172a" stroke="#3b82f6" stroke-width="3"/>
+    <text x="0" y="-85" text-anchor="middle" fill="#60a5fa" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700">Format</text>
+    <text x="0" y="-60" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Validation</text>
+
+    <g transform="translate(0, -20)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#1e3a5f"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Magic bytes</text>
+    </g>
+
+    <g transform="translate(0, 20)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#1e3a5f"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Header parse</text>
+    </g>
+
+    <g transform="translate(0, 60)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#1e3a5f"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Checksum</text>
+    </g>
+
+    <g transform="translate(0, 100)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#1e3a5f"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Signature</text>
+    </g>
+  </g>
+
+  <line x1="565" y1="350" x2="655" y2="350" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: Structure Validation -->
+  <g transform="translate(760, 350)">
+    <rect x="-100" y="-120" width="200" height="240" rx="16" fill="#0f172a" stroke="#8b5cf6" stroke-width="3"/>
+    <text x="0" y="-85" text-anchor="middle" fill="#a78bfa" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700">Structure</text>
+    <text x="0" y="-60" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Validation</text>
+
+    <g transform="translate(0, -20)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#2e1065"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Layer count</text>
+    </g>
+
+    <g transform="translate(0, 20)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#2e1065"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Tensor shapes</text>
+    </g>
+
+    <g transform="translate(0, 60)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#2e1065"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Vocab size</text>
+    </g>
+
+    <g transform="translate(0, 100)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#2e1065"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Config match</text>
+    </g>
+  </g>
+
+  <line x1="865" y1="350" x2="955" y2="350" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: Inference Validation -->
+  <g transform="translate(1060, 350)">
+    <rect x="-100" y="-120" width="200" height="240" rx="16" fill="#0f172a" stroke="#f59e0b" stroke-width="3"/>
+    <text x="0" y="-85" text-anchor="middle" fill="#fbbf24" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700">Inference</text>
+    <text x="0" y="-60" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Validation</text>
+
+    <g transform="translate(0, -20)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#451a03"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="10">Forward pass</text>
+    </g>
+
+    <g transform="translate(0, 20)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#451a03"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="10">No NaN/Inf</text>
+    </g>
+
+    <g transform="translate(0, 60)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#451a03"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="10">Token decode</text>
+    </g>
+
+    <g transform="translate(0, 100)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#451a03"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="10">Deterministic</text>
+    </g>
+  </g>
+
+  <line x1="1165" y1="350" x2="1255" y2="350" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: Performance Validation -->
+  <g transform="translate(1360, 350)">
+    <rect x="-100" y="-120" width="200" height="240" rx="16" fill="#0f172a" stroke="#ec4899" stroke-width="3"/>
+    <text x="0" y="-85" text-anchor="middle" fill="#f472b6" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700">Performance</text>
+    <text x="0" y="-60" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Validation</text>
+
+    <g transform="translate(0, -20)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#500724"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#fbcfe8" font-family="Inter, system-ui, sans-serif" font-size="10">250+ tok/s</text>
+    </g>
+
+    <g transform="translate(0, 20)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#500724"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#fbcfe8" font-family="Inter, system-ui, sans-serif" font-size="10">P99 &lt; 10ms</text>
+    </g>
+
+    <g transform="translate(0, 60)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#500724"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#fbcfe8" font-family="Inter, system-ui, sans-serif" font-size="10">Memory fit</text>
+    </g>
+
+    <g transform="translate(0, 100)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#500724"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#fbcfe8" font-family="Inter, system-ui, sans-serif" font-size="10">No regression</text>
+    </g>
+  </g>
+
+  <line x1="1465" y1="350" x2="1555" y2="350" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Stage 6: Golden Dataset -->
+  <g transform="translate(1660, 350)">
+    <rect x="-100" y="-120" width="200" height="240" rx="16" fill="#0f172a" stroke="#22c55e" stroke-width="3"/>
+    <text x="0" y="-85" text-anchor="middle" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700">Golden</text>
+    <text x="0" y="-60" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Dataset</text>
+
+    <g transform="translate(0, -20)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#052e16"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="10">Exact match</text>
+    </g>
+
+    <g transform="translate(0, 20)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#052e16"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="10">BLEU score</text>
+    </g>
+
+    <g transform="translate(0, 60)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#052e16"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="10">Perplexity</text>
+    </g>
+
+    <g transform="translate(0, 100)">
+      <rect x="-80" y="-20" width="160" height="30" rx="4" fill="#052e16"/>
+      <circle cx="-60" cy="-5" r="8" fill="#22c55e"/>
+      <text x="10" y="0" text-anchor="middle" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="10">Safety check</text>
+    </g>
+  </g>
+
+  <!-- Output Gates -->
+  <g transform="translate(1810, 350)">
+    <!-- Pass -->
+    <line x1="-40" y1="-60" x2="40" y2="-60" stroke="#22c55e" stroke-width="3" marker-end="url(#arrowGreen)"/>
+    <rect x="50" y="-90" width="100" height="60" rx="8" fill="#052e16" stroke="#22c55e" stroke-width="2"/>
+    <text x="100" y="-55" text-anchor="middle" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700">PASS</text>
+
+    <!-- Fail -->
+    <line x1="-40" y1="60" x2="40" y2="60" stroke="#ef4444" stroke-width="3" marker-end="url(#arrowRed)"/>
+    <rect x="50" y="30" width="100" height="60" rx="8" fill="#450a0a" stroke="#ef4444" stroke-width="2"/>
+    <text x="100" y="65" text-anchor="middle" fill="#f87171" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700">FAIL</text>
+  </g>
+
+  <!-- Bottom: 25-Point Checklist Summary -->
+  <g transform="translate(960, 750)">
+    <rect x="-800" y="-100" width="1600" height="280" rx="16" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <text x="0" y="-65" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">25-Point QA Checklist Categories</text>
+
+    <!-- Categories -->
+    <g transform="translate(-600, 20)">
+      <rect x="-120" y="-50" width="240" height="140" rx="8" fill="#1e3a5f"/>
+      <text x="0" y="-25" text-anchor="middle" fill="#60a5fa" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">Format (5 pts)</text>
+      <text x="0" y="0" text-anchor="middle" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Magic bytes</text>
+      <text x="0" y="18" text-anchor="middle" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Header integrity</text>
+      <text x="0" y="36" text-anchor="middle" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Checksum valid</text>
+      <text x="0" y="54" text-anchor="middle" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Signature verify</text>
+      <text x="0" y="72" text-anchor="middle" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Version match</text>
+    </g>
+
+    <g transform="translate(-300, 20)">
+      <rect x="-120" y="-50" width="240" height="140" rx="8" fill="#2e1065"/>
+      <text x="0" y="-25" text-anchor="middle" fill="#a78bfa" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">Structure (5 pts)</text>
+      <text x="0" y="0" text-anchor="middle" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Layer count</text>
+      <text x="0" y="18" text-anchor="middle" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Hidden dims</text>
+      <text x="0" y="36" text-anchor="middle" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Attention heads</text>
+      <text x="0" y="54" text-anchor="middle" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Vocab alignment</text>
+      <text x="0" y="72" text-anchor="middle" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-size="10">Config consistency</text>
+    </g>
+
+    <g transform="translate(0, 20)">
+      <rect x="-120" y="-50" width="240" height="140" rx="8" fill="#451a03"/>
+      <text x="0" y="-25" text-anchor="middle" fill="#fbbf24" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">Inference (5 pts)</text>
+      <text x="0" y="0" text-anchor="middle" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="10">Forward pass</text>
+      <text x="0" y="18" text-anchor="middle" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="10">No NaN/Inf</text>
+      <text x="0" y="36" text-anchor="middle" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="10">Softmax sum=1</text>
+      <text x="0" y="54" text-anchor="middle" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="10">Decode success</text>
+      <text x="0" y="72" text-anchor="middle" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="10">Deterministic</text>
+    </g>
+
+    <g transform="translate(300, 20)">
+      <rect x="-120" y="-50" width="240" height="140" rx="8" fill="#500724"/>
+      <text x="0" y="-25" text-anchor="middle" fill="#f472b6" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">Performance (5 pts)</text>
+      <text x="0" y="0" text-anchor="middle" fill="#fbcfe8" font-family="Inter, system-ui, sans-serif" font-size="10">Throughput target</text>
+      <text x="0" y="18" text-anchor="middle" fill="#fbcfe8" font-family="Inter, system-ui, sans-serif" font-size="10">Latency budget</text>
+      <text x="0" y="36" text-anchor="middle" fill="#fbcfe8" font-family="Inter, system-ui, sans-serif" font-size="10">Memory footprint</text>
+      <text x="0" y="54" text-anchor="middle" fill="#fbcfe8" font-family="Inter, system-ui, sans-serif" font-size="10">No regression</text>
+      <text x="0" y="72" text-anchor="middle" fill="#fbcfe8" font-family="Inter, system-ui, sans-serif" font-size="10">GPU utilization</text>
+    </g>
+
+    <g transform="translate(600, 20)">
+      <rect x="-120" y="-50" width="240" height="140" rx="8" fill="#052e16"/>
+      <text x="0" y="-25" text-anchor="middle" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">Quality (5 pts)</text>
+      <text x="0" y="0" text-anchor="middle" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="10">Golden exact</text>
+      <text x="0" y="18" text-anchor="middle" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="10">BLEU threshold</text>
+      <text x="0" y="36" text-anchor="middle" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="10">Perplexity bound</text>
+      <text x="0" y="54" text-anchor="middle" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="10">Safety filters</text>
+      <text x="0" y="72" text-anchor="middle" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="10">Bias check</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="960" y="1060" text-anchor="middle" fill="#475569" font-family="Inter, system-ui, sans-serif" font-size="14">whisper-apr-cli validate: 25 automated checks before production deployment</text>
+</svg>
