@@ -6,6 +6,8 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Rust](https://img.shields.io/badge/Rust-1.83%2B-orange.svg)](https://www.rust-lang.org/)
 
+![Course Hero Image](docs/diagrams/hero-image.svg)
+
 A production ML course using pure Rust - no Python runtime required.
 
 ## Quick Start
