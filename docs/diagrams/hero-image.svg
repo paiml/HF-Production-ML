@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#020617"/>
+      <stop offset="50%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#020617"/>
+    </linearGradient>
+    <linearGradient id="sovereignGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="50%" style="stop-color:#14b8a6"/>
+      <stop offset="100%" style="stop-color:#22c55e"/>
+    </linearGradient>
+    <linearGradient id="rustGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#ea580c"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#bgGrad)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.05">
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#fff" stroke-width="1"/>
+    </pattern>
+    <rect width="1920" height="1080" fill="url(#grid)"/>
+  </g>
+
+  <!-- Decorative circles -->
+  <circle cx="150" cy="900" r="200" fill="#7c3aed" opacity="0.1" filter="url(#softGlow)"/>
+  <circle cx="1770" cy="180" r="250" fill="#14b8a6" opacity="0.08" filter="url(#softGlow)"/>
+  <circle cx="960" cy="540" r="400" fill="#1e3a8a" opacity="0.05" filter="url(#softGlow)"/>
+
+  <!-- Course Number Badge -->
+  <g transform="translate(960, 120)">
+    <rect x="-80" y="-30" width="160" height="60" rx="30" fill="#1e3a8a" opacity="0.8"/>
+    <text x="0" y="8" text-anchor="middle" fill="#60a5fa" font-family="Inter, sans-serif" font-size="24" font-weight="600">COURSE 5 OF 5</text>
+  </g>
+
+  <!-- Main Title -->
+  <text x="960" y="260" text-anchor="middle" fill="#f8fafc" font-family="Inter, sans-serif" font-size="72" font-weight="700" filter="url(#glow)">Production ML</text>
+  <text x="960" y="340" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="48" font-weight="400">with Hugging Face</text>
+
+  <!-- Sovereign AI Stack Label -->
+  <text x="960" y="420" text-anchor="middle" fill="url(#sovereignGrad)" font-family="JetBrains Mono, monospace" font-size="28" font-weight="600" filter="url(#glow)">SOVEREIGN AI STACK</text>
+
+  <!-- Stack Components - Horizontal Layout -->
+  <g transform="translate(960, 520)">
+    <!-- trueno -->
+    <g transform="translate(-600, 0)">
+      <rect x="-100" y="-40" width="200" height="80" rx="12" fill="#0f172a" stroke="#7c3aed" stroke-width="2"/>
+      <text x="0" y="-8" text-anchor="middle" fill="#7c3aed" font-family="JetBrains Mono, monospace" font-size="24" font-weight="600">trueno</text>
+      <text x="0" y="20" text-anchor="middle" fill="#64748b" font-family="Inter, sans-serif" font-size="14">SIMD/GPU</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M -480 0 L -420 0" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+    <!-- aprender -->
+    <g transform="translate(-300, 0)">
+      <rect x="-100" y="-40" width="200" height="80" rx="12" fill="#0f172a" stroke="#14b8a6" stroke-width="2"/>
+      <text x="0" y="-8" text-anchor="middle" fill="#14b8a6" font-family="JetBrains Mono, monospace" font-size="24" font-weight="600">aprender</text>
+      <text x="0" y="20" text-anchor="middle" fill="#64748b" font-family="Inter, sans-serif" font-size="14">ML + APR Format</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M -180 0 L -120 0" stroke="#475569" stroke-width="2"/>
+
+    <!-- realizar -->
+    <g transform="translate(0, 0)">
+      <rect x="-100" y="-40" width="200" height="80" rx="12" fill="#0f172a" stroke="#22c55e" stroke-width="2"/>
+      <text x="0" y="-8" text-anchor="middle" fill="#22c55e" font-family="JetBrains Mono, monospace" font-size="24" font-weight="600">realizar</text>
+      <text x="0" y="20" text-anchor="middle" fill="#64748b" font-family="Inter, sans-serif" font-size="14">Inference Server</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M 120 0 L 180 0" stroke="#475569" stroke-width="2"/>
+
+    <!-- batuta -->
+    <g transform="translate(300, 0)">
+      <rect x="-100" y="-40" width="200" height="80" rx="12" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/>
+      <text x="0" y="-8" text-anchor="middle" fill="#f59e0b" font-family="JetBrains Mono, monospace" font-size="24" font-weight="600">batuta</text>
+      <text x="0" y="20" text-anchor="middle" fill="#64748b" font-family="Inter, sans-serif" font-size="14">Orchestration</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M 420 0 L 480 0" stroke="#475569" stroke-width="2"/>
+
+    <!-- presentar -->
+    <g transform="translate(600, 0)">
+      <rect x="-100" y="-40" width="200" height="80" rx="12" fill="#0f172a" stroke="#ec4899" stroke-width="2"/>
+      <text x="0" y="-8" text-anchor="middle" fill="#ec4899" font-family="JetBrains Mono, monospace" font-size="24" font-weight="600">presentar</text>
+      <text x="0" y="20" text-anchor="middle" fill="#64748b" font-family="Inter, sans-serif" font-size="14">WASM UI</text>
+    </g>
+  </g>
+
+  <!-- Week Modules -->
+  <g transform="translate(960, 700)">
+    <!-- Week 1 -->
+    <g transform="translate(-450, 0)">
+      <rect x="-140" y="-60" width="280" height="120" rx="16" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+      <text x="0" y="-25" text-anchor="middle" fill="#f59e0b" font-family="Inter, sans-serif" font-size="18" font-weight="600">WEEK 1</text>
+      <text x="0" y="5" text-anchor="middle" fill="#f8fafc" font-family="Inter, sans-serif" font-size="20" font-weight="500">Model Formats</text>
+      <text x="0" y="35" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="14">GGUF | SafeTensors | APR</text>
+    </g>
+
+    <!-- Week 2 -->
+    <g transform="translate(0, 0)">
+      <rect x="-140" y="-60" width="280" height="120" rx="16" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+      <text x="0" y="-25" text-anchor="middle" fill="#14b8a6" font-family="Inter, sans-serif" font-size="18" font-weight="600">WEEK 2</text>
+      <text x="0" y="5" text-anchor="middle" fill="#f8fafc" font-family="Inter, sans-serif" font-size="20" font-weight="500">MLOps Foundations</text>
+      <text x="0" y="35" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="14">CI/CD | Observability | Security</text>
+    </g>
+
+    <!-- Week 3 -->
+    <g transform="translate(450, 0)">
+      <rect x="-140" y="-60" width="280" height="120" rx="16" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+      <text x="0" y="-25" text-anchor="middle" fill="#7c3aed" font-family="Inter, sans-serif" font-size="18" font-weight="600">WEEK 3</text>
+      <text x="0" y="5" text-anchor="middle" fill="#f8fafc" font-family="Inter, sans-serif" font-size="20" font-weight="500">Project Showcase</text>
+      <text x="0" y="35" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="14">Depyler | Whisper | APR Tools</text>
+    </g>
+  </g>
+
+  <!-- Capstone Badge -->
+  <g transform="translate(960, 870)">
+    <rect x="-200" y="-35" width="400" height="70" rx="35" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+    <text x="0" y="8" text-anchor="middle" fill="#f8fafc" font-family="Inter, sans-serif" font-size="24" font-weight="600">CAPSTONE: Multi-Format Deployment</text>
+  </g>
+
+  <!-- Pure Rust Badge -->
+  <g transform="translate(1700, 980)">
+    <rect x="-80" y="-25" width="160" height="50" rx="8" fill="url(#rustGrad)" opacity="0.9"/>
+    <text x="0" y="7" text-anchor="middle" fill="#fff" font-family="Inter, sans-serif" font-size="18" font-weight="700">Pure Rust</text>
+  </g>
+
+  <!-- No Python Badge -->
+  <g transform="translate(1500, 980)">
+    <rect x="-90" y="-25" width="180" height="50" rx="8" fill="#0f172a" stroke="#ef4444" stroke-width="2"/>
+    <text x="0" y="7" text-anchor="middle" fill="#ef4444" font-family="Inter, sans-serif" font-size="16" font-weight="600">No Python Runtime</text>
+  </g>
+
+  <!-- Duration -->
+  <g transform="translate(220, 980)">
+    <text x="0" y="0" fill="#64748b" font-family="Inter, sans-serif" font-size="18">Duration:</text>
+    <text x="90" y="0" fill="#f8fafc" font-family="Inter, sans-serif" font-size="18" font-weight="600">~14 hours</text>
+  </g>
+
+  <!-- Lessons count -->
+  <g transform="translate(420, 980)">
+    <text x="0" y="0" fill="#64748b" font-family="Inter, sans-serif" font-size="18">Lessons:</text>
+    <text x="80" y="0" fill="#f8fafc" font-family="Inter, sans-serif" font-size="18" font-weight="600">10</text>
+  </g>
+
+  <!-- Demos count -->
+  <g transform="translate(560, 980)">
+    <text x="0" y="0" fill="#64748b" font-family="Inter, sans-serif" font-size="18">Demos:</text>
+    <text x="70" y="0" fill="#f8fafc" font-family="Inter, sans-serif" font-size="18" font-weight="600">19</text>
+  </g>
+</svg>
