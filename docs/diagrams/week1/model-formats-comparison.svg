@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4F46E5"/>
+      <stop offset="100%" style="stop-color:#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="ggufGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#22C55E"/>
+      <stop offset="100%" style="stop-color:#16A34A"/>
+    </linearGradient>
+    <linearGradient id="stGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#2563EB"/>
+    </linearGradient>
+    <linearGradient id="aprGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F97316"/>
+      <stop offset="100%" style="stop-color:#EA580C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#FAFAFA"/>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="1920" height="80" fill="url(#headerGrad)"/>
+  <text x="960" y="50" font-family="system-ui, sans-serif" font-size="36" font-weight="600" fill="white" text-anchor="middle">Model Format Architecture: GGUF vs SafeTensors vs APR</text>
+
+  <!-- Three columns for each format -->
+
+  <!-- GGUF Column -->
+  <g transform="translate(60, 110)">
+    <!-- Header -->
+    <rect width="560" height="50" rx="8" fill="url(#ggufGrad)"/>
+    <text x="280" y="33" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white" text-anchor="middle">GGUF</text>
+    <text x="280" y="48" font-family="monospace" font-size="10" fill="#BBF7D0" text-anchor="middle">llama.cpp / GGML</text>
+
+    <!-- File structure -->
+    <g transform="translate(0, 65)">
+      <rect width="560" height="520" rx="8" fill="#F0FDF4" stroke="#22C55E" stroke-width="2"/>
+
+      <!-- Magic -->
+      <g transform="translate(15, 15)">
+        <rect width="530" height="40" rx="4" fill="#166534"/>
+        <text x="15" y="26" font-family="monospace" font-size="14" fill="white">Magic: "GGUF" (4 bytes)</text>
+        <text x="400" y="26" font-family="monospace" font-size="12" fill="#BBF7D0">Version: 3</text>
+      </g>
+
+      <!-- Header info -->
+      <g transform="translate(15, 65)">
+        <rect width="530" height="60" rx="4" fill="#DCFCE7" stroke="#22C55E" stroke-width="1"/>
+        <text x="15" y="20" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#166534">Header (variable size)</text>
+        <text x="15" y="38" font-family="monospace" font-size="11" fill="#475569">tensor_count: i64, kv_count: i64</text>
+        <text x="15" y="52" font-family="monospace" font-size="11" fill="#475569">alignment: 32 bytes (default)</text>
+      </g>
+
+      <!-- KV Pairs -->
+      <g transform="translate(15, 135)">
+        <rect width="530" height="100" rx="4" fill="#DCFCE7" stroke="#22C55E" stroke-width="1"/>
+        <text x="15" y="20" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#166534">Key-Value Metadata</text>
+        <text x="15" y="40" font-family="monospace" font-size="11" fill="#475569">13 types: u8/i8/u16/i16/u32/i32/u64/i64</text>
+        <text x="15" y="55" font-family="monospace" font-size="11" fill="#475569">         f32/f64/bool/string/array</text>
+        <text x="15" y="75" font-family="monospace" font-size="11" fill="#64748B">key: u64_len + bytes</text>
+        <text x="15" y="90" font-family="monospace" font-size="11" fill="#64748B">val: type(i32) + data</text>
+      </g>
+
+      <!-- Tensor Info -->
+      <g transform="translate(15, 245)">
+        <rect width="530" height="85" rx="4" fill="#DCFCE7" stroke="#22C55E" stroke-width="1"/>
+        <text x="15" y="20" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#166534">Tensor Index</text>
+        <text x="15" y="40" font-family="monospace" font-size="11" fill="#475569">name: string, n_dims: u32</text>
+        <text x="15" y="55" font-family="monospace" font-size="11" fill="#475569">shape: i64[n_dims], dtype: ggml_type</text>
+        <text x="15" y="70" font-family="monospace" font-size="11" fill="#475569">offset: u64 (from data start)</text>
+      </g>
+
+      <!-- Tensor Data -->
+      <g transform="translate(15, 340)">
+        <rect width="530" height="80" rx="4" fill="#166534"/>
+        <text x="15" y="25" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="white">Tensor Data (binary blob)</text>
+        <text x="15" y="45" font-family="monospace" font-size="11" fill="#BBF7D0">Contiguous, 32-byte aligned</text>
+        <text x="15" y="60" font-family="monospace" font-size="11" fill="#BBF7D0">Quantization: Q4_0, Q4_K, Q5_K, Q6_K, Q8_0...</text>
+      </g>
+
+      <!-- Checksum -->
+      <g transform="translate(15, 430)">
+        <rect width="530" height="35" rx="4" fill="#DCFCE7" stroke="#22C55E" stroke-width="1" stroke-dasharray="4"/>
+        <text x="265" y="23" font-family="monospace" font-size="12" fill="#64748B" text-anchor="middle">No checksum (validation via metadata)</text>
+      </g>
+
+      <!-- Features -->
+      <g transform="translate(15, 475)">
+        <text x="0" y="12" font-family="system-ui, sans-serif" font-size="11" fill="#166534" font-weight="600">Key Features:</text>
+        <text x="0" y="28" font-family="system-ui, sans-serif" font-size="11" fill="#475569">CPU inference optimized, quantization-first</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- SafeTensors Column -->
+  <g transform="translate(680, 110)">
+    <!-- Header -->
+    <rect width="560" height="50" rx="8" fill="url(#stGrad)"/>
+    <text x="280" y="33" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white" text-anchor="middle">SafeTensors</text>
+    <text x="280" y="48" font-family="monospace" font-size="10" fill="#BFDBFE" text-anchor="middle">Hugging Face</text>
+
+    <!-- File structure -->
+    <g transform="translate(0, 65)">
+      <rect width="560" height="520" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2"/>
+
+      <!-- Header size -->
+      <g transform="translate(15, 15)">
+        <rect width="530" height="40" rx="4" fill="#1E40AF"/>
+        <text x="15" y="26" font-family="monospace" font-size="14" fill="white">Header Size: u64 LE (8 bytes)</text>
+        <text x="400" y="26" font-family="monospace" font-size="12" fill="#BFDBFE">max: 100MB</text>
+      </g>
+
+      <!-- JSON Header -->
+      <g transform="translate(15, 65)">
+        <rect width="530" height="170" rx="4" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1"/>
+        <text x="15" y="20" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#1E40AF">JSON Header (UTF-8, padded to 8 bytes)</text>
+        <text x="15" y="42" font-family="monospace" font-size="11" fill="#475569">{"__metadata__": {"key": "value"},</text>
+        <text x="15" y="58" font-family="monospace" font-size="11" fill="#475569"> "tensor_name": {</text>
+        <text x="15" y="74" font-family="monospace" font-size="11" fill="#475569">   "dtype": "F32",</text>
+        <text x="15" y="90" font-family="monospace" font-size="11" fill="#475569">   "shape": [1024, 768],</text>
+        <text x="15" y="106" font-family="monospace" font-size="11" fill="#475569">   "data_offsets": [0, 3145728]</text>
+        <text x="15" y="122" font-family="monospace" font-size="11" fill="#475569"> }}</text>
+        <text x="15" y="150" font-family="monospace" font-size="10" fill="#64748B">dtypes: F32/F16/BF16/F64/I32/I64/U8/F8_E5M2...</text>
+      </g>
+
+      <!-- Tensor Data -->
+      <g transform="translate(15, 245)">
+        <rect width="530" height="175" rx="4" fill="#1E40AF"/>
+        <text x="15" y="25" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="white">Tensor Data (binary)</text>
+        <text x="15" y="50" font-family="monospace" font-size="11" fill="#BFDBFE">Contiguous, no gaps</text>
+        <text x="15" y="70" font-family="monospace" font-size="11" fill="#BFDBFE">Little-endian, row-major (C-order)</text>
+        <text x="15" y="95" font-family="monospace" font-size="11" fill="#BFDBFE">Offsets: (begin, end) byte ranges</text>
+        <text x="15" y="115" font-family="monospace" font-size="11" fill="#BFDBFE">Sorted by dtype alignment, then name</text>
+        <text x="15" y="145" font-family="monospace" font-size="11" fill="#93C5FD">Zero-copy mmap() compatible</text>
+        <text x="15" y="165" font-family="monospace" font-size="11" fill="#93C5FD">Lazy tensor loading supported</text>
+      </g>
+
+      <!-- No footer -->
+      <g transform="translate(15, 430)">
+        <rect width="530" height="35" rx="4" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1" stroke-dasharray="4"/>
+        <text x="265" y="23" font-family="monospace" font-size="12" fill="#64748B" text-anchor="middle">No footer/checksum (simplicity)</text>
+      </g>
+
+      <!-- Features -->
+      <g transform="translate(15, 475)">
+        <text x="0" y="12" font-family="system-ui, sans-serif" font-size="11" fill="#1E40AF" font-weight="600">Key Features:</text>
+        <text x="0" y="28" font-family="system-ui, sans-serif" font-size="11" fill="#475569">Safe (no code exec), fast loading, HF standard</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- APR Column -->
+  <g transform="translate(1300, 110)">
+    <!-- Header -->
+    <rect width="560" height="50" rx="8" fill="url(#aprGrad)"/>
+    <text x="280" y="33" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white" text-anchor="middle">APR v2</text>
+    <text x="280" y="48" font-family="monospace" font-size="10" fill="#FED7AA" text-anchor="middle">Aprender / Sovereign AI</text>
+
+    <!-- File structure -->
+    <g transform="translate(0, 65)">
+      <rect width="560" height="520" rx="8" fill="#FFF7ED" stroke="#F97316" stroke-width="2"/>
+
+      <!-- Magic + Header -->
+      <g transform="translate(15, 15)">
+        <rect width="530" height="55" rx="4" fill="#C2410C"/>
+        <text x="15" y="22" font-family="monospace" font-size="14" fill="white">Magic: "APR\0" (4 bytes)</text>
+        <text x="400" y="22" font-family="monospace" font-size="12" fill="#FED7AA">v2.0</text>
+        <text x="15" y="42" font-family="monospace" font-size="11" fill="#FED7AA">Header: 64 bytes (64-byte aligned)</text>
+        <text x="300" y="42" font-family="monospace" font-size="11" fill="#FED7AA">CRC32 checksum</text>
+      </g>
+
+      <!-- Flags -->
+      <g transform="translate(15, 80)">
+        <rect width="530" height="50" rx="4" fill="#FFEDD5" stroke="#F97316" stroke-width="1"/>
+        <text x="15" y="18" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#C2410C">Flags (16-bit)</text>
+        <text x="15" y="38" font-family="monospace" font-size="9" fill="#475569">LZ4 | ZSTD | ENCRYPTED | SIGNED | SHARDED | QUANTIZED | VOCAB | MODEL_CARD</text>
+      </g>
+
+      <!-- JSON Metadata -->
+      <g transform="translate(15, 140)">
+        <rect width="530" height="95" rx="4" fill="#FFEDD5" stroke="#F97316" stroke-width="1"/>
+        <text x="15" y="18" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#C2410C">JSON Metadata (padded to 64 bytes)</text>
+        <text x="15" y="38" font-family="monospace" font-size="10" fill="#475569">architecture, hidden_size, num_layers, num_heads</text>
+        <text x="15" y="53" font-family="monospace" font-size="10" fill="#475569">vocab_size, rope_theta, rms_norm_eps, chat_template</text>
+        <text x="15" y="68" font-family="monospace" font-size="10" fill="#475569">quantization, sharding, license, provenance</text>
+        <text x="15" y="83" font-family="monospace" font-size="10" fill="#64748B">distillation tracking (teacher hash, method)</text>
+      </g>
+
+      <!-- Tensor Index -->
+      <g transform="translate(15, 245)">
+        <rect width="530" height="65" rx="4" fill="#FFEDD5" stroke="#F97316" stroke-width="1"/>
+        <text x="15" y="18" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#C2410C">Tensor Index (64-byte aligned entries)</text>
+        <text x="15" y="38" font-family="monospace" font-size="10" fill="#475569">name, dtype, shape[8], offset, compressed_size</text>
+        <text x="15" y="53" font-family="monospace" font-size="10" fill="#475569">dtypes: F32/F16/BF16/Q4/Q8/Q4_K/Q6_K</text>
+      </g>
+
+      <!-- Tensor Data -->
+      <g transform="translate(15, 320)">
+        <rect width="530" height="80" rx="4" fill="#C2410C"/>
+        <text x="15" y="20" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="white">Tensor Data (64-byte aligned)</text>
+        <text x="15" y="40" font-family="monospace" font-size="11" fill="#FED7AA">SIMD-optimized (cache-line alignment)</text>
+        <text x="15" y="55" font-family="monospace" font-size="11" fill="#FED7AA">Per-tensor compression (LZ4/Zstd)</text>
+        <text x="15" y="70" font-family="monospace" font-size="11" fill="#FED7AA">Optional AES-256-GCM encryption</text>
+      </g>
+
+      <!-- Footer -->
+      <g transform="translate(15, 410)">
+        <rect width="530" height="55" rx="4" fill="#FFEDD5" stroke="#F97316" stroke-width="1"/>
+        <text x="15" y="18" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#C2410C">Footer (16 bytes)</text>
+        <text x="15" y="38" font-family="monospace" font-size="11" fill="#475569">CRC32 + reverse magic "2RPA" + file_size</text>
+        <text x="15" y="53" font-family="monospace" font-size="11" fill="#64748B">Optional: Ed25519 signature (96 bytes)</text>
+      </g>
+
+      <!-- Features -->
+      <g transform="translate(15, 475)">
+        <text x="0" y="12" font-family="system-ui, sans-serif" font-size="11" fill="#C2410C" font-weight="600">Key Features:</text>
+        <text x="0" y="28" font-family="system-ui, sans-serif" font-size="11" fill="#475569">SIMD-native, encryption, signing, compression</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Bottom comparison table -->
+  <g transform="translate(60, 720)">
+    <rect width="1800" height="320" rx="12" fill="#1E293B"/>
+
+    <text x="900" y="35" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="white" text-anchor="middle">Feature Comparison</text>
+
+    <!-- Table headers -->
+    <g transform="translate(40, 55)">
+      <text x="0" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#94A3B8">Feature</text>
+      <text x="380" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#22C55E">GGUF</text>
+      <text x="700" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#3B82F6">SafeTensors</text>
+      <text x="1050" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#F97316">APR v2</text>
+    </g>
+
+    <!-- Table rows -->
+    <g transform="translate(40, 85)" font-family="system-ui, sans-serif" font-size="13">
+      <!-- Row 1 -->
+      <text x="0" y="0" fill="#CBD5E1">Alignment</text>
+      <text x="380" y="0" fill="#86EFAC">32 bytes</text>
+      <text x="700" y="0" fill="#93C5FD">8 bytes (header)</text>
+      <text x="1050" y="0" fill="#FDBA74">64 bytes (SIMD)</text>
+
+      <!-- Row 2 -->
+      <text x="0" y="30" fill="#CBD5E1">Metadata Format</text>
+      <text x="380" y="30" fill="#86EFAC">Binary KV pairs</text>
+      <text x="700" y="30" fill="#93C5FD">JSON</text>
+      <text x="1050" y="30" fill="#FDBA74">JSON</text>
+
+      <!-- Row 3 -->
+      <text x="0" y="60" fill="#CBD5E1">Quantization</text>
+      <text x="380" y="60" fill="#86EFAC">Native (Q4_K, Q6_K...)</text>
+      <text x="700" y="60" fill="#93C5FD">Via dtype only</text>
+      <text x="1050" y="60" fill="#FDBA74">Native + GGUF compat</text>
+
+      <!-- Row 4 -->
+      <text x="0" y="90" fill="#CBD5E1">Compression</text>
+      <text x="380" y="90" fill="#64748B">None</text>
+      <text x="700" y="90" fill="#64748B">None</text>
+      <text x="1050" y="90" fill="#FDBA74">LZ4 / Zstd</text>
+
+      <!-- Row 5 -->
+      <text x="0" y="120" fill="#CBD5E1">Encryption</text>
+      <text x="380" y="120" fill="#64748B">None</text>
+      <text x="700" y="120" fill="#64748B">None</text>
+      <text x="1050" y="120" fill="#FDBA74">AES-256-GCM</text>
+
+      <!-- Row 6 -->
+      <text x="0" y="150" fill="#CBD5E1">Signing</text>
+      <text x="380" y="150" fill="#64748B">None</text>
+      <text x="700" y="150" fill="#64748B">None</text>
+      <text x="1050" y="150" fill="#FDBA74">Ed25519</text>
+
+      <!-- Row 7 -->
+      <text x="0" y="180" fill="#CBD5E1">Checksum</text>
+      <text x="380" y="180" fill="#64748B">None</text>
+      <text x="700" y="180" fill="#64748B">None</text>
+      <text x="1050" y="180" fill="#FDBA74">CRC32 (header + footer)</text>
+
+      <!-- Row 8 -->
+      <text x="0" y="210" fill="#CBD5E1">Primary Use</text>
+      <text x="380" y="210" fill="#86EFAC">CPU inference</text>
+      <text x="700" y="210" fill="#93C5FD">HF ecosystem</text>
+      <text x="1050" y="210" fill="#FDBA74">Sovereign AI stack</text>
+    </g>
+
+    <!-- Divider lines -->
+    <line x1="360" y1="50" x2="360" y2="300" stroke="#334155" stroke-width="1"/>
+    <line x1="680" y1="50" x2="680" y2="300" stroke="#334155" stroke-width="1"/>
+    <line x1="1030" y1="50" x2="1030" y2="300" stroke="#334155" stroke-width="1"/>
+  </g>
+</svg>

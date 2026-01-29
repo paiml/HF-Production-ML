@@ -131,9 +131,9 @@
             <h1>APR <span>Explorer</span></h1>
             <p class="subtitle">Browser-native ML model inspection powered by WebAssembly</p>
             <div class="badges">
-                <span class="badge green">APR1 Format</span>
-                <span class="badge blue">100% Rust</span>
-                <span class="badge purple">JSON Metadata</span>
+                <span class="badge green">APR Format</span>
+                <span class="badge blue">ZSTD Compression</span>
+                <span class="badge purple">100% Rust/WASM</span>
             </div>
         </header>
 
@@ -144,7 +144,7 @@
 
         <div class="drop-zone" id="dropZone">
             <h3>Drop APR Model Here</h3>
-            <p>or click to select a .apr file (APR1 format)</p>
+            <p>or click to select a .apr file</p>
             <input type="file" id="fileInput" accept=".apr">
         </div>
 
@@ -199,7 +199,7 @@
             try {
                 await init();
                 explorer = new BrowserExplorer();
-                setStatus('ready', 'Ready - drop an APR file (APR1 format)');
+                setStatus('ready', 'Ready - drop an APR file');
             } catch (e) {
                 setStatus('error', `WASM init failed: ${e.message}`);
             }
@@ -213,18 +213,27 @@
         // File handling - delegates to Rust immediately
         function handleFile(file) {
             if (!explorer) return;
-            setStatus('loading', 'Parsing APR file...');
 
-            file.arrayBuffer().then(buffer => {
-                try {
+            // Warn about very large files (browser memory limits)
+            const MAX_SIZE = 500 * 1024 * 1024; // 500 MB compressed
+            if (file.size > MAX_SIZE) {
+                setStatus('error', `File too large: ${(file.size / 1024 / 1024).toFixed(0)} MB. Max ~500 MB.`);
+                return;
+            }
+
+            setStatus('loading', `Loading ${(file.size / 1024).toFixed(0)} KB...`);
+
+            file.arrayBuffer()
+                .then(buffer => {
+                    setStatus('loading', 'Parsing APR file...');
                     // All parsing happens in Rust
                     const result = explorer.load(new Uint8Array(buffer));
                     const model = JSON.parse(result);
                     renderModel(model);
-                } catch (e) {
-                    setStatus('error', `Parse error: ${e}`);
-                }
-            });
+                })
+                .catch(e => {
+                    setStatus('error', `Error: ${e}`);
+                });
         }
 
         // Render model data from Rust

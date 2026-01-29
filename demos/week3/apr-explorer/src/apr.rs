@@ -174,6 +174,8 @@ pub enum AprError {
     },
     /// Compression not supported (feature not enabled)
     CompressionNotSupported { compression: String },
+    /// Decompression error
+    DecompressionError { message: String },
 }
 
 impl std::fmt::Display for AprError {
@@ -219,6 +221,9 @@ impl std::fmt::Display for AprError {
                     "Compression '{}' not supported in this build",
                     compression
                 )
+            }
+            Self::DecompressionError { message } => {
+                write!(f, "Decompression error: {}", message)
             }
         }
     }
@@ -388,7 +393,7 @@ fn parse_apr_compressed(bytes: &[u8]) -> Result<AprModel, AprError> {
             byte: compression_byte,
         })?;
 
-    let _uncompressed_len = u32::from_le_bytes([bytes[5], bytes[6], bytes[7], bytes[8]]) as usize;
+    let uncompressed_len = u32::from_le_bytes([bytes[5], bytes[6], bytes[7], bytes[8]]) as usize;
     let compressed_payload = &bytes[9..];
 
     // Decompress based on algorithm
@@ -400,9 +405,20 @@ fn parse_apr_compressed(bytes: &[u8]) -> Result<AprModel, AprError> {
             });
         }
         Compression::Zstd => {
-            return Err(AprError::CompressionNotSupported {
-                compression: "ZSTD".to_string(),
-            });
+            // Use ruzstd for pure-Rust ZSTD decompression (works in WASM)
+            let mut decoder = ruzstd::StreamingDecoder::new(compressed_payload).map_err(|e| {
+                AprError::DecompressionError {
+                    message: format!("ZSTD init failed: {}", e),
+                }
+            })?;
+
+            let mut decompressed = Vec::with_capacity(uncompressed_len);
+            std::io::Read::read_to_end(&mut decoder, &mut decompressed).map_err(|e| {
+                AprError::DecompressionError {
+                    message: format!("ZSTD decode failed: {}", e),
+                }
+            })?;
+            decompressed
         }
     };
 

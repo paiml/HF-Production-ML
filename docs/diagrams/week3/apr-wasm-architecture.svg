@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#F97316"/>
+      <stop offset="100%" style="stop-color:#EA580C"/>
+    </linearGradient>
+    <linearGradient id="wasmGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6"/>
+      <stop offset="100%" style="stop-color:#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="simdGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#06B6D4"/>
+      <stop offset="100%" style="stop-color:#0891B2"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L12,5 L0,10 L3,5 Z" fill="#F97316"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="12" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L12,5 L0,10 L3,5 Z" fill="#8B5CF6"/>
+    </marker>
+    <marker id="arrowCyan" markerWidth="12" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L12,5 L0,10 L3,5 Z" fill="#06B6D4"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0A0A0F"/>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="1920" height="90" fill="url(#headerGrad)"/>
+  <text x="960" y="55" font-family="system-ui, sans-serif" font-size="36" font-weight="700" fill="white" text-anchor="middle">APR + WASM: Browser-Native ML Inference</text>
+  <text x="960" y="80" font-family="monospace" font-size="14" fill="#FED7AA" text-anchor="middle">No server. No Python. Just bytes → tensors → inference.</text>
+
+  <!-- Main flow: Left to Right -->
+
+  <!-- Step 1: APR File -->
+  <g transform="translate(80, 140)">
+    <text x="140" y="0" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#F97316" text-anchor="middle">1. APR File</text>
+
+    <g transform="translate(0, 20)">
+      <rect width="280" height="340" rx="8" fill="#1A1A1F" stroke="#F97316" stroke-width="2"/>
+
+      <!-- File icon -->
+      <g transform="translate(100, 15)">
+        <rect width="80" height="100" rx="4" fill="#F97316" opacity="0.2"/>
+        <path d="M100,15 L145,15 L165,35 L165,100 L100,100 Z" fill="none" stroke="#F97316" stroke-width="2" transform="translate(-85, -10)"/>
+        <text x="40" y="60" font-family="monospace" font-size="14" fill="#F97316" text-anchor="middle">.apr</text>
+      </g>
+
+      <!-- Structure breakdown -->
+      <g transform="translate(15, 130)">
+        <rect width="250" height="28" rx="4" fill="#C2410C"/>
+        <text x="125" y="19" font-family="monospace" font-size="11" fill="white" text-anchor="middle">Header (64 bytes, aligned)</text>
+      </g>
+
+      <g transform="translate(15, 165)">
+        <rect width="250" height="35" rx="4" fill="#F97316" opacity="0.3" stroke="#F97316" stroke-width="1"/>
+        <text x="125" y="15" font-family="monospace" font-size="10" fill="#FED7AA" text-anchor="middle">JSON Metadata</text>
+        <text x="125" y="28" font-family="monospace" font-size="9" fill="#94A3B8" text-anchor="middle">arch, layers, vocab_size</text>
+      </g>
+
+      <g transform="translate(15, 207)">
+        <rect width="250" height="35" rx="4" fill="#F97316" opacity="0.3" stroke="#F97316" stroke-width="1"/>
+        <text x="125" y="15" font-family="monospace" font-size="10" fill="#FED7AA" text-anchor="middle">Tensor Index</text>
+        <text x="125" y="28" font-family="monospace" font-size="9" fill="#94A3B8" text-anchor="middle">name, dtype, shape, offset</text>
+      </g>
+
+      <g transform="translate(15, 249)">
+        <rect width="250" height="50" rx="4" fill="#C2410C"/>
+        <text x="125" y="18" font-family="monospace" font-size="10" fill="white" text-anchor="middle">Tensor Data (64-byte aligned)</text>
+        <text x="125" y="32" font-family="monospace" font-size="9" fill="#FED7AA" text-anchor="middle">SIMD-ready, zero-copy load</text>
+        <text x="125" y="44" font-family="monospace" font-size="9" fill="#FED7AA" text-anchor="middle">Optional: LZ4/Zstd compressed</text>
+      </g>
+
+      <g transform="translate(15, 306)">
+        <rect width="250" height="22" rx="4" fill="#F97316" opacity="0.2" stroke="#F97316" stroke-width="1"/>
+        <text x="125" y="15" font-family="monospace" font-size="9" fill="#94A3B8" text-anchor="middle">Footer: CRC32 + "2RPA" + size</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Arrow 1 -->
+  <g transform="translate(370, 300)">
+    <path d="M 0,0 L 100,0" stroke="#F97316" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+    <text x="50" y="-10" font-family="monospace" font-size="10" fill="#F97316" text-anchor="middle">fetch()</text>
+  </g>
+
+  <!-- Step 2: WASM Module -->
+  <g transform="translate(490, 140)">
+    <text x="160" y="0" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#8B5CF6" text-anchor="middle">2. WASM Module</text>
+
+    <g transform="translate(0, 20)">
+      <rect width="320" height="340" rx="8" fill="#1A1A1F" stroke="#8B5CF6" stroke-width="2"/>
+
+      <!-- WASM logo area -->
+      <g transform="translate(110, 15)">
+        <rect width="100" height="50" rx="6" fill="url(#wasmGrad)"/>
+        <text x="50" y="32" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">WASM</text>
+      </g>
+
+      <!-- Module internals -->
+      <g transform="translate(15, 80)">
+        <text x="0" y="0" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#A78BFA">APR Loader (Rust → WASM)</text>
+
+        <rect x="0" y="10" width="290" height="70" rx="4" fill="#8B5CF6" opacity="0.15" stroke="#8B5CF6" stroke-width="1"/>
+        <text x="15" y="30" font-family="monospace" font-size="10" fill="#C4B5FD">• Parse header (64 bytes)</text>
+        <text x="15" y="45" font-family="monospace" font-size="10" fill="#C4B5FD">• Deserialize JSON metadata</text>
+        <text x="15" y="60" font-family="monospace" font-size="10" fill="#C4B5FD">• Build tensor registry</text>
+        <text x="15" y="75" font-family="monospace" font-size="10" fill="#C4B5FD">• Validate CRC32 checksum</text>
+      </g>
+
+      <g transform="translate(15, 170)">
+        <text x="0" y="0" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#A78BFA">Linear Memory (WASM heap)</text>
+
+        <rect x="0" y="10" width="290" height="55" rx="4" fill="#8B5CF6" opacity="0.15" stroke="#8B5CF6" stroke-width="1"/>
+        <text x="15" y="28" font-family="monospace" font-size="10" fill="#C4B5FD">• Direct byte access (no copy!)</text>
+        <text x="15" y="43" font-family="monospace" font-size="10" fill="#C4B5FD">• 64-byte aligned slices</text>
+        <text x="15" y="58" font-family="monospace" font-size="10" fill="#C4B5FD">• Typed arrays: Float32Array view</text>
+      </g>
+
+      <g transform="translate(15, 245)">
+        <text x="0" y="0" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#A78BFA">Trueno SIMD Engine</text>
+
+        <rect x="0" y="10" width="290" height="70" rx="4" fill="url(#simdGrad)" opacity="0.3" stroke="#06B6D4" stroke-width="1"/>
+        <text x="15" y="28" font-family="monospace" font-size="10" fill="#67E8F9">• WASM SIMD128 intrinsics</text>
+        <text x="15" y="43" font-family="monospace" font-size="10" fill="#67E8F9">• 4x f32 parallel ops</text>
+        <text x="15" y="58" font-family="monospace" font-size="10" fill="#67E8F9">• Matrix multiply, attention</text>
+        <text x="15" y="73" font-family="monospace" font-size="10" fill="#67E8F9">• Dequantization (Q4_K, Q8)</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Arrow 2 -->
+  <g transform="translate(820, 300)">
+    <path d="M 0,0 L 100,0" stroke="#8B5CF6" stroke-width="3" fill="none" marker-end="url(#arrowPurple)"/>
+    <text x="50" y="-10" font-family="monospace" font-size="10" fill="#8B5CF6" text-anchor="middle">infer()</text>
+  </g>
+
+  <!-- Step 3: Browser Runtime -->
+  <g transform="translate(940, 140)">
+    <text x="160" y="0" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#06B6D4" text-anchor="middle">3. Browser Runtime</text>
+
+    <g transform="translate(0, 20)">
+      <rect width="320" height="340" rx="8" fill="#1A1A1F" stroke="#06B6D4" stroke-width="2"/>
+
+      <!-- Browser window mockup -->
+      <g transform="translate(15, 15)">
+        <rect width="290" height="160" rx="6" fill="#0F0F14" stroke="#334155" stroke-width="1"/>
+        <!-- Traffic lights -->
+        <circle cx="20" cy="15" r="5" fill="#EF4444"/>
+        <circle cx="38" cy="15" r="5" fill="#F59E0B"/>
+        <circle cx="56" cy="15" r="5" fill="#22C55E"/>
+        <!-- URL bar -->
+        <rect x="70" y="8" width="200" height="16" rx="3" fill="#1E293B"/>
+        <text x="170" y="19" font-family="monospace" font-size="8" fill="#64748B" text-anchor="middle">interactive.paiml.com</text>
+
+        <!-- Content area -->
+        <rect x="10" y="35" width="270" height="115" rx="4" fill="#12121A"/>
+        <text x="145" y="55" font-family="monospace" font-size="11" fill="#22C55E" text-anchor="middle">$ apr-shell</text>
+        <text x="145" y="75" font-family="monospace" font-size="10" fill="#94A3B8" text-anchor="middle">Loading model.apr (9.4KB)...</text>
+        <text x="145" y="95" font-family="monospace" font-size="10" fill="#67E8F9" text-anchor="middle">Ready. 127 tensors loaded.</text>
+        <text x="145" y="115" font-family="monospace" font-size="10" fill="#22C55E" text-anchor="middle">&gt; predict([0.5, 0.3, 0.2])</text>
+        <text x="145" y="135" font-family="monospace" font-size="10" fill="#FED7AA" text-anchor="middle">[0.847, 0.112, 0.041]</text>
+      </g>
+
+      <!-- Performance stats -->
+      <g transform="translate(15, 190)">
+        <text x="0" y="0" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#06B6D4">Performance</text>
+
+        <g transform="translate(0, 15)">
+          <rect width="140" height="50" rx="4" fill="#06B6D4" opacity="0.15" stroke="#06B6D4" stroke-width="1"/>
+          <text x="70" y="20" font-family="monospace" font-size="20" fill="#22D3EE" text-anchor="middle">~2ms</text>
+          <text x="70" y="38" font-family="system-ui, sans-serif" font-size="10" fill="#67E8F9" text-anchor="middle">load time</text>
+        </g>
+
+        <g transform="translate(150, 15)">
+          <rect width="140" height="50" rx="4" fill="#06B6D4" opacity="0.15" stroke="#06B6D4" stroke-width="1"/>
+          <text x="70" y="20" font-family="monospace" font-size="20" fill="#22D3EE" text-anchor="middle">&lt;1ms</text>
+          <text x="70" y="38" font-family="system-ui, sans-serif" font-size="10" fill="#67E8F9" text-anchor="middle">inference</text>
+        </g>
+      </g>
+
+      <!-- Badges -->
+      <g transform="translate(15, 280)">
+        <rect width="85" height="24" rx="4" fill="#F97316"/>
+        <text x="42" y="16" font-family="monospace" font-size="10" fill="white" text-anchor="middle">.apr model</text>
+
+        <rect x="95" y="0" width="95" height="24" rx="4" fill="#8B5CF6"/>
+        <text x="142" y="16" font-family="monospace" font-size="10" fill="white" text-anchor="middle">100% WASM</text>
+
+        <rect x="200" y="0" width="90" height="24" rx="4" fill="#06B6D4"/>
+        <text x="245" y="16" font-family="monospace" font-size="10" fill="white" text-anchor="middle">SIMD 128</text>
+      </g>
+
+      <!-- No server badge -->
+      <g transform="translate(15, 315)">
+        <rect width="290" height="22" rx="4" fill="#22C55E" opacity="0.2" stroke="#22C55E" stroke-width="1"/>
+        <text x="145" y="15" font-family="system-ui, sans-serif" font-size="11" fill="#22C55E" text-anchor="middle">No server required - runs entirely in browser</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Right side: Why APR for WASM -->
+  <g transform="translate(1320, 140)">
+    <text x="260" y="0" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="white" text-anchor="middle">Why APR + WASM Works</text>
+
+    <g transform="translate(0, 25)">
+      <rect width="520" height="440" rx="10" fill="#1A1A1F" stroke="#334155" stroke-width="1"/>
+
+      <!-- Point 1: Alignment -->
+      <g transform="translate(20, 25)">
+        <rect width="480" height="70" rx="6" fill="#F97316" opacity="0.1" stroke="#F97316" stroke-width="1"/>
+        <text x="15" y="22" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#F97316">64-Byte Alignment = SIMD Ready</text>
+        <text x="15" y="42" font-family="system-ui, sans-serif" font-size="12" fill="#94A3B8">Tensors aligned to cache lines. WASM SIMD128 loads</text>
+        <text x="15" y="58" font-family="system-ui, sans-serif" font-size="12" fill="#94A3B8">4 floats at once without alignment penalties.</text>
+      </g>
+
+      <!-- Point 2: Zero Copy -->
+      <g transform="translate(20, 110)">
+        <rect width="480" height="70" rx="6" fill="#8B5CF6" opacity="0.1" stroke="#8B5CF6" stroke-width="1"/>
+        <text x="15" y="22" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#8B5CF6">Zero-Copy Loading</text>
+        <text x="15" y="42" font-family="system-ui, sans-serif" font-size="12" fill="#94A3B8">APR bytes → WASM linear memory directly.</text>
+        <text x="15" y="58" font-family="system-ui, sans-serif" font-size="12" fill="#94A3B8">No parsing overhead, no intermediate allocations.</text>
+      </g>
+
+      <!-- Point 3: Small Size -->
+      <g transform="translate(20, 195)">
+        <rect width="480" height="70" rx="6" fill="#06B6D4" opacity="0.1" stroke="#06B6D4" stroke-width="1"/>
+        <text x="15" y="22" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#06B6D4">Tiny Footprint</text>
+        <text x="15" y="42" font-family="system-ui, sans-serif" font-size="12" fill="#94A3B8">WASM module: ~150KB. APR models: 9-50KB typical.</text>
+        <text x="15" y="58" font-family="system-ui, sans-serif" font-size="12" fill="#94A3B8">Optional LZ4/Zstd compression for larger models.</text>
+      </g>
+
+      <!-- Point 4: Deterministic -->
+      <g transform="translate(20, 280)">
+        <rect width="480" height="70" rx="6" fill="#22C55E" opacity="0.1" stroke="#22C55E" stroke-width="1"/>
+        <text x="15" y="22" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#22C55E">Deterministic Execution</text>
+        <text x="15" y="42" font-family="system-ui, sans-serif" font-size="12" fill="#94A3B8">Same APR + same input = same output, every time.</text>
+        <text x="15" y="58" font-family="system-ui, sans-serif" font-size="12" fill="#94A3B8">No floating point non-determinism across browsers.</text>
+      </g>
+
+      <!-- Point 5: Security -->
+      <g transform="translate(20, 365)">
+        <rect width="480" height="55" rx="6" fill="#EF4444" opacity="0.1" stroke="#EF4444" stroke-width="1"/>
+        <text x="15" y="22" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#EF4444">Sandboxed &amp; Safe</text>
+        <text x="15" y="42" font-family="system-ui, sans-serif" font-size="12" fill="#94A3B8">WASM sandbox + APR checksum = no code injection possible.</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Bottom: Live demos proof -->
+  <g transform="translate(60, 620)">
+    <rect width="1800" height="420" rx="12" fill="#12121A" stroke="#334155" stroke-width="1"/>
+
+    <text x="900" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="600" fill="white" text-anchor="middle">Live Proof: interactive.paiml.com</text>
+    <text x="900" y="65" font-family="system-ui, sans-serif" font-size="14" fill="#64748B" text-anchor="middle">Real demos running APR models in your browser right now</text>
+
+    <!-- Demo cards -->
+    <g transform="translate(40, 90)">
+      <!-- Demo 1: Shell ML -->
+      <g transform="translate(0, 0)">
+        <rect width="400" height="140" rx="8" fill="#1A1A1F" stroke="#F97316" stroke-width="2"/>
+        <rect width="400" height="35" rx="8" fill="#F97316"/>
+        <text x="200" y="24" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="white" text-anchor="middle">Shell ML</text>
+        <text x="20" y="60" font-family="system-ui, sans-serif" font-size="12" fill="#CBD5E1">Interactive ML command-line in browser</text>
+        <text x="20" y="80" font-family="monospace" font-size="11" fill="#F97316">Model: aprender-shell-base.apr</text>
+        <text x="20" y="100" font-family="monospace" font-size="11" fill="#64748B">Size: 9.4KB | Tensors: 127</text>
+        <text x="20" y="120" font-family="monospace" font-size="11" fill="#22C55E">Load: 2ms | Infer: &lt;1ms</text>
+      </g>
+
+      <!-- Demo 2: Monte Carlo -->
+      <g transform="translate(440, 0)">
+        <rect width="400" height="140" rx="8" fill="#1A1A1F" stroke="#3B82F6" stroke-width="2"/>
+        <rect width="400" height="35" rx="8" fill="#3B82F6"/>
+        <text x="200" y="24" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="white" text-anchor="middle">Monte Carlo S&amp;P 500</text>
+        <text x="20" y="60" font-family="system-ui, sans-serif" font-size="12" fill="#CBD5E1">Portfolio simulation with 96 years of data</text>
+        <text x="20" y="80" font-family="monospace" font-size="11" fill="#3B82F6">Model: sp500-monte-carlo.apr</text>
+        <text x="20" y="100" font-family="monospace" font-size="11" fill="#64748B">Size: 10KB | 10,000 simulations</text>
+        <text x="20" y="120" font-family="monospace" font-size="11" fill="#22C55E">Full sim: ~50ms in browser</text>
+      </g>
+
+      <!-- Demo 3: Brown Noise -->
+      <g transform="translate(880, 0)">
+        <rect width="400" height="140" rx="8" fill="#1A1A1F" stroke="#8B5CF6" stroke-width="2"/>
+        <rect width="400" height="35" rx="8" fill="#8B5CF6"/>
+        <text x="200" y="24" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="white" text-anchor="middle">Brown Noise Generator</text>
+        <text x="20" y="60" font-family="system-ui, sans-serif" font-size="12" fill="#CBD5E1">Real-time audio synthesis</text>
+        <text x="20" y="80" font-family="monospace" font-size="11" fill="#8B5CF6">Config: brown-noise.apr</text>
+        <text x="20" y="100" font-family="monospace" font-size="11" fill="#64748B">WebAudio API + WASM DSP</text>
+        <text x="20" y="120" font-family="monospace" font-size="11" fill="#22C55E">Latency: &lt;10ms audio buffer</text>
+      </g>
+
+      <!-- Demo 4: Pong AI -->
+      <g transform="translate(1320, 0)">
+        <rect width="400" height="140" rx="8" fill="#1A1A1F" stroke="#22C55E" stroke-width="2"/>
+        <rect width="400" height="35" rx="8" fill="#22C55E"/>
+        <text x="200" y="24" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="white" text-anchor="middle">Pong AI (Jugar Engine)</text>
+        <text x="20" y="60" font-family="system-ui, sans-serif" font-size="12" fill="#CBD5E1">Neural network game agent</text>
+        <text x="20" y="80" font-family="monospace" font-size="11" fill="#22C55E">Model: pong-agent.apr</text>
+        <text x="20" y="100" font-family="monospace" font-size="11" fill="#64748B">3-layer MLP | 60 FPS game loop</text>
+        <text x="20" y="120" font-family="monospace" font-size="11" fill="#22C55E">Decision: ~0.1ms per frame</text>
+      </g>
+    </g>
+
+    <!-- Stack badges -->
+    <g transform="translate(40, 260)">
+      <text x="0" y="0" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#94A3B8">Sovereign AI Stack:</text>
+
+      <g transform="translate(160, -15)">
+        <rect width="80" height="28" rx="4" fill="#F97316"/>
+        <text x="40" y="18" font-family="monospace" font-size="11" fill="white" text-anchor="middle">aprender</text>
+      </g>
+      <g transform="translate(250, -15)">
+        <rect width="70" height="28" rx="4" fill="#06B6D4"/>
+        <text x="35" y="18" font-family="monospace" font-size="11" fill="white" text-anchor="middle">trueno</text>
+      </g>
+      <g transform="translate(330, -15)">
+        <rect width="60" height="28" rx="4" fill="#8B5CF6"/>
+        <text x="30" y="18" font-family="monospace" font-size="11" fill="white" text-anchor="middle">jugar</text>
+      </g>
+      <g transform="translate(400, -15)">
+        <rect width="70" height="28" rx="4" fill="#3B82F6"/>
+        <text x="35" y="18" font-family="monospace" font-size="11" fill="white" text-anchor="middle">simular</text>
+      </g>
+      <g transform="translate(480, -15)">
+        <rect width="80" height="28" rx="4" fill="#22C55E"/>
+        <text x="40" y="18" font-family="monospace" font-size="11" fill="white" text-anchor="middle">presentar</text>
+      </g>
+
+      <text x="600" y="3" font-family="system-ui, sans-serif" font-size="12" fill="#64748B">All compile to WASM. All use APR for models/config.</text>
+    </g>
+
+    <!-- The key insight -->
+    <g transform="translate(40, 310)">
+      <rect width="1720" height="80" rx="8" fill="#F97316" opacity="0.1" stroke="#F97316" stroke-width="2"/>
+      <text x="860" y="35" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#F97316" text-anchor="middle">The Key Insight</text>
+      <text x="860" y="60" font-family="system-ui, sans-serif" font-size="14" fill="#CBD5E1" text-anchor="middle">APR's 64-byte alignment + binary format + optional compression = the perfect WASM payload.</text>
+      <text x="860" y="78" font-family="system-ui, sans-serif" font-size="14" fill="#CBD5E1" text-anchor="middle">No JSON parsing overhead. No Base64 encoding. No server round-trips. Just fetch → load → run.</text>
+    </g>
+  </g>
+</svg>

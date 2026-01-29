@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4F46E5"/>
+      <stop offset="100%" style="stop-color:#7C3AED"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="4" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" markerWidth="14" markerHeight="10" refX="12" refY="5" orient="auto">
+      <path d="M0,0 L14,5 L0,10 L3,5 Z" fill="#7C3AED"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#FAFAFA"/>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="1920" height="80" fill="url(#headerGrad)"/>
+  <text x="960" y="50" font-family="system-ui, sans-serif" font-size="36" font-weight="600" fill="white" text-anchor="middle">What's Inside a Hugging Face Model Repository?</text>
+
+  <!-- Publishing Flow with Shapes - spread across full width -->
+  <g transform="translate(0, 100)">
+    <text x="960" y="0" font-family="system-ui, sans-serif" font-size="22" font-weight="600" fill="#1E293B" text-anchor="middle">Publishing Flow</text>
+
+    <!-- Computer/Local - position 1 -->
+    <g transform="translate(120, 30)">
+      <rect x="0" y="0" width="180" height="110" rx="8" fill="#E0E7FF" stroke="#4F46E5" stroke-width="2"/>
+      <rect x="20" y="12" width="140" height="75" rx="4" fill="#1E293B"/>
+      <rect x="60" y="110" width="60" height="10" rx="2" fill="#4F46E5"/>
+      <text x="90" y="50" font-family="monospace" font-size="12" fill="#22C55E" text-anchor="middle">model.apr</text>
+      <text x="90" y="70" font-family="monospace" font-size="12" fill="#60A5FA" text-anchor="middle">config.json</text>
+      <!-- Label directly under this shape -->
+      <text x="90" y="145" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#1E293B" text-anchor="middle">Your Computer</text>
+    </g>
+
+    <!-- Arrow 1 -->
+    <path d="M 320 85 L 440 85" stroke="#7C3AED" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+
+    <!-- Terminal/CLI - position 2 -->
+    <g transform="translate(470, 30)">
+      <rect x="0" y="0" width="200" height="110" rx="8" fill="#1E293B" stroke="#22C55E" stroke-width="2"/>
+      <circle cx="20" cy="18" r="5" fill="#EF4444"/>
+      <circle cx="38" cy="18" r="5" fill="#F59E0B"/>
+      <circle cx="56" cy="18" r="5" fill="#22C55E"/>
+      <text x="100" y="55" font-family="monospace" font-size="13" fill="#22C55E" text-anchor="middle">$ apr publish</text>
+      <text x="100" y="78" font-family="monospace" font-size="11" fill="#64748B" text-anchor="middle">or huggingface-cli</text>
+      <!-- Label directly under this shape -->
+      <text x="100" y="145" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#1E293B" text-anchor="middle">CLI Tool</text>
+    </g>
+
+    <!-- Arrow 2 -->
+    <path d="M 690 85 L 810 85" stroke="#7C3AED" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+
+    <!-- Cloud/HF Hub - position 3 -->
+    <g transform="translate(840, 20)">
+      <!-- Clean cloud shape using path -->
+      <path d="M 60,95
+               C 25,95 25,60 55,55
+               C 50,25 90,15 115,35
+               C 135,15 185,25 180,60
+               C 210,60 210,95 175,95
+               Z"
+            fill="#FEF3C7" stroke="#F59E0B" stroke-width="2"/>
+      <text x="115" y="75" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#92400E" text-anchor="middle">HF Hub</text>
+      <!-- Label directly under this shape -->
+      <text x="115" y="155" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#1E293B" text-anchor="middle">Hugging Face</text>
+    </g>
+
+    <!-- Arrow 3 -->
+    <path d="M 1070 85 L 1190 85" stroke="#7C3AED" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+
+    <!-- Globe/World - position 4 -->
+    <g transform="translate(1220, 20)">
+      <circle cx="90" cy="70" r="65" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2"/>
+      <ellipse cx="90" cy="70" rx="65" ry="24" fill="none" stroke="#3B82F6" stroke-width="1.5"/>
+      <ellipse cx="90" cy="70" rx="24" ry="65" fill="none" stroke="#3B82F6" stroke-width="1.5"/>
+      <line x1="25" y1="70" x2="155" y2="70" stroke="#3B82F6" stroke-width="1.5"/>
+      <!-- Label directly under this shape -->
+      <text x="90" y="155" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#1E293B" text-anchor="middle">Everyone</text>
+    </g>
+
+    <!-- Subtitles - separate row, well spaced -->
+    <g transform="translate(0, 200)" font-family="system-ui, sans-serif" font-size="13" fill="#64748B">
+      <text x="210" y="0" text-anchor="middle">model, config, README</text>
+      <text x="570" y="0" text-anchor="middle">Rust Sovereign AI Stack</text>
+      <text x="950" y="0" text-anchor="middle">huggingface.co/you/model</text>
+      <text x="1310" y="0" text-anchor="middle">Download, Fine-tune, Deploy</text>
+    </g>
+  </g>
+
+  <!-- Middle Section: Folder + Explanations + Key Points -->
+  <g transform="translate(60, 340)">
+
+    <!-- Left: Folder Structure -->
+    <g transform="translate(0, 0)">
+      <text x="0" y="0" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#1E293B">Model Folder</text>
+
+      <g transform="translate(0, 25)">
+        <rect width="380" height="250" rx="10" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2"/>
+        <rect width="160" height="26" rx="5" fill="#F59E0B" transform="translate(0, -13)"/>
+        <text x="80" y="5" font-family="monospace" font-size="13" font-weight="600" fill="white" text-anchor="middle">my-model/</text>
+
+        <g transform="translate(20, 30)" font-family="monospace" font-size="16">
+          <rect x="-8" y="-15" width="350" height="28" rx="4" fill="#F0FDF4"/>
+          <text y="0" fill="#166534" font-weight="600">README.md</text>
+          <text x="180" y="0" fill="#22C55E" font-size="12">REQUIRED</text>
+
+          <text y="40" fill="#475569">config.json</text>
+          <text y="80" fill="#475569">model.safetensors</text>
+          <text y="120" fill="#475569">tokenizer.json</text>
+          <text y="160" fill="#94A3B8">tokenizer_config.json</text>
+          <text y="200" fill="#94A3B8">generation_config.json</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Middle: What Each File Does -->
+    <g transform="translate(450, 0)">
+      <text x="0" y="0" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#1E293B">What Each File Does</text>
+
+      <g transform="translate(0, 25)">
+        <g transform="translate(0, 0)">
+          <rect width="480" height="50" rx="6" fill="#F0FDF4" stroke="#22C55E" stroke-width="2"/>
+          <text x="15" y="22" font-family="monospace" font-size="14" font-weight="600" fill="#166534">README.md</text>
+          <text x="15" y="40" font-family="system-ui, sans-serif" font-size="13" fill="#475569">Model card - what it does, license</text>
+        </g>
+
+        <g transform="translate(0, 60)">
+          <rect width="480" height="50" rx="6" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2"/>
+          <text x="15" y="22" font-family="monospace" font-size="14" font-weight="600" fill="#1E40AF">config.json</text>
+          <text x="15" y="40" font-family="system-ui, sans-serif" font-size="13" fill="#475569">Blueprint - layers, heads, dimensions</text>
+        </g>
+
+        <g transform="translate(0, 120)">
+          <rect width="480" height="50" rx="6" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2"/>
+          <text x="15" y="22" font-family="monospace" font-size="14" font-weight="600" fill="#92400E">model.safetensors</text>
+          <text x="15" y="40" font-family="system-ui, sans-serif" font-size="13" fill="#475569">The brain - billions of learned weights</text>
+        </g>
+
+        <g transform="translate(0, 180)">
+          <rect width="480" height="50" rx="6" fill="#FCE7F3" stroke="#EC4899" stroke-width="2"/>
+          <text x="15" y="22" font-family="monospace" font-size="14" font-weight="600" fill="#9D174D">tokenizer.json</text>
+          <text x="15" y="40" font-family="system-ui, sans-serif" font-size="13" fill="#475569">Translator - converts text to numbers</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Right: Key Points -->
+    <g transform="translate(1010, 0)">
+      <text x="0" y="0" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#1E293B">Key Points</text>
+
+      <g transform="translate(0, 35)" font-family="system-ui, sans-serif" font-size="15" fill="#475569">
+        <circle cx="10" cy="-4" r="6" fill="#22C55E"/>
+        <text x="28" y="0">Files &gt;10MB use Git LFS</text>
+
+        <circle cx="10" cy="46" r="6" fill="#22C55E"/>
+        <text x="28" y="50">50GB max per file</text>
+
+        <circle cx="10" cy="96" r="6" fill="#22C55E"/>
+        <text x="28" y="100">Unlimited public storage</text>
+
+        <circle cx="10" cy="146" r="6" fill="#22C55E"/>
+        <text x="28" y="150">.apr format supported</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Bottom: CLI Commands -->
+  <g transform="translate(60, 660)">
+    <rect width="1800" height="380" rx="14" fill="#1E293B"/>
+
+    <text x="35" y="40" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#F8FAFC">Publishing Commands</text>
+
+    <!-- apr publish -->
+    <g transform="translate(35, 60)">
+      <rect width="850" height="140" rx="8" fill="#0F172A"/>
+      <text x="20" y="35" font-family="monospace" font-size="15" fill="#F97316"># Rust Sovereign AI Stack</text>
+      <text x="20" y="70" font-family="monospace" font-size="20" fill="#22C55E">apr publish ./my-model user/model-name</text>
+      <text x="20" y="110" font-family="monospace" font-size="20" fill="#22C55E">apr publish ./model paiml/my-model --license mit</text>
+    </g>
+
+    <!-- huggingface-cli -->
+    <g transform="translate(915, 60)">
+      <rect width="850" height="140" rx="8" fill="#0F172A"/>
+      <text x="20" y="35" font-family="monospace" font-size="15" fill="#3B82F6"># Standard HuggingFace CLI</text>
+      <text x="20" y="70" font-family="monospace" font-size="20" fill="#60A5FA">huggingface-cli login</text>
+      <text x="20" y="110" font-family="monospace" font-size="20" fill="#60A5FA">huggingface-cli upload my-model ./</text>
+    </g>
+
+    <!-- Example output -->
+    <g transform="translate(35, 220)">
+      <rect width="1730" height="130" rx="8" fill="#0F172A"/>
+      <text x="20" y="30" font-family="monospace" font-size="14" fill="#64748B"># Example: Publishing a fine-tuned model with metadata</text>
+      <text x="20" y="60" font-family="monospace" font-size="16" fill="#22C55E">$ apr publish ./whisper paiml/whisper-finetuned --license apache-2.0 --tags "speech,whisper"</text>
+      <text x="20" y="95" font-family="monospace" font-size="16" fill="#94A3B8">Uploading model.safetensors (1.2GB) ... Done!</text>
+      <text x="20" y="115" font-family="monospace" font-size="16" fill="#94A3B8">Published to: https://huggingface.co/paiml/whisper-finetuned</text>
+    </g>
+  </g>
+</svg>

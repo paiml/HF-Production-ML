@@ -1,0 +1,3 @@
+# Demo scripts are internal-only, not tracked in git
+*
+!.gitignore

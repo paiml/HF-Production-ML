@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#0f172a"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="70" fill="url(#headerGrad)"/>
+  <text x="40" y="45" fill="#fff" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="700">Lesson 1.1: Course Introduction &amp; HuggingFace Publishing</text>
+
+  <!-- Left Column: Sovereign Stack -->
+  <g transform="translate(40, 100)">
+    <text x="0" y="30" fill="#4ade80" font-family="Inter, sans-serif" font-size="20" font-weight="600">The Sovereign AI Stack</text>
+
+    <rect x="0" y="50" width="520" height="280" rx="12" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+
+    <!-- Stack layers -->
+    <g transform="translate(20, 70)">
+      <rect x="0" y="0" width="480" height="50" rx="8" fill="#052e16" stroke="#22c55e" stroke-width="2"/>
+      <text x="20" y="32" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="18" font-weight="600">trueno</text>
+      <text x="150" y="32" fill="#94a3b8" font-family="Inter, sans-serif" font-size="14">SIMD &amp; GPU compute primitives</text>
+    </g>
+
+    <g transform="translate(20, 130)">
+      <rect x="0" y="0" width="480" height="50" rx="8" fill="#052e16" stroke="#22c55e" stroke-width="2"/>
+      <text x="20" y="32" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="18" font-weight="600">aprender</text>
+      <text x="150" y="32" fill="#94a3b8" font-family="Inter, sans-serif" font-size="14">ML algorithms, .apr format</text>
+    </g>
+
+    <g transform="translate(20, 190)">
+      <rect x="0" y="0" width="480" height="50" rx="8" fill="#052e16" stroke="#22c55e" stroke-width="2"/>
+      <text x="20" y="32" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="18" font-weight="600">realizar</text>
+      <text x="150" y="32" fill="#94a3b8" font-family="Inter, sans-serif" font-size="14">Inference server, APIs</text>
+    </g>
+
+    <g transform="translate(20, 250)">
+      <rect x="0" y="0" width="480" height="50" rx="8" fill="#052e16" stroke="#22c55e" stroke-width="2"/>
+      <text x="20" y="32" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="18" font-weight="600">batuta</text>
+      <text x="150" y="32" fill="#94a3b8" font-family="Inter, sans-serif" font-size="14">Orchestration, registry</text>
+    </g>
+  </g>
+
+  <!-- Right Column: HF Model Repo -->
+  <g transform="translate(620, 100)">
+    <text x="0" y="30" fill="#fbbf24" font-family="Inter, sans-serif" font-size="20" font-weight="600">HuggingFace Model Repository</text>
+
+    <rect x="0" y="50" width="520" height="280" rx="12" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+
+    <!-- File tree -->
+    <g transform="translate(20, 80)">
+      <text x="0" y="0" fill="#f8fafc" font-family="JetBrains Mono, monospace" font-size="16">model-name/</text>
+      <text x="30" y="35" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="15">├── model.safetensors</text>
+      <text x="320" y="35" fill="#60a5fa" font-family="Inter, sans-serif" font-size="13">Weights</text>
+      <text x="30" y="70" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="15">├── tokenizer.json</text>
+      <text x="320" y="70" fill="#60a5fa" font-family="Inter, sans-serif" font-size="13">Tokenizer</text>
+      <text x="30" y="105" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="15">├── config.json</text>
+      <text x="320" y="105" fill="#60a5fa" font-family="Inter, sans-serif" font-size="13">Config</text>
+      <text x="30" y="140" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="15">└── README.md</text>
+      <text x="320" y="140" fill="#60a5fa" font-family="Inter, sans-serif" font-size="13">Metadata</text>
+    </g>
+
+    <!-- Badge -->
+    <rect x="20" y="240" width="480" height="40" rx="8" fill="#451a03" stroke="#f59e0b" stroke-width="1"/>
+    <text x="260" y="267" text-anchor="middle" fill="#fcd34d" font-family="Inter, sans-serif" font-size="14" font-weight="500">Four artifacts per model: weights, tokenizer, config, metadata</text>
+  </g>
+
+  <!-- Bottom: Key Commands -->
+  <g transform="translate(40, 420)">
+    <text x="0" y="30" fill="#a78bfa" font-family="Inter, sans-serif" font-size="20" font-weight="600">Key Commands</text>
+
+    <rect x="0" y="50" width="1100" height="140" rx="12" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+
+    <g transform="translate(30, 85)">
+      <rect x="0" y="0" width="330" height="36" rx="6" fill="#0f172a"/>
+      <text x="15" y="24" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="14">apr pull hf.co/org/model</text>
+      <text x="0" y="60" fill="#64748b" font-family="Inter, sans-serif" font-size="13">Pull model from HuggingFace</text>
+    </g>
+
+    <g transform="translate(400, 85)">
+      <rect x="0" y="0" width="180" height="36" rx="6" fill="#0f172a"/>
+      <text x="15" y="24" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="14">apr list</text>
+      <text x="0" y="60" fill="#64748b" font-family="Inter, sans-serif" font-size="13">List downloaded models</text>
+    </g>
+
+    <g transform="translate(620, 85)">
+      <rect x="0" y="0" width="220" height="36" rx="6" fill="#0f172a"/>
+      <text x="15" y="24" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="14">apr info model-name</text>
+      <text x="0" y="60" fill="#64748b" font-family="Inter, sans-serif" font-size="13">Show model info</text>
+    </g>
+
+    <g transform="translate(880, 85)">
+      <rect x="0" y="0" width="180" height="36" rx="6" fill="#0f172a"/>
+      <text x="15" y="24" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="14">apr push</text>
+      <text x="0" y="60" fill="#64748b" font-family="Inter, sans-serif" font-size="13">Publish to registry</text>
+    </g>
+  </g>
+
+  <!-- Key Takeaways -->
+  <g transform="translate(40, 610)">
+    <text x="0" y="30" fill="#22c55e" font-family="Inter, sans-serif" font-size="20" font-weight="600">Key Takeaways</text>
+
+    <rect x="0" y="50" width="1100" height="110" rx="12" fill="#052e16" stroke="#22c55e" stroke-width="2"/>
+
+    <g transform="translate(30, 80)">
+      <circle cx="8" cy="8" r="6" fill="#4ade80"/>
+      <text x="25" y="13" fill="#e2e8f0" font-family="Inter, sans-serif" font-size="15">One stack, no Python dependencies</text>
+    </g>
+
+    <g transform="translate(320, 80)">
+      <circle cx="8" cy="8" r="6" fill="#4ade80"/>
+      <text x="25" y="13" fill="#e2e8f0" font-family="Inter, sans-serif" font-size="15">HuggingFace Hub = source of truth</text>
+    </g>
+
+    <g transform="translate(620, 80)">
+      <circle cx="8" cy="8" r="6" fill="#4ade80"/>
+      <text x="25" y="13" fill="#e2e8f0" font-family="Inter, sans-serif" font-size="15">apr pull downloads to local stack</text>
+    </g>
+
+    <g transform="translate(900, 80)">
+      <circle cx="8" cy="8" r="6" fill="#4ade80"/>
+      <text x="25" y="13" fill="#e2e8f0" font-family="Inter, sans-serif" font-size="15">Pure Rust</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="600" y="780" text-anchor="middle" fill="#475569" font-family="Inter, sans-serif" font-size="12">Production ML with Hugging Face | Week 1: Model Formats</text>
+</svg>

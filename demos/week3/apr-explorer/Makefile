@@ -14,10 +14,12 @@
 
 # Build WASM with wasm-pack (requires wasm feature)
 build:
+	cargo install wasm-pack --quiet
 	wasm-pack build --target web --out-dir www/pkg --release -- --features wasm
 
 # Development build (faster, with debug info)
 dev:
+	cargo install wasm-pack --quiet
 	wasm-pack build --target web --out-dir www/pkg --dev -- --features wasm
 
 # Run tests (pure Rust, no browser needed)

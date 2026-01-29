@@ -4,24 +4,19 @@
       <stop offset="0%" stop-color="#22c55e"/>
       <stop offset="100%" stop-color="#16a34a"/>
     </linearGradient>
-    <linearGradient id="ollamaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#3b82f6"/>
-      <stop offset="100%" stop-color="#1d4ed8"/>
-    </linearGradient>
-    <linearGradient id="llamaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+    <linearGradient id="ggufGrad" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#f59e0b"/>
       <stop offset="100%" stop-color="#d97706"/>
     </linearGradient>
-    <linearGradient id="gpuGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#8b5cf6"/>
-      <stop offset="100%" stop-color="#6d28d9"/>
-    </linearGradient>
-    <linearGradient id="zramGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#06b6d4"/>
-      <stop offset="100%" stop-color="#0891b2"/>
+    <linearGradient id="stGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
     </linearGradient>
     <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrGreen" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#22c55e"/>
     </marker>
   </defs>
 
@@ -29,338 +24,317 @@
   <rect width="1920" height="1080" fill="#020617"/>
 
   <!-- Title -->
-  <text x="960" y="50" text-anchor="middle" fill="#f8fafc" font-family="Inter, system-ui, sans-serif" font-size="38" font-weight="700">Qwen Showcase: LLM Inference Benchmark</text>
-  <text x="960" y="85" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="18">Proving APR &gt; Ollama &gt; llama.cpp with falsifiable claims</text>
+  <text x="960" y="50" text-anchor="middle" fill="#f8fafc" font-family="Inter, system-ui, sans-serif" font-size="38" font-weight="700">APR Format Ecosystem: Rosetta Stone</text>
+  <text x="960" y="85" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="18">Universal Model Format Converter · GGUF ↔ APR ↔ SafeTensors</text>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- SECTION 1: Performance Comparison (Top Left) -->
+  <!-- SECTION 1: Rosetta Stone Overview (Top Left) -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <g transform="translate(60, 120)">
-    <rect x="0" y="0" width="580" height="250" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
-    <text x="290" y="32" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Throughput Comparison (tok/s)</text>
+    <rect x="0" y="0" width="580" height="280" rx="12" fill="#0f172a" stroke="#22c55e" stroke-width="2"/>
+    <text x="290" y="32" text-anchor="middle" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Rosetta Stone Module</text>
+    <text x="290" y="52" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">aprender::format::rosetta</text>
 
-    <!-- APR Native bar -->
-    <g transform="translate(30, 55)">
-      <text x="0" y="18" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">APR native</text>
-      <rect x="100" y="0" width="360" height="30" rx="4" fill="url(#aprGrad)"/>
-      <text x="470" y="20" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700">600 tok/s</text>
+    <!-- Conversion triangle -->
+    <g transform="translate(290, 160)">
+      <!-- GGUF node -->
+      <g transform="translate(-150, -60)">
+        <rect x="-60" y="-25" width="120" height="50" rx="8" fill="url(#ggufGrad)" opacity="0.3" stroke="#f59e0b" stroke-width="2"/>
+        <text x="0" y="5" text-anchor="middle" fill="#fcd34d" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700">GGUF</text>
+        <text x="0" y="20" text-anchor="middle" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="10">.gguf</text>
+      </g>
+
+      <!-- APR node (center top) -->
+      <g transform="translate(0, -90)">
+        <rect x="-60" y="-25" width="120" height="50" rx="8" fill="url(#aprGrad)" opacity="0.3" stroke="#22c55e" stroke-width="2"/>
+        <text x="0" y="5" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700">APR</text>
+        <text x="0" y="20" text-anchor="middle" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="10">.apr</text>
+      </g>
+
+      <!-- SafeTensors node -->
+      <g transform="translate(150, -60)">
+        <rect x="-70" y="-25" width="140" height="50" rx="8" fill="url(#stGrad)" opacity="0.3" stroke="#3b82f6" stroke-width="2"/>
+        <text x="0" y="5" text-anchor="middle" fill="#93c5fd" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700">SafeTensors</text>
+        <text x="0" y="20" text-anchor="middle" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="10">.safetensors</text>
+      </g>
+
+      <!-- Bidirectional arrows -->
+      <line x1="-90" y1="-55" x2="-55" y2="-80" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
+      <line x1="-55" y1="-95" x2="-90" y2="-70" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
+
+      <line x1="55" y1="-80" x2="90" y2="-55" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
+      <line x1="90" y1="-70" x2="55" y2="-95" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
+
+      <line x1="-80" y1="-35" x2="70" y2="-35" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
+      <line x1="70" y1="-50" x2="-80" y2="-50" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
     </g>
 
-    <!-- APR GGUF bar -->
-    <g transform="translate(30, 95)">
-      <text x="0" y="18" fill="#86efac" font-family="Inter, system-ui, sans-serif" font-size="13">APR GGUF</text>
-      <rect x="100" y="0" width="300" height="30" rx="4" fill="url(#aprGrad)" opacity="0.7"/>
-      <text x="410" y="20" fill="#86efac" font-family="JetBrains Mono, monospace" font-size="14">500 tok/s</text>
-    </g>
-
-    <!-- Ollama bar -->
-    <g transform="translate(30, 135)">
-      <text x="0" y="18" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="13">Ollama</text>
-      <rect x="100" y="0" width="191" height="30" rx="4" fill="url(#ollamaGrad)"/>
-      <text x="300" y="20" fill="#93c5fd" font-family="JetBrains Mono, monospace" font-size="14">318 tok/s</text>
-    </g>
-
-    <!-- llama.cpp bar -->
-    <g transform="translate(30, 175)">
-      <text x="0" y="18" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="13">llama.cpp</text>
-      <rect x="100" y="0" width="120" height="30" rx="4" fill="url(#llamaGrad)"/>
-      <text x="230" y="20" fill="#fcd34d" font-family="JetBrains Mono, monospace" font-size="14">200 tok/s</text>
-    </g>
-
-    <!-- Speedup badges -->
-    <g transform="translate(30, 215)">
-      <rect x="0" y="0" width="150" height="25" rx="4" fill="#22c55e" opacity="0.2"/>
-      <text x="75" y="17" text-anchor="middle" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">2× faster than Ollama</text>
-
-      <rect x="165" y="0" width="170" height="25" rx="4" fill="#22c55e" opacity="0.2"/>
-      <text x="250" y="17" text-anchor="middle" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">3× faster than llama.cpp</text>
-    </g>
+    <!-- 6 conversion paths note -->
+    <text x="290" y="250" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="12">6 direct conversion paths · Bidirectional · Zero data loss</text>
   </g>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- SECTION 2: PMAT Falsification (Top Center) -->
+  <!-- SECTION 2: Format Features (Top Center) -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <g transform="translate(680, 120)">
-    <rect x="0" y="0" width="560" height="250" rx="12" fill="#0f172a" stroke="#ef4444" stroke-width="2"/>
-    <text x="280" y="32" text-anchor="middle" fill="#fca5a5" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">PMAT Falsification (100 points)</text>
+    <rect x="0" y="0" width="560" height="280" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <text x="280" y="32" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Format Comparison</text>
 
-    <!-- Point 41 -->
-    <g transform="translate(30, 55)">
-      <rect x="0" y="0" width="500" height="50" rx="6" fill="#22c55e" opacity="0.1" stroke="#22c55e" stroke-width="1"/>
-      <text x="15" y="20" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700">Point 41 (25 pts)</text>
-      <text x="15" y="38" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">APR ≥1.25× llama.cpp → 500/200 = 2.5× ✓</text>
-      <text x="450" y="30" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700">PASS</text>
+    <!-- Table header -->
+    <g transform="translate(30, 60)" font-family="JetBrains Mono, monospace" font-size="11">
+      <text x="0" y="0" fill="#64748b">Feature</text>
+      <text x="160" y="0" fill="#fcd34d">GGUF</text>
+      <text x="280" y="0" fill="#4ade80">APR</text>
+      <text x="400" y="0" fill="#93c5fd">SafeTensors</text>
+
+      <!-- Row 1: Quantization -->
+      <rect x="-5" y="10" width="500" height="28" rx="2" fill="#1e293b"/>
+      <text x="0" y="30" fill="#94a3b8">Quantization</text>
+      <text x="160" y="30" fill="#fcd34d">Q4_0..Q8_0</text>
+      <text x="280" y="30" fill="#4ade80">Q4_0, Q8_0</text>
+      <text x="400" y="30" fill="#94a3b8">F16/F32 only</text>
+
+      <!-- Row 2: Alignment -->
+      <rect x="-5" y="43" width="500" height="28" rx="2" fill="#0f172a"/>
+      <text x="0" y="63" fill="#94a3b8">Alignment</text>
+      <text x="160" y="63" fill="#fcd34d">32-byte</text>
+      <text x="280" y="63" fill="#4ade80">64-byte</text>
+      <text x="400" y="63" fill="#93c5fd">None</text>
+
+      <!-- Row 3: Compression -->
+      <rect x="-5" y="76" width="500" height="28" rx="2" fill="#1e293b"/>
+      <text x="0" y="96" fill="#94a3b8">Compression</text>
+      <text x="160" y="96" fill="#94a3b8">None</text>
+      <text x="280" y="96" fill="#4ade80">LZ4/Zstd</text>
+      <text x="400" y="96" fill="#94a3b8">None</text>
+
+      <!-- Row 4: Metadata -->
+      <rect x="-5" y="109" width="500" height="28" rx="2" fill="#0f172a"/>
+      <text x="0" y="129" fill="#94a3b8">Metadata</text>
+      <text x="160" y="129" fill="#fcd34d">KV pairs</text>
+      <text x="280" y="129" fill="#4ade80">JSON</text>
+      <text x="400" y="129" fill="#93c5fd">JSON header</text>
+
+      <!-- Row 5: Signatures -->
+      <rect x="-5" y="142" width="500" height="28" rx="2" fill="#1e293b"/>
+      <text x="0" y="162" fill="#94a3b8">Signatures</text>
+      <text x="160" y="162" fill="#94a3b8">—</text>
+      <text x="280" y="162" fill="#4ade80">Ed25519</text>
+      <text x="400" y="162" fill="#94a3b8">—</text>
+
+      <!-- Row 6: Mmap -->
+      <rect x="-5" y="175" width="500" height="28" rx="2" fill="#0f172a"/>
+      <text x="0" y="195" fill="#94a3b8">Zero-copy mmap</text>
+      <text x="160" y="195" fill="#fcd34d">✓</text>
+      <text x="280" y="195" fill="#4ade80">✓</text>
+      <text x="400" y="195" fill="#93c5fd">✓</text>
     </g>
 
-    <!-- Point 42 -->
-    <g transform="translate(30, 115)">
-      <rect x="0" y="0" width="500" height="50" rx="6" fill="#22c55e" opacity="0.1" stroke="#22c55e" stroke-width="1"/>
-      <text x="15" y="20" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700">Point 42 (20 pts)</text>
-      <text x="15" y="38" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">Minimum ≥60 tok/s → 500 tok/s ✓</text>
-      <text x="450" y="30" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700">PASS</text>
-    </g>
-
-    <!-- Point 49 -->
-    <g transform="translate(30, 175)">
-      <rect x="0" y="0" width="500" height="50" rx="6" fill="#22c55e" opacity="0.1" stroke="#22c55e" stroke-width="1"/>
-      <text x="15" y="20" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700">Point 49 (15 pts)</text>
-      <text x="15" y="38" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">CV &lt;5% consistency → ~2% measured ✓</text>
-      <text x="450" y="30" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700">PASS</text>
-    </g>
+    <!-- Note -->
+    <text x="280" y="260" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">APR = best of both: GGUF quantization + SafeTensors safety</text>
   </g>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- SECTION 3: Qwen2.5 Architecture (Top Right) -->
+  <!-- SECTION 3: Supported Architectures (Top Right) -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <g transform="translate(1280, 120)">
-    <rect x="0" y="0" width="580" height="250" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
-    <text x="290" y="32" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Qwen2.5-Coder Architecture</text>
+    <rect x="0" y="0" width="580" height="280" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <text x="290" y="32" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Supported Architectures</text>
 
-    <!-- Model sizes table -->
-    <g transform="translate(30, 55)" font-family="JetBrains Mono, monospace" font-size="11">
-      <!-- Header -->
-      <text x="0" y="0" fill="#64748b">Model</text>
-      <text x="120" y="0" fill="#64748b">Params</text>
-      <text x="190" y="0" fill="#64748b">Hidden</text>
-      <text x="260" y="0" fill="#64748b">Heads</text>
-      <text x="320" y="0" fill="#64748b">KV</text>
-      <text x="370" y="0" fill="#64748b">Layers</text>
-      <text x="440" y="0" fill="#64748b">Q4_K Size</text>
+    <!-- Architecture grid -->
+    <g transform="translate(30, 60)">
+      <!-- Qwen2 -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="250" height="70" rx="8" fill="#22c55e" opacity="0.1" stroke="#22c55e" stroke-width="1"/>
+        <text x="20" y="25" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">Qwen2 / Qwen2.5</text>
+        <text x="20" y="45" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="10">Alibaba · 0.5B-72B · GQA</text>
+        <text x="20" y="60" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">Architecture::Qwen2</text>
+      </g>
 
-      <!-- 0.5B -->
-      <rect x="-5" y="10" width="530" height="22" rx="2" fill="#1e293b"/>
-      <text x="0" y="26" fill="#94a3b8">0.5B</text>
-      <text x="120" y="26" fill="#94a3b8">0.5B</text>
-      <text x="190" y="26" fill="#94a3b8">896</text>
-      <text x="260" y="26" fill="#94a3b8">14</text>
-      <text x="320" y="26" fill="#67e8f9">2</text>
-      <text x="370" y="26" fill="#94a3b8">24</text>
-      <text x="440" y="26" fill="#86efac">~275 MB</text>
+      <!-- LLaMA -->
+      <g transform="translate(270, 0)">
+        <rect x="0" y="0" width="250" height="70" rx="8" fill="#3b82f6" opacity="0.1" stroke="#3b82f6" stroke-width="1"/>
+        <text x="20" y="25" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">LLaMA / Llama 2/3</text>
+        <text x="20" y="45" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="10">Meta · 7B-70B · RoPE</text>
+        <text x="20" y="60" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">Architecture::Llama</text>
+      </g>
 
-      <!-- 1.5B (highlighted) -->
-      <rect x="-5" y="37" width="530" height="22" rx="2" fill="#22c55e" opacity="0.15"/>
-      <text x="0" y="53" fill="#4ade80" font-weight="700">1.5B</text>
-      <text x="120" y="53" fill="#4ade80">1.5B</text>
-      <text x="190" y="53" fill="#4ade80">1536</text>
-      <text x="260" y="53" fill="#4ade80">24</text>
-      <text x="320" y="53" fill="#67e8f9">6</text>
-      <text x="370" y="53" fill="#4ade80">28</text>
-      <text x="440" y="53" fill="#86efac">~825 MB</text>
+      <!-- Whisper -->
+      <g transform="translate(0, 85)">
+        <rect x="0" y="0" width="250" height="70" rx="8" fill="#f59e0b" opacity="0.1" stroke="#f59e0b" stroke-width="1"/>
+        <text x="20" y="25" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">Whisper</text>
+        <text x="20" y="45" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="10">OpenAI · tiny-large · ASR</text>
+        <text x="20" y="60" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">Architecture::Whisper</text>
+      </g>
 
-      <!-- 7B -->
-      <rect x="-5" y="64" width="530" height="22" rx="2" fill="#1e293b"/>
-      <text x="0" y="80" fill="#94a3b8">7B</text>
-      <text x="120" y="80" fill="#94a3b8">7B</text>
-      <text x="190" y="80" fill="#94a3b8">3584</text>
-      <text x="260" y="80" fill="#94a3b8">28</text>
-      <text x="320" y="80" fill="#67e8f9">8</text>
-      <text x="370" y="80" fill="#94a3b8">32</text>
-      <text x="440" y="80" fill="#86efac">~4.5 GB</text>
-
-      <!-- 32B -->
-      <rect x="-5" y="91" width="530" height="22" rx="2" fill="#1e293b"/>
-      <text x="0" y="107" fill="#94a3b8">32B</text>
-      <text x="120" y="107" fill="#94a3b8">32B</text>
-      <text x="190" y="107" fill="#94a3b8">5120</text>
-      <text x="260" y="107" fill="#94a3b8">40</text>
-      <text x="320" y="107" fill="#67e8f9">10</text>
-      <text x="370" y="107" fill="#94a3b8">64</text>
-      <text x="440" y="107" fill="#86efac">~19 GB</text>
-    </g>
-
-    <!-- GQA explanation -->
-    <g transform="translate(30, 185)">
-      <rect x="0" y="0" width="520" height="50" rx="6" fill="#06b6d4" opacity="0.1" stroke="#06b6d4" stroke-width="1"/>
-      <text x="15" y="20" fill="#67e8f9" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">Grouped Query Attention (GQA)</text>
-      <text x="15" y="38" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">KV heads &lt; Query heads → 7:1 ratio for 0.5B · Reduces KV cache by 7×</text>
-    </g>
-  </g>
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- SECTION 4: GPU Acceleration (Bottom Left) -->
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <g transform="translate(60, 400)">
-    <rect x="0" y="0" width="580" height="280" rx="12" fill="#0f172a" stroke="#8b5cf6" stroke-width="2"/>
-    <text x="290" y="32" text-anchor="middle" fill="#a78bfa" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">GPU Acceleration (trueno)</text>
-
-    <!-- PTX / Megakernels -->
-    <g transform="translate(30, 55)">
-      <rect x="0" y="0" width="250" height="90" rx="8" fill="url(#gpuGrad)" opacity="0.2" stroke="#8b5cf6" stroke-width="1"/>
-      <text x="125" y="25" text-anchor="middle" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Megakernels</text>
-      <text x="15" y="48" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">• Fused Q4K SIMD ops</text>
-      <text x="15" y="66" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">• Persistent GPU resident</text>
-      <text x="15" y="84" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">• DP4A int8 arithmetic</text>
-    </g>
-
-    <!-- CUDA Graphs -->
-    <g transform="translate(300, 55)">
-      <rect x="0" y="0" width="250" height="90" rx="8" fill="url(#gpuGrad)" opacity="0.2" stroke="#8b5cf6" stroke-width="1"/>
-      <text x="125" y="25" text-anchor="middle" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">CUDA Graphs</text>
-      <text x="15" y="48" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">• Capture kernel sequence</text>
-      <text x="15" y="66" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">• Replay without dispatch</text>
-      <text x="15" y="84" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">• &lt;5% launch overhead</text>
-    </g>
-
-    <!-- Hardware target -->
-    <g transform="translate(30, 160)">
-      <rect x="0" y="0" width="520" height="100" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1"/>
-      <text x="20" y="25" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Target: RTX 4090</text>
-
-      <g transform="translate(20, 40)" font-family="Inter, system-ui, sans-serif" font-size="11">
-        <text x="0" y="15" fill="#94a3b8">VRAM:</text>
-        <text x="60" y="15" fill="#4ade80" font-family="JetBrains Mono, monospace">24 GB</text>
-
-        <text x="130" y="15" fill="#94a3b8">FP32:</text>
-        <text x="180" y="15" fill="#4ade80" font-family="JetBrains Mono, monospace">163 TFLOPS</text>
-
-        <text x="290" y="15" fill="#94a3b8">Bandwidth:</text>
-        <text x="370" y="15" fill="#4ade80" font-family="JetBrains Mono, monospace">1008 GB/s</text>
-
-        <text x="0" y="40" fill="#94a3b8">INT8:</text>
-        <text x="60" y="40" fill="#4ade80" font-family="JetBrains Mono, monospace">163 TOPS</text>
-        <text x="150" y="40" fill="#64748b">(Q4K dequantization)</text>
+      <!-- BERT -->
+      <g transform="translate(270, 85)">
+        <rect x="0" y="0" width="250" height="70" rx="8" fill="#8b5cf6" opacity="0.1" stroke="#8b5cf6" stroke-width="1"/>
+        <text x="20" y="25" fill="#c4b5fd" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">BERT / RoBERTa</text>
+        <text x="20" y="45" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="10">Google · base-large · MLM</text>
+        <text x="20" y="60" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">Architecture::Bert</text>
       </g>
     </g>
-  </g>
 
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- SECTION 5: ZRAM KV Cache (Bottom Center) -->
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <g transform="translate(680, 400)">
-    <rect x="0" y="0" width="560" height="280" rx="12" fill="#0f172a" stroke="#06b6d4" stroke-width="2"/>
-    <text x="280" y="32" text-anchor="middle" fill="#22d3ee" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">ZRAM KV Cache Compression</text>
-
-    <!-- Compression comparison -->
-    <g transform="translate(30, 55)">
-      <text x="0" y="0" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">Algorithm</text>
-      <text x="150" y="0" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">Throughput</text>
-      <text x="280" y="0" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">Ratio</text>
-
-      <!-- Same-fill -->
-      <rect x="0" y="15" width="400" height="28" rx="4" fill="#1e293b"/>
-      <text x="15" y="33" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11">Same-Fill (zeros)</text>
-      <text x="150" y="33" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="11">171 GB/s</text>
-      <text x="280" y="33" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="11">∞ (4 bytes)</text>
-
-      <!-- LZ4 -->
-      <rect x="0" y="50" width="400" height="28" rx="4" fill="#22c55e" opacity="0.1"/>
-      <text x="15" y="68" fill="#86efac" font-family="JetBrains Mono, monospace" font-size="11">LZ4 (SIMD)</text>
-      <text x="150" y="68" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="11">3.2 GB/s</text>
-      <text x="280" y="68" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="11">2.1×</text>
-
-      <!-- ZSTD -->
-      <rect x="0" y="85" width="400" height="28" rx="4" fill="#1e293b"/>
-      <text x="15" y="103" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11">ZSTD</text>
-      <text x="150" y="103" fill="#eab308" font-family="JetBrains Mono, monospace" font-size="11">0.8 GB/s</text>
-      <text x="280" y="103" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="11">2.8×</text>
-    </g>
-
-    <!-- KV Cache sizing -->
-    <g transform="translate(30, 185)">
-      <rect x="0" y="0" width="500" height="75" rx="8" fill="url(#zramGrad)" opacity="0.15" stroke="#06b6d4" stroke-width="1"/>
-      <text x="15" y="22" fill="#67e8f9" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">KV Cache Sizing (Qwen2-0.5B, FP16)</text>
-
-      <text x="15" y="45" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">2K tokens: ~21 MB</text>
-      <text x="150" y="45" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">8K tokens: ~85 MB</text>
-      <text x="290" y="45" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">32K tokens: ~340 MB</text>
-
-      <text x="15" y="65" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="11">With ZRAM (LZ4): 2.1× smaller → longer context in same VRAM</text>
+    <!-- Auto-detect note -->
+    <g transform="translate(30, 230)">
+      <rect x="0" y="0" width="520" height="35" rx="6" fill="#1e293b"/>
+      <text x="15" y="22" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">Architecture::Auto — detect from tensor names · Preserves original naming</text>
     </g>
   </g>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- SECTION 6: Profiling Breakdown (Bottom Right) -->
+  <!-- SECTION 4: Import Pipeline (Bottom Left) -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <g transform="translate(1280, 400)">
-    <rect x="0" y="0" width="580" height="280" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
-    <text x="290" y="32" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Component Profiling</text>
+  <g transform="translate(60, 430)">
+    <rect x="0" y="0" width="580" height="280" rx="12" fill="#0f172a" stroke="#3b82f6" stroke-width="2"/>
+    <text x="290" y="32" text-anchor="middle" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Import Pipeline</text>
+    <text x="290" y="52" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">aprender::format::converter</text>
 
-    <!-- Profiling bars -->
-    <g transform="translate(30, 55)">
-      <!-- Q4K_GEMV -->
-      <text x="0" y="15" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11">Q4K_GEMV</text>
-      <rect x="110" y="0" width="270" height="22" rx="3" fill="#8b5cf6" opacity="0.6"/>
-      <text x="390" y="15" fill="#c4b5fd" font-family="JetBrains Mono, monospace" font-size="11">45%</text>
-      <text x="430" y="15" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="10">✓</text>
+    <!-- Pipeline stages -->
+    <g transform="translate(30, 75)">
+      <!-- Source -->
+      <rect x="0" y="0" width="100" height="60" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="50" y="25" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">Source</text>
+      <text x="50" y="45" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="9">hf://org/repo</text>
 
-      <!-- Attention -->
-      <text x="0" y="45" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11">Attention</text>
-      <rect x="110" y="30" width="132" height="22" rx="3" fill="#ec4899" opacity="0.6"/>
-      <text x="250" y="45" fill="#f9a8d4" font-family="JetBrains Mono, monospace" font-size="11">22%</text>
-      <text x="290" y="45" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="10">✓</text>
+      <line x1="105" y1="30" x2="135" y2="30" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
 
-      <!-- FFN -->
-      <text x="0" y="75" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11">FFN (SwiGLU)</text>
-      <rect x="110" y="60" width="102" height="22" rx="3" fill="#f59e0b" opacity="0.6"/>
-      <text x="220" y="75" fill="#fcd34d" font-family="JetBrains Mono, monospace" font-size="11">17%</text>
-      <text x="260" y="75" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="10">✓</text>
+      <!-- Download -->
+      <rect x="140" y="0" width="100" height="60" rx="6" fill="#3b82f6" opacity="0.2" stroke="#3b82f6" stroke-width="1"/>
+      <text x="190" y="25" text-anchor="middle" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">Download</text>
+      <text x="190" y="45" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="9">hf_hub API</text>
 
-      <!-- RMSNorm -->
-      <text x="0" y="105" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11">RMSNorm</text>
-      <rect x="110" y="90" width="60" height="22" rx="3" fill="#22c55e" opacity="0.6"/>
-      <text x="180" y="105" fill="#86efac" font-family="JetBrains Mono, monospace" font-size="11">10%</text>
-      <text x="220" y="105" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="10">✓</text>
+      <line x1="245" y1="30" x2="275" y2="30" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
 
-      <!-- KernelLaunch (warning) -->
-      <text x="0" y="135" fill="#fca5a5" font-family="JetBrains Mono, monospace" font-size="11">KernelLaunch</text>
-      <rect x="110" y="120" width="36" height="22" rx="3" fill="#ef4444" opacity="0.6"/>
-      <text x="155" y="135" fill="#fca5a5" font-family="JetBrains Mono, monospace" font-size="11">6%</text>
-      <text x="195" y="135" fill="#fca5a5" font-family="Inter, system-ui, sans-serif" font-size="10">→ CUDA graphs</text>
+      <!-- Validate -->
+      <rect x="280" y="0" width="100" height="60" rx="6" fill="#f59e0b" opacity="0.2" stroke="#f59e0b" stroke-width="1"/>
+      <text x="330" y="25" text-anchor="middle" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">Validate</text>
+      <text x="330" y="45" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="9">100-pt QA</text>
+
+      <line x1="385" y1="30" x2="415" y2="30" stroke="#64748b" stroke-width="2" marker-end="url(#arr)"/>
+
+      <!-- Convert -->
+      <rect x="420" y="0" width="100" height="60" rx="6" fill="#22c55e" opacity="0.2" stroke="#22c55e" stroke-width="1"/>
+      <text x="470" y="25" text-anchor="middle" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">Convert</text>
+      <text x="470" y="45" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="9">.apr output</text>
     </g>
 
-    <!-- Hotspot explanation -->
-    <g transform="translate(30, 205)">
-      <rect x="0" y="0" width="520" height="55" rx="6" fill="#1e293b"/>
-      <text x="15" y="20" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Hotspot detection: &gt;5% triggers analysis</text>
-      <text x="15" y="40" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">✓ = expected range · Red = optimization opportunity · renacer trace integration</text>
+    <!-- Code example -->
+    <g transform="translate(30, 155)">
+      <rect x="0" y="0" width="520" height="100" rx="6" fill="#1e293b"/>
+      <text x="15" y="20" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="10">// Import from HuggingFace Hub</text>
+      <text x="15" y="38" fill="#c4b5fd" font-family="JetBrains Mono, monospace" font-size="10">apr_import(</text>
+      <text x="15" y="54" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="10">    "hf://Qwen/Qwen2.5-Coder-1.5B"</text>
+      <text x="15" y="70" fill="#fcd34d" font-family="JetBrains Mono, monospace" font-size="10">    ImportOptions { arch: Qwen2, quantize: Q8_0 }</text>
+      <text x="15" y="86" fill="#c4b5fd" font-family="JetBrains Mono, monospace" font-size="10">)?;</text>
     </g>
   </g>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- Bottom: Benchmark Grid -->
+  <!-- SECTION 5: APR v2 Format (Bottom Center) -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <g transform="translate(60, 710)">
+  <g transform="translate(680, 430)">
+    <rect x="0" y="0" width="560" height="280" rx="12" fill="#0f172a" stroke="#22c55e" stroke-width="2"/>
+    <text x="280" y="32" text-anchor="middle" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">APR v2 Format Structure</text>
+    <text x="280" y="52" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">64-byte alignment · LZ4 compression · JSON metadata</text>
+
+    <!-- Format diagram -->
+    <g transform="translate(80, 70)">
+      <!-- Header -->
+      <rect x="0" y="0" width="400" height="35" rx="4" fill="#22c55e" opacity="0.2" stroke="#22c55e" stroke-width="1"/>
+      <text x="200" y="22" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="11">Header (64 bytes) — Magic: APR\0 · Version · Flags</text>
+
+      <!-- Metadata -->
+      <rect x="0" y="40" width="400" height="35" rx="4" fill="#3b82f6" opacity="0.2" stroke="#3b82f6" stroke-width="1"/>
+      <text x="200" y="62" text-anchor="middle" fill="#93c5fd" font-family="JetBrains Mono, monospace" font-size="11">JSON Metadata — model_type · architecture · params</text>
+
+      <!-- Tensor Index -->
+      <rect x="0" y="80" width="400" height="35" rx="4" fill="#f59e0b" opacity="0.2" stroke="#f59e0b" stroke-width="1"/>
+      <text x="200" y="102" text-anchor="middle" fill="#fcd34d" font-family="JetBrains Mono, monospace" font-size="11">Tensor Index — name · dtype · shape · offset</text>
+
+      <!-- Tensor Data -->
+      <rect x="0" y="120" width="400" height="50" rx="4" fill="#8b5cf6" opacity="0.2" stroke="#8b5cf6" stroke-width="1"/>
+      <text x="200" y="142" text-anchor="middle" fill="#c4b5fd" font-family="JetBrains Mono, monospace" font-size="11">Tensor Data (64-byte aligned)</text>
+      <text x="200" y="158" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="10">LZ4 compressed · mmap compatible</text>
+
+      <!-- Footer -->
+      <rect x="0" y="175" width="400" height="30" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="200" y="195" text-anchor="middle" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11">CRC32 Checksum · Ed25519 Signature (optional)</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 6: Export Options (Bottom Right) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(1280, 430)">
+    <rect x="0" y="0" width="580" height="280" rx="12" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/>
+    <text x="290" y="32" text-anchor="middle" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Export Options</text>
+    <text x="290" y="52" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="12">aprender::format::converter::apr_export</text>
+
+    <!-- Export formats -->
+    <g transform="translate(30, 75)">
+      <!-- GGUF export -->
+      <rect x="0" y="0" width="250" height="80" rx="8" fill="#f59e0b" opacity="0.1" stroke="#f59e0b" stroke-width="1"/>
+      <text x="20" y="25" fill="#fcd34d" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Export to GGUF</text>
+      <text x="20" y="45" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="10">ExportFormat::Gguf</text>
+      <text x="20" y="62" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">llama.cpp compatible</text>
+      <text x="20" y="75" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">Q4_K_M, Q5_K_M, Q8_0</text>
+
+      <!-- SafeTensors export -->
+      <rect x="270" y="0" width="250" height="80" rx="8" fill="#3b82f6" opacity="0.1" stroke="#3b82f6" stroke-width="1"/>
+      <text x="290" y="25" fill="#93c5fd" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">Export to SafeTensors</text>
+      <text x="290" y="45" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="10">ExportFormat::SafeTensors</text>
+      <text x="290" y="62" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">HuggingFace compatible</text>
+      <text x="290" y="75" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">F16, F32, BF16</text>
+    </g>
+
+    <!-- Quantization options -->
+    <g transform="translate(30, 170)">
+      <rect x="0" y="0" width="520" height="90" rx="8" fill="#1e293b"/>
+      <text x="15" y="22" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">Quantization Types</text>
+
+      <text x="15" y="45" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="10">Q4_0</text>
+      <text x="70" y="45" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">4-bit (block size 32)</text>
+      <text x="220" y="45" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="10">~4× compression</text>
+
+      <text x="15" y="62" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="10">Q8_0</text>
+      <text x="70" y="62" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">8-bit (block size 32)</text>
+      <text x="220" y="62" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="10">~2× compression</text>
+
+      <text x="15" y="79" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="10">F16</text>
+      <text x="70" y="79" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="10">Half precision</text>
+      <text x="220" y="79" fill="#4ade80" font-family="Inter, system-ui, sans-serif" font-size="10">~2× compression</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- Bottom: CLI Commands -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(60, 740)">
     <rect x="0" y="0" width="1800" height="100" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
-    <text x="900" y="28" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600">2×3 Benchmark Grid</text>
+    <text x="900" y="28" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600">CLI Commands (aprender-cli)</text>
 
-    <!-- Grid visualization -->
-    <g transform="translate(200, 45)">
-      <!-- Headers -->
-      <text x="200" y="0" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">APR GGUF</text>
-      <text x="450" y="0" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Ollama</text>
-      <text x="700" y="0" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">llama.cpp</text>
+    <!-- Commands -->
+    <g transform="translate(100, 50)" font-family="JetBrains Mono, monospace" font-size="12">
+      <rect x="0" y="0" width="380" height="30" rx="4" fill="#1e293b"/>
+      <text x="15" y="20" fill="#4ade80">aprender convert</text>
+      <text x="160" y="20" fill="#94a3b8">hf://org/repo output.apr</text>
 
-      <!-- Row 1: GGUF -->
-      <text x="0" y="25" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">GGUF</text>
-      <rect x="120" y="10" width="160" height="25" rx="3" fill="#22c55e" opacity="0.3"/>
-      <text x="200" y="28" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="11">500 tok/s</text>
-      <rect x="370" y="10" width="160" height="25" rx="3" fill="#3b82f6" opacity="0.3"/>
-      <text x="450" y="28" text-anchor="middle" fill="#93c5fd" font-family="JetBrains Mono, monospace" font-size="11">318 tok/s</text>
-      <rect x="620" y="10" width="160" height="25" rx="3" fill="#f59e0b" opacity="0.3"/>
-      <text x="700" y="28" text-anchor="middle" fill="#fcd34d" font-family="JetBrains Mono, monospace" font-size="11">200 tok/s</text>
+      <rect x="420" y="0" width="380" height="30" rx="4" fill="#1e293b"/>
+      <text x="435" y="20" fill="#4ade80">aprender export</text>
+      <text x="570" y="20" fill="#94a3b8">model.apr --format gguf</text>
 
-      <!-- Row 2: Native -->
-      <text x="0" y="55" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="11">Native</text>
-      <rect x="120" y="40" width="160" height="25" rx="3" fill="#22c55e" opacity="0.5"/>
-      <text x="200" y="58" text-anchor="middle" fill="#4ade80" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">600 tok/s</text>
-      <rect x="370" y="40" width="160" height="25" rx="3" fill="#1e293b"/>
-      <text x="450" y="58" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="11">baseline</text>
-      <rect x="620" y="40" width="160" height="25" rx="3" fill="#1e293b"/>
-      <text x="700" y="58" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="11">baseline</text>
-    </g>
+      <rect x="840" y="0" width="380" height="30" rx="4" fill="#1e293b"/>
+      <text x="855" y="20" fill="#4ade80">aprender validate</text>
+      <text x="1010" y="20" fill="#94a3b8">model.apr --qa-100</text>
 
-    <!-- Stats -->
-    <g transform="translate(1100, 50)">
-      <text x="0" y="0" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Warmup: 3 iterations</text>
-      <text x="0" y="18" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Measure: 10 iterations</text>
-      <text x="0" y="36" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">95% CI · CV &lt;5%</text>
-
-      <text x="200" y="0" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Model: Qwen2.5-Coder-1.5B</text>
-      <text x="200" y="18" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Format: Q4_K_M</text>
-      <text x="200" y="36" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="11">Vocab: 151,936 tokens</text>
+      <rect x="1260" y="0" width="380" height="30" rx="4" fill="#1e293b"/>
+      <text x="1275" y="20" fill="#4ade80">aprender inspect</text>
+      <text x="1420" y="20" fill="#94a3b8">model.gguf --diff model.apr</text>
     </g>
   </g>
 
   <!-- Footer -->
-  <text x="960" y="850" text-anchor="middle" fill="#475569" font-family="Inter, system-ui, sans-serif" font-size="14">Falsifiable claims · Statistical rigor · Production-grade benchmarking</text>
+  <text x="960" y="880" text-anchor="middle" fill="#475569" font-family="Inter, system-ui, sans-serif" font-size="14">Rosetta Stone · Universal format conversion · Toyota Way: Genchi Genbutsu (go and see the data)</text>
 </svg>
