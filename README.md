@@ -1,6 +1,6 @@
 # Production ML with Hugging Face
 
-**Course 5 of 5: Deploying ML Models with the Sovereign AI Stack**
+**Deploying ML Models with the Sovereign AI Stack**
 
 [![CI](https://github.com/paiml/HF-Production-ML/actions/workflows/ci.yml/badge.svg)](https://github.com/paiml/HF-Production-ML/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
