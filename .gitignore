@@ -65,6 +65,11 @@ coverage.xml
 .DS_Store
 Thumbs.db
 
+# --- Lock files (not Cargo.lock) ---
+*.yaml.lock
+poetry.lock
+pdm.lock
+
 # --- Misc ---
 *.log
 .env
