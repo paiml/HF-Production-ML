@@ -69,3 +69,7 @@ Run `make help` for all available commands.
 ## License
 
 Apache-2.0
+
+<!-- FUNNEL-001 footer: replace HF-Production-ML with the repo name -->
+---
+📚 **Learn this hands-on:** [Pragmatic AI Labs courses on Coursera](https://www.coursera.org/partners/pragmatic-ai-labs?utm_source=github&utm_medium=readme&utm_campaign=funnel_2026q4&utm_content=HF-Production-ML) · ✉ [Free newsletter](https://ds500.paiml.com/mailing?utm_source=github&utm_medium=readme&utm_campaign=funnel_2026q4&utm_content=HF-Production-ML)
